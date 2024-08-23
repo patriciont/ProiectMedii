@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="BookingApp.Views.LoginPage"
+            Title="LoginPage">
+    
+    <StackLayout Padding="20">
+        <Label Text="Login"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <Entry x:Name="UsernameEntry"
+            Placeholder="Username"
+            Keyboard="Text"
+            Margin="0,20,0,10" />
+
+        <Entry x:Name="PasswordEntry"
+            Placeholder="Password"
+            IsPassword="True"
+            Keyboard="Text"
+            Margin="0,0,0,20" />
+
+        <Button Text="Login"
+            Clicked="OnLoginButtonClicked"
+            HorizontalOptions="Center" />
+
+        <Label x:Name="LoginStatusLabel"
+            Text=""
+            TextColor="Red"
+            IsVisible="False"
+            HorizontalOptions="Center" />
+    </StackLayout>
+</ContentPage>
