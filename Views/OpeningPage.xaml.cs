@@ -6,4 +6,14 @@ public partial class OpeningPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+	private void OnBookButtonClicked(object sender, EventArgs e)
+	{
+        Application.Current.MainPage = new BookingPage();
+    }
+
+	private void OnManageButtonClicked(object sender, EventArgs e)
+	{
+		Application.Current.MainPage = new ManageBookings();
+	}
 }

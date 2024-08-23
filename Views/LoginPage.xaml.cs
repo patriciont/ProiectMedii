@@ -21,7 +21,7 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        if (username == "Student" && password == "Password") 
+        if (username == "S" && password == "P") 
         {
             LoginStatusLabel.IsVisible = false;
             Application.Current.MainPage = new OpeningPage(); 

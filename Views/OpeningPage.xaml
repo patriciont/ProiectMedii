@@ -3,10 +3,25 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="BookingApp.Views.OpeningPage"
             Title="OpeningPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Landing Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+
+    <Grid Padding="20" RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="Auto">
+        <Label Text="Welcome to the Study Room Booking App!"
+            FontSize="16"
+            HorizontalOptions="Center"
+            Grid.Row="0" />
+
+        <Button Text="Book A Room"
+            Clicked="OnBookButtonClicked"
+            HorizontalOptions="Center"
+            Grid.Row="1"
+            Margin="0,20,0,10" />
+
+        <Button Text="Manage Your Bookings"
+            Clicked="OnManageButtonClicked"
+            HorizontalOptions="Center"
+            Grid.Row="2"
+            Margin="0,10,0,10" />
+    </Grid>
+    
 </ContentPage>
