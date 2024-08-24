@@ -16,7 +16,7 @@ namespace BookingApp
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3");
             DatabaseService = new DatabaseService(dbPath);
 
-            MainPage = new NavigationPage(new Views.LoginPage());
+            MainPage = new NavigationPage(new MainPage());
         }
     }
 }
