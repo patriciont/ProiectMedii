@@ -7,8 +7,12 @@ using BookingApp.Services;
 
 namespace BookingApp
 {
+
+    // ADMIN PAGE
     public partial class MainPage : ContentPage
     {
+
+        // Dropdown menus
         private List<string> _roomFieldsOfStudy = new List<string>
         {
             "Computer Science",
@@ -32,18 +36,32 @@ namespace BookingApp
             "Arts"
         };
 
+        // Commands variables
+        public Command<User> DeleteUserCommand { get; private set; }
+        public Command<Room> DeleteRoomCommand { get; private set; }
+
+
         public MainPage()
         {
             InitializeComponent();
 
+            // Dropdown Menus
             RoomFieldOfStudyPicker.ItemsSource = _roomFieldsOfStudy;
             UserFieldOfStudyPicker.ItemsSource = _userFieldsOfStudy;
 
-            
+            // Define Commands
+            DeleteUserCommand = new Command<User>(OnDeleteUser);
+            DeleteRoomCommand = new Command<Room>(OnDeleteRoom);
+
+            // Set the BindingContext to this page
+            BindingContext = this;
+
+            // Get all Users and Rooms
             LoadUsers();
             LoadRooms();
         }
 
+        // Add user button
         private void OnAddUserClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(UserNameEntry.Text) || string.IsNullOrWhiteSpace(PasswordEntry.Text))
@@ -61,9 +79,17 @@ namespace BookingApp
             };
 
             App.DatabaseService.SaveUser(user);
-            LoadUsers(); 
+            LoadUsers();
+
+            // Clear the input fields
+            UserNameEntry.Text = string.Empty;
+            PasswordEntry.Text = string.Empty;
+            UserFieldOfStudyPicker.SelectedItem = null;
+
             StatusLabel.Text = $"User '{user.Username}' added successfully.";
         }
+
+        // Add room button
 
         private void OnAddRoomClicked(object sender, EventArgs e)
         {
@@ -83,72 +109,88 @@ namespace BookingApp
             };
 
             App.DatabaseService.SaveRoom(room);
-            LoadRooms(); // Reload the room list
+            LoadRooms();
+
+            // Clear the input fields
+            RoomName.Text = string.Empty;
+            RoomNumber.Text = string.Empty;
+            RoomDescriptionEntry.Text = string.Empty;
+            RoomFieldOfStudyPicker.SelectedItem = null;
+            RoomCapacityEntry.Text = string.Empty;
+
             StatusLabel.Text = $"Room '{room.RoomName}' added successfully.";
         }
 
-        private async void OnDeleteUserClicked(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var user = (User)button.BindingContext;  
+        // Delete user button
 
+        private async void OnDeleteUser(User user)
+        {
             bool confirm = await DisplayAlert("Confirm", $"Are you sure you want to delete user {user.Username}?", "Yes", "No");
             if (confirm)
             {
                 App.DatabaseService.DeleteUser(user.Id);
-                LoadUsers(); 
+                LoadUsers();
                 StatusLabel.Text = $"User '{user.Username}' deleted.";
             }
         }
 
-        private async void OnDeleteRoomClicked(object sender, EventArgs e)
+        // Delete room button
+        private async void OnDeleteRoom(Room room)
         {
-            var button = (Button)sender;
-            var room = (Room)button.BindingContext;
-
             bool confirm = await DisplayAlert("Confirm", $"Are you sure you want to delete room {room.RoomName}?", "Yes", "No");
             if (confirm)
             {
                 App.DatabaseService.DeleteRoom(room.Id);
-                LoadRooms(); 
+                LoadRooms();
                 StatusLabel.Text = $"Room '{room.RoomName}' deleted.";
             }
         }
 
+        // Delete all users button
         private async void OnDeleteAllUsersClicked(object sender, EventArgs e)
         {
             bool confirm = await DisplayAlert("Confirm", "Are you sure you want to delete all users? This action cannot be undone.", "Yes", "No");
             if (confirm)
             {
                 App.DatabaseService.DeleteAllUsers();
-                LoadUsers();  // Refresh the user list
-                LoadRooms();  // Refresh the room list
+                LoadUsers();  
+                LoadRooms();  
                 StatusLabel.Text = "All data deleted.";
             }
         }
 
+        // Delete all rooms button
         private async void OnDeleteAllRoomsClicked(object sender, EventArgs e)
         {
             bool confirm = await DisplayAlert("Confirm", "Are you sure you want to delete all rooms? This action cannot be undone.", "Yes", "No");
             if (confirm)
             {
                 App.DatabaseService.DeleteAllRooms();
-                LoadUsers();  // Refresh the user list
-                LoadRooms();  // Refresh the room list
+                LoadUsers();  
+                LoadRooms();  
                 StatusLabel.Text = "All data deleted.";
             }
         }
 
+        // Go to site button
+
+        private void OnGoToSiteClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new Views.OpeningPage();
+        }
+
+        // Methods to get all users and rooms
+
         private void LoadUsers()
         {
             var users = App.DatabaseService.GetAllUsers();
-            UsersListView.ItemsSource = users;
+            UsersCollectionView.ItemsSource = users;
         }
 
         private void LoadRooms()
         {
             var rooms = App.DatabaseService.GetAllRooms();
-            RoomsListView.ItemsSource = rooms;
+            RoomsCollectionView.ItemsSource = rooms;
         }
 
     }
