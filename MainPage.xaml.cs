@@ -12,6 +12,14 @@ namespace BookingApp
     public partial class MainPage : ContentPage
     {
 
+        // Admin list
+        private List<Admin> _adminList = new List<Admin>
+        {
+            // Update later, connect to database (getalladmins()?)
+            new Admin { Id = 1, Name = "John Doe" },
+            new Admin { Id = 2, Name = "Jane Smith" }
+        };
+
         // Dropdown menus
         private List<string> _roomFieldsOfStudy = new List<string>
         {
@@ -22,7 +30,7 @@ namespace BookingApp
             "Biology",
             "Chemistry",
             "Arts",
-            "Open"
+            "Commons"
         };
 
         private List<string> _userFieldsOfStudy = new List<string>
@@ -49,6 +57,8 @@ namespace BookingApp
             RoomFieldOfStudyPicker.ItemsSource = _roomFieldsOfStudy;
             UserFieldOfStudyPicker.ItemsSource = _userFieldsOfStudy;
 
+            AdminPicker.ItemsSource = _adminList;
+
             // Define Commands
             DeleteUserCommand = new Command<User>(OnDeleteUser);
             DeleteRoomCommand = new Command<Room>(OnDeleteRoom);
@@ -64,61 +74,118 @@ namespace BookingApp
         // Add user button
         private void OnAddUserClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UserNameEntry.Text) || string.IsNullOrWhiteSpace(PasswordEntry.Text))
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(UserNameEntry.Text) ||
+                string.IsNullOrWhiteSpace(PasswordEntry.Text) ||
+                string.IsNullOrWhiteSpace(EmailEntry.Text) ||
+                UserFieldOfStudyPicker.SelectedItem == null)
             {
-                StatusLabel.Text = "Please enter a valid name and password.";
+                UserStatusLabel.Text = "Please fill in all required fields.";
+                UserStatusLabel.TextColor = Colors.Red;
                 return;
             }
 
+            // Create new User object
             var user = new User
             {
                 Username = UserNameEntry.Text.Trim(),
                 Password = PasswordEntry.Text.Trim(),
-                FieldOfStudy = UserFieldOfStudyPicker.SelectedItem?.ToString() ?? "Unspecified",
-                PermissionsLevel = 4
+                Email = EmailEntry.Text.Trim(),
+                FieldOfStudy = UserFieldOfStudyPicker.SelectedItem.ToString(),
+                PermissionsLevel = 4 // Default permissions level
             };
 
+            // Save user to database
             App.DatabaseService.SaveUser(user);
-            LoadUsers();
 
-            // Clear the input fields
+            // Clear input fields
             UserNameEntry.Text = string.Empty;
             PasswordEntry.Text = string.Empty;
+            EmailEntry.Text = string.Empty;
             UserFieldOfStudyPicker.SelectedItem = null;
 
-            StatusLabel.Text = $"User '{user.Username}' added successfully.";
+            // Update status label and reload users
+            UserStatusLabel.Text = $"User '{user.Username}' added successfully.";
+            UserStatusLabel.TextColor = Colors.Green;
+            LoadUsers();
         }
 
         // Add room button
-
         private void OnAddRoomClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(RoomName.Text) || string.IsNullOrWhiteSpace(RoomNumber.Text))
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(RoomNameEntry.Text) || string.IsNullOrWhiteSpace(RoomNumberEntry.Text) || RoomFieldOfStudyPicker.SelectedItem == null || AdminPicker.SelectedItem == null)
             {
-                StatusLabel.Text = "Please enter a valid room name and number.";
+                RoomStatusLabel.Text = "Please fill in all required fields.";
+                RoomStatusLabel.TextColor = Colors.Red;
                 return;
             }
 
+            // Create new Room object
             var room = new Room
             {
-                RoomName = RoomName.Text.Trim(),
-                RoomNumber = RoomNumber.Text.Trim(),
+                RoomName = RoomNameEntry.Text.Trim(),
+                RoomNumber = RoomNumberEntry.Text.Trim(),
                 Description = RoomDescriptionEntry.Text?.Trim(),
-                FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem?.ToString() ?? "Unspecified",
-                Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0
+                FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem.ToString(),
+                Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
+                AdminId = ((Admin)AdminPicker.SelectedItem).Id,
+                AvailabilitySlots = new List<RoomSlot>()
             };
 
+            // Add room slots
+            foreach (var slotLayout in SlotContainer.Children)
+            {
+                var startTimePicker = (slotLayout as StackLayout).Children[1] as TimePicker;
+                var endTimePicker = (slotLayout as StackLayout).Children[3] as TimePicker;
+
+                var slot = new RoomSlot
+                {
+                    StartTime = DateTime.Today.Add(startTimePicker.Time),
+                    EndTime = DateTime.Today.Add(endTimePicker.Time)
+                };
+
+                room.AvailabilitySlots.Add(slot);
+            }
+
+            // Save room to database
             App.DatabaseService.SaveRoom(room);
-            LoadRooms();
 
-            // Clear the input fields
-            RoomName.Text = string.Empty;
-            RoomNumber.Text = string.Empty;
+            // Clear fields
+            RoomNameEntry.Text = string.Empty;
+            RoomNumberEntry.Text = string.Empty;
             RoomDescriptionEntry.Text = string.Empty;
-            RoomFieldOfStudyPicker.SelectedItem = null;
+            RoomFieldOfStudyPicker.SelectedIndex = -1;
             RoomCapacityEntry.Text = string.Empty;
+            AdminPicker.SelectedIndex = -1;
+            SlotContainer.Children.Clear();
 
-            StatusLabel.Text = $"Room '{room.RoomName}' added successfully.";
+            // Update status label
+            RoomStatusLabel.Text = $"Room '{room.RoomName}' added successfully.";
+            RoomStatusLabel.TextColor = Colors.Green;
+
+            // Reload rooms if needed
+            LoadRooms();
+        }
+
+        // Add slot button
+        private void OnAddSlotClicked(object sender, EventArgs e)
+        {
+            var slotLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
+
+            var startTimePicker = new TimePicker();
+            var endTimePicker = new TimePicker();
+            var removeButton = new Button { Text = "Remove", BackgroundColor = Colors.Red, TextColor = Colors.White };
+
+            removeButton.Clicked += (s, args) => SlotContainer.Children.Remove(slotLayout);
+
+            slotLayout.Children.Add(new Label { Text = "Start:" });
+            slotLayout.Children.Add(startTimePicker);
+            slotLayout.Children.Add(new Label { Text = "End:" });
+            slotLayout.Children.Add(endTimePicker);
+            slotLayout.Children.Add(removeButton);
+
+            SlotContainer.Children.Add(slotLayout);
         }
 
         // Delete user button
