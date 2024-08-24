@@ -11,7 +11,7 @@ namespace BookingApp.Models
 
         public bool IsRoomAvailable(Room room, DateTime startTime, DateTime endTime)
         {
-            foreach (var slot in room.AvailabilitySlots)
+            foreach (var slot in App.DatabaseService.GetRoomSlots(room.Id))
             {
                 if (slot.StartTime < endTime && startTime < slot.EndTime && slot.BookedCount >= room.Capacity)
                 {
@@ -23,24 +23,19 @@ namespace BookingApp.Models
 
         public void BookRoom(Room room, RoomSlot newSlot, int userId)
         {
-            var slot = room.AvailabilitySlots.Find(s => s.StartTime == newSlot.StartTime && s.EndTime == newSlot.EndTime);
+            var slot = App.DatabaseService.GetRoomSlots(room.Id).Find(s => s.StartTime == newSlot.StartTime && s.EndTime == newSlot.EndTime);
 
             if (slot != null && slot.BookedCount < room.Capacity)
             {
                 slot.BookedUserIds.Add(userId);
                 slot.BookedCount++;
-
-                // Save the updated slot to the database
-                // db.Update(slot);
+                App.DatabaseService.SaveRoomSlot(slot); // Update slot in the database
             }
             else if (slot == null)
             {
                 newSlot.BookedUserIds.Add(userId);
                 newSlot.BookedCount = 1;
-                room.AvailabilitySlots.Add(newSlot);
-
-                // Save the new slot to the database
-                // db.Insert(newSlot);
+                App.DatabaseService.SaveRoomSlot(newSlot); // Save new slot in the database
             }
             else
             {

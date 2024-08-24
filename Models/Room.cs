@@ -7,7 +7,7 @@ using SQLite;
 
 namespace BookingApp.Models
 {
-    class Room
+    public class Room
     {
         [PrimaryKey, AutoIncrement]
 

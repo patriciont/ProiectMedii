@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Models
 {
-    class RoomSlot
+    public class RoomSlot
     {
         [PrimaryKey, AutoIncrement]
 

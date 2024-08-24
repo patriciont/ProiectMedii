@@ -3,12 +3,18 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="BookingApp.Views.BookingPage"
             Title="BookingPage">
-    
-    <VerticalStackLayout>
+
+    <StackLayout Padding="10">
         <Label 
             Text="Booking Page!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Add Admin" Clicked="OnAddAdminClicked"/>
+        <Button Text="Add Room" Clicked="OnAddRoomClicked"/>
+        <Button Text="Add Slot" Clicked="OnAddSlotClicked"/>
+        <Button Text="List Rooms" Clicked="OnListRoomsClicked"/>
+        <Label x:Name="StatusLabel" Text="Status: Waiting for actions" />
 
         <Button Text="Back"
             Clicked="OnBackButtonClicked"
@@ -16,6 +22,6 @@
             Grid.Row="3"
             Margin="0,10,0,0" />
         
-    </VerticalStackLayout>
+    </StackLayout>
     
 </ContentPage>
