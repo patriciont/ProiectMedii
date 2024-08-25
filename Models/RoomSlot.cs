@@ -30,6 +30,14 @@ namespace BookingApp.Models
         public List<int> BookedUserIds { get; set; } = new List<int>();
 
         // The current number of bookings for this slot
-        public int BookedCount { get; set; } 
+        public int BookedCount { get; set; }
+
+        public string SlotDetails
+        {
+            get
+            {
+                return $"{StartTime:HH:mm} - {EndTime:HH:mm} ({BookedCount} booked)";
+            }
+        }
     }
 }

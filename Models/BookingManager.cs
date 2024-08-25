@@ -9,18 +9,7 @@ namespace BookingApp.Models
     class BookingManager
     {
 
-        public bool IsRoomAvailable(Room room, DateTime startTime, DateTime endTime)
-        {
-            foreach (var slot in App.DatabaseService.GetRoomSlots(room.Id))
-            {
-                if (slot.StartTime < endTime && startTime < slot.EndTime && slot.BookedCount >= room.Capacity)
-                {
-                    return false; // Slot is fully booked
-                }
-            }
-            return true; // No conflict, room has available capacity
-        }
-
+        // Book a room slot
         public void BookRoom(Room room, RoomSlot newSlot, int userId)
         {
             var slot = App.DatabaseService.GetRoomSlots(room.Id).Find(s => s.StartTime == newSlot.StartTime && s.EndTime == newSlot.EndTime);
@@ -41,6 +30,24 @@ namespace BookingApp.Models
             {
                 throw new Exception("Room slot is fully booked.");
             }
+        }
+
+        // Get available room slots
+        public List<RoomSlot> GetAvailableRoomSlots(Room room)
+        {
+            var allSlots = App.DatabaseService.GetRoomSlots(room.Id);
+            var availableSlots = new List<RoomSlot>();
+
+            foreach (var slot in allSlots)
+            {
+                // Check if the slot is available (not fully booked)
+                if (slot.BookedCount < room.Capacity)
+                {
+                    availableSlots.Add(slot);
+                }
+            }
+
+            return availableSlots;
         }
     }
 }

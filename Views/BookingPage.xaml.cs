@@ -1,3 +1,4 @@
+using BookingApp.Models;
 using BookingApp.Services;
 using Microsoft.Maui.Controls;
 using System;
@@ -9,6 +10,7 @@ namespace BookingApp.Views;
 public partial class BookingPage : ContentPage
 {
     private string _userFieldOfStudy;
+    private Room _selectedRoom;
 
     public BookingPage(string userFieldOfStudy)
     {
