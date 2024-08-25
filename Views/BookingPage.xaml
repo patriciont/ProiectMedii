@@ -9,8 +9,29 @@
             Text="Booking Page!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        
-        
+
+        <ScrollView Padding="15">
+            <StackLayout Spacing="20">
+                <!-- Header -->
+                <Label Text="Booking Page" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" />
+
+
+                <!-- Rooms Display -->
+                <CollectionView x:Name="RoomsCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="0,0,0,10" Padding="10" CornerRadius="5" BorderColor="LightGray">
+                                <StackLayout>
+                                    <Label Text="{Binding RoomName}" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Description}" FontSize="14"/>
+                                    <Label Text="{Binding Capacity}" FontSize="14"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
 
         <Button Text="Back"
             Clicked="OnBackButtonClicked"

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BookingApp.Models;
 using BookingApp.Services;
+using BookingApp.Views;
 
 namespace BookingApp
 {
@@ -243,7 +244,13 @@ namespace BookingApp
 
         private void OnGoToSiteClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new Views.OpeningPage();
+            // Get the field of study from the current user
+            string userFieldOfStudy = User.CurrentUser.LoggedInUser?.FieldOfStudy ?? "DefaultFieldOfStudy";
+            var databaseService = App.DatabaseService;
+
+            var bookingPage = new BookingPage(userFieldOfStudy);
+            var loginPage = new LoginPage();
+            Application.Current.MainPage = new NavigationPage(loginPage);
         }
 
         // Methods to get all users and rooms

@@ -1,15 +1,27 @@
+using BookingApp.Services;
 using Microsoft.Maui.Controls;
-using BookingApp.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BookingApp.Views;
 
 public partial class BookingPage : ContentPage
 {
-	public BookingPage()
-	{
-		InitializeComponent();
-	}
+    private string _userFieldOfStudy;
+
+    public BookingPage(string userFieldOfStudy)
+    {
+        InitializeComponent();
+        _userFieldOfStudy = userFieldOfStudy;
+        LoadRooms();
+    }
+
+    private void LoadRooms()
+    {
+        var rooms = App.DatabaseService.GetRoomsByFieldOfStudy(_userFieldOfStudy);
+        RoomsCollectionView.ItemsSource = rooms;
+    }
 
     private void OnBackButtonClicked(object sender, EventArgs e)
     {

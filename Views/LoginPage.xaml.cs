@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using static BookingApp.Models.User;
 
 namespace BookingApp.Views;
 
@@ -9,27 +10,21 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
 	}
 
-    private void OnLoginButtonClicked(object sender, EventArgs e)
-    {
-        string username = UsernameEntry.Text;
-        string password = PasswordEntry.Text;
-
-        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    private async void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            LoginStatusLabel.Text = "Username and password cannot be empty.";
-            LoginStatusLabel.IsVisible = true;
-            return;
+            var username = UsernameEntry.Text.Trim();
+            var password = PasswordEntry.Text.Trim();
+            
+            var user = App.DatabaseService.GetUserByUsername(username);
+            if (user != null && user.Password == PasswordEntry.Text) // Password check
+            {
+                CurrentUser.LoggedInUser = user;
+                
+                Navigation.PushAsync(new BookingPage(CurrentUser.LoggedInUser.FieldOfStudy));
+            }
+            else
+            {
+                LoginStatusLabel.Text = "Invalid username or password.";
+            }
         }
-
-        if (username == "S" && password == "P") 
-        {
-            LoginStatusLabel.IsVisible = false;
-            Application.Current.MainPage = new OpeningPage(); 
-        }
-        else
-        {
-            LoginStatusLabel.Text = "Invalid login, please try again.";
-            LoginStatusLabel.IsVisible = true;
-        }
-    }
 }

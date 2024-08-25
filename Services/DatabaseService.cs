@@ -26,6 +26,11 @@ namespace BookingApp.Services
         public Room GetRoom(int id) => _database.Table<Room>().FirstOrDefault(r => r.Id == id);
         public List<Room> GetAllRooms() => _database.Table<Room>().ToList();
 
+        public List<Room> GetRoomsByFieldOfStudy(string fieldOfStudy)
+        {
+            return _database.Table<Room>().Where(r => r.FieldOfStudy == fieldOfStudy || r.FieldOfStudy == "Commons").ToList();
+        }
+
 
         // RoomSlot methods
         public int SaveRoomSlot(RoomSlot slot) => _database.Insert(slot);
@@ -40,6 +45,12 @@ namespace BookingApp.Services
         public int SaveUser(User user) => _database.Insert(user);
         public User GetUser(int id) => _database.Table<User>().FirstOrDefault(u => u.Id == id);
         public List<User> GetAllUsers() => _database.Table<User>().ToList();
+
+        // Get a user by username
+        public User GetUserByUsername(string username)
+        {
+            return _database.Table<User>().FirstOrDefault(u => u.Username == username);
+        }
 
 
         // Methods for deleting users and rooms

@@ -32,8 +32,13 @@ namespace BookingApp.Models
         public string? Password { get; set; }
 
         [SQLite.MaxLength(100)]
-        public string? FieldOfStudy { get; set; }  
+        public string? FieldOfStudy { get; set; }
 
         public int PermissionsLevel { get; set; }
+
+        public static class CurrentUser
+        {
+            public static User LoggedInUser { get; set; }
+        }
     }
 }
