@@ -10,34 +10,21 @@ namespace BookingApp.Models
     public class RoomSlot
     {
         [PrimaryKey, AutoIncrement]
-
-        // Unique ID
         public int Id { get; set; }
 
-        // Foreign key to Room
-        public int RoomId { get; set; } 
+        public int RoomId { get; set; }
 
-        // Start time
-        public DateTime StartTime { get; set; }  
+        public DateTime Date { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
 
-        // End time
-        public DateTime EndTime { get; set; }
+        public int AvailableDayId { get; set; } // Foreign key to AvailableDay
 
-
-        [Ignore] // Aplication logic
-
-        // List of user IDs who have booked this slot
+        [Ignore]  // Application logic
         public List<int> BookedUserIds { get; set; } = new List<int>();
 
-        // The current number of bookings for this slot
         public int BookedCount { get; set; }
 
-        public string SlotDetails
-        {
-            get
-            {
-                return $"{StartTime:HH:mm} - {EndTime:HH:mm} ({BookedCount} booked)";
-            }
-        }
+        public string SlotDetails => $"{StartTime:HH:mm} - {EndTime:HH:mm}";
     }
 }

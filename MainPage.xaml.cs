@@ -13,12 +13,13 @@ namespace BookingApp
     public partial class MainPage : ContentPage
     {
 
+        private readonly RoomService _roomService;
+
         // Admin list
         private List<Admin> _adminList = new List<Admin>
         {
             // Update later, connect to database (getalladmins()?)
-            new Admin { Id = 1, Name = "John Doe" },
-            new Admin { Id = 2, Name = "Jane Smith" }
+            new Admin { Id = 1, Name = "John Doe" }
         };
 
         // Dropdown menus
@@ -54,10 +55,11 @@ namespace BookingApp
         {
             InitializeComponent();
 
+            _roomService = new RoomService(App.DatabaseService);
+
             // Dropdown Menus
             RoomFieldOfStudyPicker.ItemsSource = _roomFieldsOfStudy;
             UserFieldOfStudyPicker.ItemsSource = _userFieldsOfStudy;
-
             AdminPicker.ItemsSource = _adminList;
 
             // Define Commands
@@ -122,43 +124,21 @@ namespace BookingApp
                 return;
             }
 
-            // Create new Room object
-            var room = new Room
-            {
-                RoomName = RoomNameEntry.Text.Trim(),
-                RoomNumber = RoomNumberEntry.Text.Trim(),
-                Description = RoomDescriptionEntry.Text?.Trim(),
-                FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem.ToString(),
-                Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
-                AdminId = ((Admin)AdminPicker.SelectedItem).Id,
-                AvailabilitySlots = new List<RoomSlot>()
-            };
-
-            // Add room slots
-            foreach (var slotLayout in SlotContainer.Children)
-            {
-                var startTimePicker = (slotLayout as StackLayout).Children[1] as TimePicker;
-                var endTimePicker = (slotLayout as StackLayout).Children[3] as TimePicker;
-
-                var slot = new RoomSlot
-                {
-                    StartTime = DateTime.Today.Add(startTimePicker.Time),
-                    EndTime = DateTime.Today.Add(endTimePicker.Time)
-                };
-
-                room.AvailabilitySlots.Add(slot);
-            }
-
-            // Save room to database
-            App.DatabaseService.SaveRoom(room);
+            // Create and save the room
+            var room = _roomService.CreateRoom(
+                RoomNameEntry.Text,
+                RoomNumberEntry.Text,
+                RoomDescriptionEntry.Text,
+                RoomFieldOfStudyPicker.SelectedItem.ToString(),
+                int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
+                ((Admin)AdminPicker.SelectedItem).Id,
+                CreateRoomSlots() // Modified to include days and times
+            );
 
             // Clear fields
-            RoomNameEntry.Text = string.Empty;
-            RoomNumberEntry.Text = string.Empty;
-            RoomDescriptionEntry.Text = string.Empty;
-            RoomFieldOfStudyPicker.SelectedIndex = -1;
-            RoomCapacityEntry.Text = string.Empty;
-            AdminPicker.SelectedIndex = -1;
+            ClearRoomFields();
+
+            // Clear SlotContainer to remove all added slots
             SlotContainer.Children.Clear();
 
             // Update status label
@@ -169,17 +149,46 @@ namespace BookingApp
             LoadRooms();
         }
 
+        private List<RoomSlot> CreateRoomSlots()
+        {
+            var roomSlots = new List<RoomSlot>();
+
+            foreach (var child in SlotContainer.Children)
+            {
+                if (child is StackLayout slotLayout)
+                {
+                    var datePicker = (DatePicker)slotLayout.Children[1];
+                    var startTimePicker = (TimePicker)slotLayout.Children[3];
+                    var endTimePicker = (TimePicker)slotLayout.Children[5];
+
+                    var roomSlot = new RoomSlot
+                    {
+                        Date = datePicker.Date,
+                        StartTime = startTimePicker.Time,
+                        EndTime = endTimePicker.Time
+                    };
+
+                    roomSlots.Add(roomSlot);
+                }
+            }
+
+            return roomSlots;
+        }
+
         // Add slot button
         private void OnAddSlotClicked(object sender, EventArgs e)
         {
             var slotLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
 
+            var datePicker = new DatePicker { MinimumDate = DateTime.Now };
             var startTimePicker = new TimePicker();
             var endTimePicker = new TimePicker();
             var removeButton = new Button { Text = "Remove", BackgroundColor = Colors.Red, TextColor = Colors.White };
 
             removeButton.Clicked += (s, args) => SlotContainer.Children.Remove(slotLayout);
 
+            slotLayout.Children.Add(new Label { Text = "Date:" });
+            slotLayout.Children.Add(datePicker);
             slotLayout.Children.Add(new Label { Text = "Start:" });
             slotLayout.Children.Add(startTimePicker);
             slotLayout.Children.Add(new Label { Text = "End:" });
@@ -251,6 +260,18 @@ namespace BookingApp
             var bookingPage = new BookingPage(userFieldOfStudy);
             var loginPage = new LoginPage();
             Application.Current.MainPage = new NavigationPage(loginPage);
+        }
+
+        // Clear room inputs
+        private void ClearRoomFields()
+        {
+            RoomNameEntry.Text = string.Empty;
+            RoomNumberEntry.Text = string.Empty;
+            RoomDescriptionEntry.Text = string.Empty;
+            RoomFieldOfStudyPicker.SelectedIndex = -1;
+            RoomCapacityEntry.Text = string.Empty;
+            AdminPicker.SelectedIndex = -1;
+            SlotContainer.Children.Clear();
         }
 
         // Methods to get all users and rooms

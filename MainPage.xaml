@@ -58,9 +58,10 @@
                     <Picker x:Name="AdminPicker" Title="Select Contact Person" ItemsSource="{Binding AdminList}"/>
 
                     <!-- Time Slots -->
-                    <Label Text="Define Availability Slots" FontSize="16" FontAttributes="Bold" />
+                    
                     <StackLayout x:Name="SlotContainer" Spacing="10">
                     <!-- Slots will be added here dynamically -->
+                    
                     </StackLayout>
                     <Button Text="Add Slot" Clicked="OnAddSlotClicked" BackgroundColor="LightBlue"/>
 

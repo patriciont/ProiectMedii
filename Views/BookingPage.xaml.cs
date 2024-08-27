@@ -10,7 +10,6 @@ namespace BookingApp.Views;
 public partial class BookingPage : ContentPage
 {
     private string _userFieldOfStudy;
-    private Room _selectedRoom;
 
     public BookingPage(string userFieldOfStudy)
     {

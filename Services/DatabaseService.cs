@@ -18,6 +18,7 @@ namespace BookingApp.Services
             _database.CreateTable<Admin>();
             _database.CreateTable<User>();
             _database.CreateTable<Room>();
+            _database.CreateTable<AvailableDay>();
             _database.CreateTable<RoomSlot>();
         }
 
@@ -31,11 +32,15 @@ namespace BookingApp.Services
             return _database.Table<Room>().Where(r => r.FieldOfStudy == fieldOfStudy || r.FieldOfStudy == "Commons").ToList();
         }
 
+        // AvailableDay methods
+        public int SaveAvailableDay(AvailableDay availableDay) => _database.Insert(availableDay);
+        public AvailableDay GetAvailableDay(int id) => _database.Table<AvailableDay>().FirstOrDefault(d => d.Id == id);
+        public List<AvailableDay> GetAvailableDays(int roomId) => _database.Table<AvailableDay>().Where(d => d.RoomId == roomId).ToList();
 
         // RoomSlot methods
         public int SaveRoomSlot(RoomSlot slot) => _database.Insert(slot);
         public RoomSlot GetRoomSlot(int id) => _database.Table<RoomSlot>().FirstOrDefault(s => s.Id == id);
-        public List<RoomSlot> GetRoomSlots(int roomId) => _database.Table<RoomSlot>().Where(s => s.RoomId == roomId).ToList();
+        public List<RoomSlot> GetRoomSlots(int availableDayId) => _database.Table<RoomSlot>().Where(s => s.AvailableDayId == availableDayId).ToList();
 
         // Admin methods
         public int SaveAdmin(Admin admin) => _database.Insert(admin);
@@ -52,18 +57,9 @@ namespace BookingApp.Services
             return _database.Table<User>().FirstOrDefault(u => u.Username == username);
         }
 
-
         // Methods for deleting users and rooms
-        public int DeleteUser(int id)
-        {
-            return _database.Delete<User>(id);
-        }
-
-        public int DeleteRoom(int id)
-        {
-            return _database.Delete<Room>(id);
-        }
-
+        public int DeleteUser(int id) => _database.Delete<User>(id);
+        public int DeleteRoom(int id) => _database.Delete<Room>(id);
         public void DeleteAllUsers() => _database.DeleteAll<User>();
         public void DeleteAllRooms() => _database.DeleteAll<Room>();
     }

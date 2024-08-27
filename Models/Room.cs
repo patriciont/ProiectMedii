@@ -49,7 +49,10 @@ namespace BookingApp.Models
 
         [Ignore]  // application logic
         // List of RoomSlots 
-        public List<RoomSlot> ? AvailabilitySlots { get; set; }  
+        public List<RoomSlot> ? AvailabilitySlots { get; set; }
+
+        [Ignore]  // Application logic
+        public List<AvailableDay>? AvailableDays { get; set; }
 
     }
 }
