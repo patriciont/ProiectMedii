@@ -19,5 +19,7 @@ namespace BookingApp.Models
 
         [Ignore]  // Application logic
         public List<RoomSlot>? Slots { get; set; }  // Slots available on this day
+
+        public bool IsSelected { get; set; }
     }
 }

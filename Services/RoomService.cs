@@ -47,20 +47,33 @@ namespace BookingApp.Services
         }
 
         // Create a room with no slots (slots will be added later)
-        public Room CreateRoom(string roomName, string roomNumber, string description, string fieldOfStudy, int capacity, int adminId, List<RoomSlot> roomSlots)
+        public Room CreateRoom(string name, string number, string description, string fieldOfStudy, int capacity, int adminId, List<AvailableDay> availableDays)
         {
             var room = new Room
             {
-                RoomName = roomName.Trim(),
-                RoomNumber = roomNumber.Trim(),
-                Description = description?.Trim(),
+                RoomName = name,
+                RoomNumber = number,
+                Description = description,
                 FieldOfStudy = fieldOfStudy,
                 Capacity = capacity,
-                AdminId = adminId,
-                AvailableDays = new List<AvailableDay>()
+                AdminId = adminId
             };
 
-            SaveRoom(room);
+            App.DatabaseService.SaveRoom(room);
+
+            // Save available days and slots
+            foreach (var day in availableDays)
+            {
+                day.RoomId = room.Id; // Link the day to the room
+                App.DatabaseService.SaveAvailableDay(day);
+
+                foreach (var slot in day.Slots)
+                {
+                    slot.AvailableDayId = day.Id;
+                    App.DatabaseService.SaveRoomSlot(slot);
+                }
+            }
+
             return room;
         }
 

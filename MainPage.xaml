@@ -39,34 +39,93 @@
                 <StackLayout Spacing="15">
                     <Label Text="Create New Room" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
 
-                    <!-- Room Name and Number -->
+                    <!-- Room Name and Infos -->
                     <StackLayout Orientation="Horizontal" Spacing="10">
                         <Entry x:Name="RoomNameEntry" Placeholder="Room Name" WidthRequest="150"/>
                         <Entry x:Name="RoomNumberEntry" Placeholder="Room Number" WidthRequest="100" Keyboard="Numeric"/>
                     </StackLayout>
 
-                    <!-- Description -->
                     <Editor x:Name="RoomDescriptionEntry" Placeholder="Room Description" HeightRequest="100"/>
-
-                    <!-- Field of Study Picker -->
                     <Picker x:Name="RoomFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding RoomFieldsOfStudy}"/>
-
-                    <!-- Capacity -->
                     <Entry x:Name="RoomCapacityEntry" Placeholder="Capacity" Keyboard="Numeric"/>
-
-                    <!-- Admin (Contact Person) Picker -->
                     <Picker x:Name="AdminPicker" Title="Select Contact Person" ItemsSource="{Binding AdminList}"/>
 
-                    <!-- Time Slots -->
-                    
-                    <StackLayout x:Name="SlotContainer" Spacing="10">
-                    <!-- Slots will be added here dynamically -->
-                    
+                    <!-- Slot Template -->
+                    <Label Text="Slot Template" FontSize="20" Margin="0,10,0,0" />
+                    <StackLayout x:Name="SlotTemplateContainer">
+                        <!-- Time Slot Template -->
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Start:" VerticalOptions="Center" />
+                            <TimePicker x:Name="StartTimePicker" />
+                            <Label Text="End:" VerticalOptions="Center" />
+                            <TimePicker x:Name="EndTimePicker" />
+                            <Button Text="Remove" Clicked="OnRemoveSlotClicked" />
+                        </StackLayout>
                     </StackLayout>
-                    <Button Text="Add Slot" Clicked="OnAddSlotClicked" BackgroundColor="LightBlue"/>
+                    <Button Text="Add Slot" Clicked="OnAddSlotClicked" />
 
-                    <!-- Add Room Button -->
-                    <Button Text="Add Room" Clicked="OnAddRoomClicked" BackgroundColor="Green" TextColor="White"/>
+                    <!-- Input for Adding Days -->
+                    <Label Text="Add Day" FontSize="20" Margin="0,10,0,0" />
+                    <DatePicker x:Name="DatePicker" />
+                    <!-- Display Selected Days -->
+                    <CollectionView x:Name="AvailableDaysCollectionView"
+                        SelectionMode="Multiple"
+                        SelectionChanged="OnAvailableDaysSelectionChanged">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Margin="5"
+                                    Padding="10"
+                                    BackgroundColor="{Binding IsSelected, Converter={StaticResource BooleanToColorConverter}}"
+                                    CornerRadius="10"
+                                    HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" Spacing="10">
+                                        <!-- Display the date -->
+                                        <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="120" />       
+
+                                        <!-- Add a small button to each available day -->
+                                        <Button Text="Action"
+                                            Clicked=""
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Text="Add Day" Clicked="OnAddDayClicked" />
+
+                    
+
+                    <!-- Display Saved Days with Time Slots -->
+                    <Label Text="Saved Days with Time Slots" FontSize="20" Margin="0,10,0,0" />
+                    <CollectionView x:Name="SavedDaysCollectionView">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5" Spacing="5">
+                                    <Label Text="{Binding Date}" FontSize="16" />
+                                    <CollectionView ItemsSource="{Binding Slots}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding StartTime}" />
+                                                    <Label Text="-" />
+                                                    <Label Text="{Binding EndTime}" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button Text="Save Template" Clicked="OnSaveTemplateClicked" />
+
+                    <!-- Save Room Button -->
+                    <Button Text="Add Room" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
 
                     <!-- Status Label -->
                     <Label x:Name="RoomStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>

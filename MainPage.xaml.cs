@@ -15,6 +15,11 @@ namespace BookingApp
 
         private readonly RoomService _roomService;
 
+        private List<RoomSlot> _currentSlotTemplate = new List<RoomSlot>();
+        private List<AvailableDay> _AvailableDays = new List<AvailableDay>();
+        private List<AvailableDay> _savedDays = new List<AvailableDay>();
+
+
         // Admin list
         private List<Admin> _adminList = new List<Admin>
         {
@@ -72,6 +77,23 @@ namespace BookingApp
             // Get all Users and Rooms
             LoadUsers();
             LoadRooms();
+
+            UpdateSelectedDays();
+            UpdateSavedDays();
+
+            AvailableDaysCollectionView.ItemsSource = _AvailableDays;
+            SavedDaysCollectionView.ItemsSource = _savedDays;
+        }
+
+        private List<AvailableDay> GetAvailableDays()
+        {
+            // Example data, replace with actual implementation
+            return new List<AvailableDay>
+            {
+                new AvailableDay { Date = DateTime.Now.AddDays(1), IsSelected = false },
+                new AvailableDay { Date = DateTime.Now.AddDays(2), IsSelected = false },
+                // Add more days as needed
+            };
         }
 
         // Add user button
@@ -116,87 +138,150 @@ namespace BookingApp
         // Add room button
         private void OnAddRoomClicked(object sender, EventArgs e)
         {
-            // Validate inputs
-            if (string.IsNullOrWhiteSpace(RoomNameEntry.Text) || string.IsNullOrWhiteSpace(RoomNumberEntry.Text) || RoomFieldOfStudyPicker.SelectedItem == null || AdminPicker.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(RoomNameEntry.Text) || string.IsNullOrWhiteSpace(RoomNumberEntry.Text) ||
+                RoomFieldOfStudyPicker.SelectedItem == null || AdminPicker.SelectedItem == null ||
+                !_savedDays.Any())
             {
-                RoomStatusLabel.Text = "Please fill in all required fields.";
-                RoomStatusLabel.TextColor = Colors.Red;
+                // Display error message
                 return;
             }
 
-            // Create and save the room
-            var room = _roomService.CreateRoom(
-                RoomNameEntry.Text,
-                RoomNumberEntry.Text,
-                RoomDescriptionEntry.Text,
-                RoomFieldOfStudyPicker.SelectedItem.ToString(),
-                int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
-                ((Admin)AdminPicker.SelectedItem).Id,
-                CreateRoomSlots() // Modified to include days and times
-            );
-
-            // Clear fields
-            ClearRoomFields();
-
-            // Clear SlotContainer to remove all added slots
-            SlotContainer.Children.Clear();
-
-            // Update status label
-            RoomStatusLabel.Text = $"Room '{room.RoomName}' added successfully.";
-            RoomStatusLabel.TextColor = Colors.Green;
-
-            // Reload rooms if needed
-            LoadRooms();
-        }
-
-        private List<RoomSlot> CreateRoomSlots()
-        {
-            var roomSlots = new List<RoomSlot>();
-
-            foreach (var child in SlotContainer.Children)
+            var room = new Room
             {
-                if (child is StackLayout slotLayout)
-                {
-                    var datePicker = (DatePicker)slotLayout.Children[1];
-                    var startTimePicker = (TimePicker)slotLayout.Children[3];
-                    var endTimePicker = (TimePicker)slotLayout.Children[5];
+                RoomName = RoomNameEntry.Text,
+                RoomNumber = RoomNumberEntry.Text,
+                Description = RoomDescriptionEntry.Text,
+                FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem.ToString(),
+                Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
+                AdminId = ((Admin)AdminPicker.SelectedItem).Id,
+                AvailableDays = _savedDays
+            };
 
-                    var roomSlot = new RoomSlot
-                    {
-                        Date = datePicker.Date,
-                        StartTime = startTimePicker.Time,
-                        EndTime = endTimePicker.Time
-                    };
+            // Save room to database
+            App.DatabaseService.SaveRoom(room);
 
-                    roomSlots.Add(roomSlot);
-                }
-            }
-
-            return roomSlots;
+            ClearRoomFields();
         }
+
 
         // Add slot button
         private void OnAddSlotClicked(object sender, EventArgs e)
         {
             var slotLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
 
-            var datePicker = new DatePicker { MinimumDate = DateTime.Now };
             var startTimePicker = new TimePicker();
             var endTimePicker = new TimePicker();
             var removeButton = new Button { Text = "Remove", BackgroundColor = Colors.Red, TextColor = Colors.White };
 
-            removeButton.Clicked += (s, args) => SlotContainer.Children.Remove(slotLayout);
+            removeButton.Clicked += (s, args) => SlotTemplateContainer.Children.Remove(slotLayout);
 
-            slotLayout.Children.Add(new Label { Text = "Date:" });
-            slotLayout.Children.Add(datePicker);
             slotLayout.Children.Add(new Label { Text = "Start:" });
             slotLayout.Children.Add(startTimePicker);
             slotLayout.Children.Add(new Label { Text = "End:" });
             slotLayout.Children.Add(endTimePicker);
             slotLayout.Children.Add(removeButton);
 
-            SlotContainer.Children.Add(slotLayout);
+            SlotTemplateContainer.Children.Add(slotLayout);
         }
+
+        private void OnRemoveSlotClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var slotLayout = (StackLayout)button.Parent;
+            SlotTemplateContainer.Children.Remove(slotLayout);
+        }
+
+        private void OnSaveTemplateClicked(object sender, EventArgs e)
+        {
+            var newSlots = new List<RoomSlot>();
+
+            foreach (var child in SlotTemplateContainer.Children)
+            {
+                if (child is StackLayout slotLayout)
+                {
+                    var startTimePicker = (TimePicker)slotLayout.Children[1];
+                    var endTimePicker = (TimePicker)slotLayout.Children[3];
+
+                    var roomSlot = new RoomSlot
+                    {
+                        StartTime = startTimePicker.Time,
+                        EndTime = endTimePicker.Time
+                    };
+
+                    newSlots.Add(roomSlot);
+                }
+            }
+
+            foreach (var day in _AvailableDays)
+            {
+                day.Slots = new List<RoomSlot>(newSlots);
+            }
+
+            _savedDays.AddRange(_AvailableDays);
+            UpdateSavedDays();
+            ClearSlotTemplate();
+            _AvailableDays.Clear();
+            UpdateSelectedDays();
+        }
+
+        private void OnAvailableDaysSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItems = e.CurrentSelection.Cast<AvailableDay>().ToList();
+            foreach (var item in selectedItems)
+            {
+                item.IsSelected = true;
+                if (!_AvailableDays.Contains(item))
+                {
+                    _AvailableDays.Add(item);
+                }
+            }
+
+            var deselectedItems = e.PreviousSelection.Cast<AvailableDay>().ToList();
+            foreach (var item in deselectedItems)
+            {
+                item.IsSelected = false;
+                _AvailableDays.Remove(item);
+            }
+
+            UpdateSelectedDays();
+        }
+
+        private void ClearSlotTemplate()
+        {
+            SlotTemplateContainer.Children.Clear();
+        }
+
+        private void UpdateSelectedDays()
+        {
+            AvailableDaysCollectionView.ItemsSource = null; // Reset ItemsSource to update the CollectionView
+            AvailableDaysCollectionView.ItemsSource = _AvailableDays;
+        }
+
+        private void UpdateSavedDays()
+        {
+            SavedDaysCollectionView.ItemsSource = null; // Reset ItemsSource to update the CollectionView
+            SavedDaysCollectionView.ItemsSource = _savedDays;
+        }
+
+        private void OnAddDayClicked(object sender, EventArgs e)
+        {
+            var selectedDate = DatePicker.Date;
+
+            if (!_AvailableDays.Any(d => d.Date == selectedDate))
+            {
+                _AvailableDays.Add(new AvailableDay { Date = selectedDate });
+                UpdateSelectedDays();
+            }
+        }
+
+        private void OnRemoveDayClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var day = (AvailableDay)button.BindingContext;
+            _AvailableDays.Remove(day);
+            UpdateSelectedDays();
+        }
+
 
         // Delete user button
 
@@ -271,7 +356,12 @@ namespace BookingApp
             RoomFieldOfStudyPicker.SelectedIndex = -1;
             RoomCapacityEntry.Text = string.Empty;
             AdminPicker.SelectedIndex = -1;
-            SlotContainer.Children.Clear();
+            SlotTemplateContainer.Children.Clear();
+            _currentSlotTemplate.Clear();
+            _AvailableDays.Clear();
+            _savedDays.Clear();
+            UpdateSelectedDays();
+            UpdateSavedDays();
         }
 
         // Methods to get all users and rooms
