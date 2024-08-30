@@ -40,7 +40,7 @@ namespace BookingApp.Models
 
 
         // Foreign key to Admin (Contact Person)
-        public int AdminId { get; set; }
+        //public int AdminId { get; set; }
 
 
         [Ignore] // application logic

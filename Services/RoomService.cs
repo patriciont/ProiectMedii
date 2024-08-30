@@ -47,7 +47,7 @@ namespace BookingApp.Services
         }
 
         // Create a room with no slots (slots will be added later)
-        public Room CreateRoom(string name, string number, string description, string fieldOfStudy, int capacity, int adminId, List<AvailableDay> availableDays)
+        public Room CreateRoom(string name, string number, string description, string fieldOfStudy, int capacity, List<AvailableDay> availableDays)
         {
             var room = new Room
             {
@@ -56,7 +56,7 @@ namespace BookingApp.Services
                 Description = description,
                 FieldOfStudy = fieldOfStudy,
                 Capacity = capacity,
-                AdminId = adminId
+                //AdminId = adminId
             };
 
             App.DatabaseService.SaveRoom(room);
