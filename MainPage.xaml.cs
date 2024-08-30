@@ -5,6 +5,9 @@ using System.Linq;
 using BookingApp.Models;
 using BookingApp.Services;
 using BookingApp.Views;
+using Plugin.Maui.Calendar.Models;
+using Plugin.Maui.Calendar.Controls;
+using Plugin.Maui.Calendar.Shared.Controls.SelectionEngines;
 
 namespace BookingApp
 {
@@ -13,11 +16,14 @@ namespace BookingApp
     public partial class MainPage : ContentPage
     {
 
+        public EventCollection Events { get; set; }
         private readonly RoomService _roomService;
 
         private List<RoomSlot> _currentSlotTemplate = new List<RoomSlot>();
         private List<AvailableDay> _AvailableDays = new List<AvailableDay>();
         private List<AvailableDay> _savedDays = new List<AvailableDay>();
+
+        private readonly MultiSelectionEngine _selectionEngine = new MultiSelectionEngine();
 
 
         // Admin list
@@ -78,22 +84,11 @@ namespace BookingApp
             LoadUsers();
             LoadRooms();
 
-            UpdateSelectedDays();
+            
             UpdateSavedDays();
-
-            AvailableDaysCollectionView.ItemsSource = _AvailableDays;
+            
             SavedDaysCollectionView.ItemsSource = _savedDays;
-        }
-
-        private List<AvailableDay> GetAvailableDays()
-        {
-            // Example data, replace with actual implementation
-            return new List<AvailableDay>
-            {
-                new AvailableDay { Date = DateTime.Now.AddDays(1), IsSelected = false },
-                new AvailableDay { Date = DateTime.Now.AddDays(2), IsSelected = false },
-                // Add more days as needed
-            };
+            ClearRoomFields();
         }
 
         // Add user button
@@ -173,6 +168,21 @@ namespace BookingApp
             var endTimePicker = new TimePicker();
             var removeButton = new Button { Text = "Remove", BackgroundColor = Colors.Red, TextColor = Colors.White };
 
+            // Set default times 
+            if (SlotTemplateContainer.Children.Count == 0)
+            {
+                StartTimePicker.Time = new TimeSpan(9, 0, 0);
+                EndTimePicker.Time = new TimeSpan(10, 0, 0);
+            }
+            else
+            {
+                StartTimePicker.Time = StartTimePicker.Time.Add(new TimeSpan(1, 0, 0));
+                EndTimePicker.Time = EndTimePicker.Time.Add(new TimeSpan(1, 0, 0));
+            }
+
+            startTimePicker.Time = StartTimePicker.Time;
+            endTimePicker.Time = EndTimePicker.Time;
+
             removeButton.Clicked += (s, args) => SlotTemplateContainer.Children.Remove(slotLayout);
 
             slotLayout.Children.Add(new Label { Text = "Start:" });
@@ -193,6 +203,9 @@ namespace BookingApp
 
         private void OnSaveTemplateClicked(object sender, EventArgs e)
         {
+
+            OnAddDayClicked(sender, e);
+
             var newSlots = new List<RoomSlot>();
 
             foreach (var child in SlotTemplateContainer.Children)
@@ -221,41 +234,16 @@ namespace BookingApp
             UpdateSavedDays();
             ClearSlotTemplate();
             _AvailableDays.Clear();
-            UpdateSelectedDays();
+            
         }
 
-        private void OnAvailableDaysSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedItems = e.CurrentSelection.Cast<AvailableDay>().ToList();
-            foreach (var item in selectedItems)
-            {
-                item.IsSelected = true;
-                if (!_AvailableDays.Contains(item))
-                {
-                    _AvailableDays.Add(item);
-                }
-            }
-
-            var deselectedItems = e.PreviousSelection.Cast<AvailableDay>().ToList();
-            foreach (var item in deselectedItems)
-            {
-                item.IsSelected = false;
-                _AvailableDays.Remove(item);
-            }
-
-            UpdateSelectedDays();
-        }
 
         private void ClearSlotTemplate()
         {
             SlotTemplateContainer.Children.Clear();
         }
 
-        private void UpdateSelectedDays()
-        {
-            AvailableDaysCollectionView.ItemsSource = null; // Reset ItemsSource to update the CollectionView
-            AvailableDaysCollectionView.ItemsSource = _AvailableDays;
-        }
+        
 
         private void UpdateSavedDays()
         {
@@ -265,23 +253,22 @@ namespace BookingApp
 
         private void OnAddDayClicked(object sender, EventArgs e)
         {
-            var selectedDate = DatePicker.Date;
+            var selectedDates = PlugCal.SelectedDates;
 
-            if (!_AvailableDays.Any(d => d.Date == selectedDate))
+            foreach (var date in selectedDates)
             {
-                _AvailableDays.Add(new AvailableDay { Date = selectedDate });
-                UpdateSelectedDays();
+                if (!_AvailableDays.Any(d => d.Date == date))
+                {
+                    var newDay = new AvailableDay
+                    {
+                        Date = date,
+                        Slots = new List<RoomSlot>(_currentSlotTemplate)
+                    };
+
+                    _AvailableDays.Add(newDay);
+                }
             }
         }
-
-        private void OnRemoveDayClicked(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var day = (AvailableDay)button.BindingContext;
-            _AvailableDays.Remove(day);
-            UpdateSelectedDays();
-        }
-
 
         // Delete user button
 
@@ -360,7 +347,6 @@ namespace BookingApp
             _currentSlotTemplate.Clear();
             _AvailableDays.Clear();
             _savedDays.Clear();
-            UpdateSelectedDays();
             UpdateSavedDays();
         }
 

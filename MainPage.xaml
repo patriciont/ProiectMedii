@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
              x:Class="BookingApp.MainPage"
              Title="Admin Dashboard">
 
@@ -50,57 +51,34 @@
                     <Entry x:Name="RoomCapacityEntry" Placeholder="Capacity" Keyboard="Numeric"/>
                     <Picker x:Name="AdminPicker" Title="Select Contact Person" ItemsSource="{Binding AdminList}"/>
 
+                    <!-- Input for Adding Days -->
+                    <Label Text="Select Day/s" FontSize="20" Margin="0,10,0,0" />
+
+                    <cal:MultiSelectionCalendar
+                        x:Name="PlugCal"
+                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False"
+                        />
+
                     <!-- Slot Template -->
-                    <Label Text="Slot Template" FontSize="20" Margin="0,10,0,0" />
+                    <Label Text="Define Time Slot/s" FontSize="20" Margin="0,10,0,0" />
                     <StackLayout x:Name="SlotTemplateContainer">
                         <!-- Time Slot Template -->
                         <StackLayout Orientation="Horizontal" Spacing="10">
                             <Label Text="Start:" VerticalOptions="Center" />
-                            <TimePicker x:Name="StartTimePicker" />
+                            <TimePicker x:Name="StartTimePicker" Time="09:00:00"/>
+                            
                             <Label Text="End:" VerticalOptions="Center" />
-                            <TimePicker x:Name="EndTimePicker" />
+                            <TimePicker x:Name="EndTimePicker" Time="10:00:00"/>
                             <Button Text="Remove" Clicked="OnRemoveSlotClicked" />
                         </StackLayout>
                     </StackLayout>
                     <Button Text="Add Slot" Clicked="OnAddSlotClicked" />
 
-                    <!-- Input for Adding Days -->
-                    <Label Text="Add Day" FontSize="20" Margin="0,10,0,0" />
-                    <DatePicker x:Name="DatePicker" />
-                    <!-- Display Selected Days -->
-                    <CollectionView x:Name="AvailableDaysCollectionView"
-                        SelectionMode="Multiple"
-                        SelectionChanged="OnAvailableDaysSelectionChanged">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Margin="5"
-                                    Padding="10"
-                                    BackgroundColor="{Binding IsSelected, Converter={StaticResource BooleanToColorConverter}}"
-                                    CornerRadius="10"
-                                    HasShadow="True">
-                                    <StackLayout Orientation="Horizontal" Spacing="10">
-                                        <!-- Display the date -->
-                                        <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Center"
-                                            WidthRequest="120" />       
+                    <Button Text="Save Template" Clicked="OnSaveTemplateClicked" />
 
-                                        <!-- Add a small button to each available day -->
-                                        <Button Text="Action"
-                                            Clicked=""
-                                            HorizontalOptions="End"
-                                            VerticalOptions="Center" />
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <Button Text="Add Day" Clicked="OnAddDayClicked" />
-
-                    
 
                     <!-- Display Saved Days with Time Slots -->
-                    <Label Text="Saved Days with Time Slots" FontSize="20" Margin="0,10,0,0" />
+                    <Label Text="Saved Days and Time Slots" FontSize="20" Margin="0,10,0,0" />
                     <CollectionView x:Name="SavedDaysCollectionView">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -121,8 +99,6 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-
-                    <Button Text="Save Template" Clicked="OnSaveTemplateClicked" />
 
                     <!-- Save Room Button -->
                     <Button Text="Add Room" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
