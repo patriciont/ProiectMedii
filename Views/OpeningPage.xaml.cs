@@ -6,7 +6,17 @@ public partial class OpeningPage : ContentPage
 	public OpeningPage()
 	{
 		InitializeComponent();
-	}
+
+        SetWelcomeMessage();
+    }
+
+    private void SetWelcomeMessage()
+    {
+        var userName = CurrentUser.LoggedInUser?.Username ?? "Guest";
+
+        // Set the welcome message
+        WelcomeLabel.Text = $"Welcome, {userName}!";
+    }
 
     private void OnBookButtonClicked(object sender, EventArgs e)
     {
@@ -22,6 +32,7 @@ public partial class OpeningPage : ContentPage
     }
     private void OnManageButtonClicked(object sender, EventArgs e)
 	{
-		Application.Current.MainPage = new ManageBookings();
+        var profilePage = new ManageBookings();
+        Application.Current.MainPage = new NavigationPage(profilePage);
 	}
 }

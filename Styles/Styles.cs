@@ -8,6 +8,19 @@ using Microsoft.Maui.Graphics;
 
 namespace BookingApp.Styles
 {
+    // LABEL STYLES
+
+    // Room Label
+    public class RoomLabel : Label
+    {
+        public RoomLabel()
+        {
+            TextColor = Colors.Black;
+            FontSize = 15;
+        }
+    }
+
+    // Expander Label
     public class ExpanderLabel : Label
     {
         public ExpanderLabel()
@@ -26,6 +39,9 @@ namespace BookingApp.Styles
         }
     }
 
+    // BUTTON STYLES
+
+    // Main Button
     public class MainButton : Button
     {
         public MainButton()
@@ -38,4 +54,19 @@ namespace BookingApp.Styles
         }
 
     }
+
+    public class RoomSelectButton : Button
+    {
+        public RoomSelectButton()
+        {
+            BackgroundColor = Colors.Green;
+            TextColor = Colors.White;
+            WidthRequest = 110;
+            HeightRequest = 35;
+            Padding = new Thickness(10);
+        }
+
+    }
+
+
 }

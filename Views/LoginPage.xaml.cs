@@ -19,8 +19,9 @@ public partial class LoginPage : ContentPage
             if (user != null && user.Password == PasswordEntry.Text) // Password check
             {
                 CurrentUser.LoggedInUser = user;
-                
-                Navigation.PushAsync(new BookingPage(CurrentUser.LoggedInUser.FieldOfStudy));
+
+            Application.Current.MainPage = new NavigationPage(new OpeningPage());
+
             }
             else
             {

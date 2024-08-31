@@ -24,6 +24,12 @@ public partial class BookingPage : ContentPage
         RoomsCollectionView.ItemsSource = rooms;
     }
 
+    public void OnSelectRoomClicked(object sender, EventArgs e)
+    {
+        
+        
+    }
+
     private void OnBackButtonClicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new OpeningPage();

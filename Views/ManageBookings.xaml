@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:BookingApp.Styles"
             x:Class="BookingApp.Views.ManageBookings"
             Title="ManageBookings">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Manage Bookings Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-        <Button Text="Back"
-                Clicked="OnBackButtonClicked"
-                HorizontalOptions="Center"
-                Grid.Row="3"
-                Margin="0,10,0,0" />
-        
-    </VerticalStackLayout>
-    
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+            <!-- User Information -->
+            <StackLayout Padding="10" BackgroundColor="LightGray">
+                <local:RoomLabel Text="Name:" FontSize="18" FontAttributes="Bold"/>
+                <local:RoomLabel x:Name="UserNameLabel" FontSize="16"/>
+
+                <local:RoomLabel Text="Email:" FontSize="18" FontAttributes="Bold"/>
+                <local:RoomLabel x:Name="UserEmailLabel" FontSize="16"/>
+
+                <local:RoomLabel Text="Field of Study:" FontSize="18" FontAttributes="Bold"/>
+                <local:RoomLabel x:Name="UserFieldOfStudyLabel" FontSize="16"/>
+            </StackLayout>
+
+            <!-- Manage Bookings Section -->
+            <local:MainButton Text="View Bookings"
+                              Clicked="OnViewBookingsButtonClicked"
+                              HorizontalOptions="Center"/>
+
+            <!-- Edit Profile Section -->
+            <local:MainButton Text="Edit Profile"
+                              Clicked="OnEditProfileButtonClicked"
+                              HorizontalOptions="Center"/>
+
+            <!-- Log Out Button -->
+            <local:MainButton Text="Log Out"
+                              Clicked="OnLogOutButtonClicked"
+                              HorizontalOptions="Center"/>
+
+            <!-- Back Button -->
+            <local:MainButton Text="Back"
+                    Clicked="OnBackButtonClicked"
+                    HorizontalOptions="Center"
+                    Grid.Row="2"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
