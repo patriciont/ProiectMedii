@@ -13,8 +13,6 @@ namespace BookingApp.Models
         public int Id { get; set; }
 
         public int RoomId { get; set; }
-
-        public DateTime Date { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
@@ -24,7 +22,8 @@ namespace BookingApp.Models
         public List<int> BookedUserIds { get; set; } = new List<int>();
 
         public int BookedCount { get; set; }
+        public string SlotDetails => $"{StartTime:hh\\:mm} - {EndTime:hh\\:mm}";
 
-        public string SlotDetails => $"{StartTime:HH:mm} - {EndTime:HH:mm}";
+
     }
 }

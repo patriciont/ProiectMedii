@@ -30,7 +30,7 @@ namespace BookingApp.Styles
             FontAttributes = FontAttributes.Bold;
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
-            BackgroundColor = Colors.Grey;
+            BackgroundColor = Colors.Green;
             TextColor = Colors.White;
             Padding = new Thickness(10);
             Margin = new Thickness(5);

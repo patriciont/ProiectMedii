@@ -57,7 +57,7 @@
 
                             <cal:MultiSelectionCalendar
                         x:Name="PlugCal"
-                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False"
+                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False" WidthRequest="300"
                         />
 
                             <!-- Define Time Slots -->

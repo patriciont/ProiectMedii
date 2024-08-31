@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="BookingApp.Views.BookingDetails"
+            Title="BookingDetails">
+
+    <StackLayout Padding="10">
+        <!-- Room Details -->
+        <Label x:Name="RoomNameLabel" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <!-- Available Days -->
+        <CollectionView x:Name="DaysCollectionView" ItemsLayout="VerticalList" SelectionMode="Single" SelectionChanged="OnDaySelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,10,0,10" Padding="10" BorderColor="LightGray" HasShadow="True">
+                        <StackLayout>
+                            <Label Text="{Binding Date, StringFormat='{0:dddd, MMMM d, yyyy}'}" FontSize="18" FontAttributes="Bold" />
+                            
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Room Slots -->
+        <CollectionView x:Name="SlotsCollectionView" ItemsLayout="VerticalList" IsVisible="True">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+
+                        <Label Text="{Binding SlotDetails}" FontSize="16" />
+                        <Button Text="Book" Clicked="OnBookButtonClicked"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

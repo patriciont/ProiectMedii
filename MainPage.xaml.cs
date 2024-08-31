@@ -62,6 +62,8 @@ namespace BookingApp
         {
             InitializeComponent();
 
+            App.PrintDatabasePath();
+
             _roomService = new RoomService(App.DatabaseService);
 
             // Dropdown Menus
@@ -142,14 +144,28 @@ namespace BookingApp
                 Description = RoomDescriptionEntry.Text,
                 FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem.ToString(),
                 Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
-                //AdminId = ((Admin)AdminPicker.SelectedItem).Id, ADD THIS IN LATER WHEN USERS ARE SETUP
                 AvailableDays = _savedDays
             };
 
             // Save room to database
             App.DatabaseService.SaveRoom(room);
-            LoadRooms();
 
+            // Save available days and slots
+            foreach (var day in _savedDays)
+            {
+                day.RoomId = room.Id; // Set foreign key
+                var dayId = App.DatabaseService.SaveAvailableDay(day); // Save day and get ID
+
+                foreach (var slot in day.Slots)
+                {
+                    slot.AvailableDayId = dayId; 
+                    slot.RoomId = room.Id; 
+                    App.DatabaseService.SaveRoomSlot(slot); 
+
+                }
+            }
+
+            LoadRooms();
             ClearRoomFields();
         }
 
@@ -238,8 +254,10 @@ namespace BookingApp
         private void OnSaveTemplateClicked(object sender, EventArgs e)
         {
 
+            // Add days first
             OnAddDayClicked(sender, e);
 
+            // Create a new list of slots to use for each day
             var newSlots = new List<RoomSlot>();
 
             foreach (var child in SlotTemplateContainer.Children)
@@ -253,22 +271,31 @@ namespace BookingApp
                     {
                         StartTime = startTimePicker.Time,
                         EndTime = endTimePicker.Time
+
+                        //room id here
                     };
 
                     newSlots.Add(roomSlot);
                 }
             }
 
+            // Assign slots to each available day
             foreach (var day in _AvailableDays)
             {
-                day.Slots = new List<RoomSlot>(newSlots);
+                // Make a deep copy of slots to ensure each day gets its own instances
+                day.Slots = newSlots.Select(slot => new RoomSlot
+                {
+                    StartTime = slot.StartTime,
+                    EndTime = slot.EndTime,
+                    AvailableDayId = day.Id
+                    //roomid here
+                }).ToList();
             }
 
             _savedDays.AddRange(_AvailableDays);
             UpdateSavedDays();
             ClearSlotTemplate();
             _AvailableDays.Clear();
-
         }
 
 

@@ -26,8 +26,11 @@ public partial class BookingPage : ContentPage
 
     public void OnSelectRoomClicked(object sender, EventArgs e)
     {
-        
-        
+        var button = (Button)sender;
+        var selectedRoom = (Room)button.BindingContext;
+
+        var bookingDetailsPage = new BookingDetails(selectedRoom);
+        Application.Current.MainPage.Navigation.PushAsync(bookingDetailsPage);
     }
 
     private void OnBackButtonClicked(object sender, EventArgs e)

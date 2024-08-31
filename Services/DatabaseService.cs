@@ -34,8 +34,24 @@ namespace BookingApp.Services
 
         // AvailableDay methods
         public int SaveAvailableDay(AvailableDay availableDay) => _database.Insert(availableDay);
-        public AvailableDay GetAvailableDay(int id) => _database.Table<AvailableDay>().FirstOrDefault(d => d.Id == id);
+        public AvailableDay GetAvailableDay(int id)
+        {
+            var availableDay = _database.Table<AvailableDay>().FirstOrDefault(d => d.Id == id);
+            if (availableDay != null)
+            {
+                availableDay.Slots = GetRoomSlots(availableDay.Id); // Load slots for the available day
+            }
+            return availableDay;
+        }
+
         public List<AvailableDay> GetAvailableDays(int roomId) => _database.Table<AvailableDay>().Where(d => d.RoomId == roomId).ToList();
+
+        public List<AvailableDay> GetAvailableDaysWithin(int roomId, DateTime startDate, DateTime endDate)
+        {
+            return _database.Table<AvailableDay>()
+                            .Where(d => d.RoomId == roomId && d.Date >= startDate && d.Date <= endDate)
+                            .ToList();
+        }
 
         // RoomSlot methods
         public int SaveRoomSlot(RoomSlot slot) => _database.Insert(slot);
