@@ -14,9 +14,7 @@ namespace BookingApp
             InitializeComponent();
 
             // Set up the path for the SQLite database
-            //var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3");
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "bookingappdb.db3");
-            //string dbPath = Path.Combine(FileSystem.Current.AppDataDirectory, "bookingappdb.db3");
 
             DatabaseService = new DatabaseService(dbPath);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Services
 {
-    internal class RoomService
+    public class RoomService
     {
 
         private readonly DatabaseService _databaseService;

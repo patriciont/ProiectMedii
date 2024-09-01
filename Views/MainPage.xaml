@@ -12,7 +12,7 @@
             <!-- Header -->
             <Label Text="Admin Dashboard" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
-            <!-- Add User Section -->
+            <!-- ADD USER -->
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <local:ExpanderLabel Text="Add User" HorizontalOptions="Center"/>
@@ -26,7 +26,7 @@
                             <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
                             <Picker x:Name="UserFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}"/>
 
-                            <local:MainButton Text="Add User" Clicked="OnAddUserClicked"/>
+                            <local:MainButton Text="Save User" Clicked="OnAddUserClicked"/>
 
                             <Label x:Name="UserStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
                         </StackLayout>
@@ -34,11 +34,40 @@
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
-            <!-- Add Room Section -->
+            <!-- SELECT AND DISPLAY USER -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <!-- User Details Column -->
+                    <StackLayout Grid.Column="0" Padding="0,0,10,0">
+                        <!-- User Picker -->
+                        <Picker x:Name="UserPicker" 
+                    Title="Select a User"
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser}"
+                    ItemDisplayBinding="{Binding Username}"/>
+
+                        <!-- Display Selected User Details -->
+                        <Label Text="User Details:" FontSize="15" FontAttributes="Bold" Margin="0,10,0,10"/>
+                        <Label Text="{Binding SelectedUser.Username}" FontSize="16"/>
+                        <Label Text="{Binding SelectedUser.Email}" FontSize="16"/>
+                        <Label Text="{Binding SelectedUser.FieldOfStudy}" FontSize="16"/>
+                    </StackLayout>
+
+                    <!-- Delete Button Column -->
+                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Button Text="Delete" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding SelectedUser}" BackgroundColor="Red" TextColor="White" CornerRadius="5"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+
+
+            <!-- ADDING ROOM -->
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <local:ExpanderLabel Text="Add Room" HorizontalOptions="Center"/>
                 </toolkit:Expander.Header>
+                
                 <toolkit:Expander.Content>
                     <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,10,0,10">
                         <StackLayout Spacing="15">
@@ -52,12 +81,22 @@
                             <Picker x:Name="RoomFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding RoomFieldsOfStudy}"/>
                             <Entry x:Name="RoomCapacityEntry" Placeholder="Capacity" Keyboard="Numeric"/>
 
-                            <!-- Input for Adding Days -->
-                            <Label Text="Select Day/s" FontSize="20" Margin="0,10,0,0" />
+                            <!-- Save Room Button -->
+                            <local:MainButton Text="Save Room" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
+                            <Label x:Name="RoomStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+
+            <!-- ADDING DAYS -->
+            <StackLayout Spacing="15">
+                <Label x:Name="SelectedRoomLabel" FontSize="20" Margin="0,10,0,0" HorizontalOptions="Center"/>
 
                             <cal:MultiSelectionCalendar
                         x:Name="PlugCal"
-                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False" WidthRequest="300"
+                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False"  BackgroundColor="White" WidthRequest="300" HeightRequest="300"
                         />
 
                             <!-- Define Time Slots -->
@@ -75,8 +114,8 @@
                                 </StackLayout>
                             </StackLayout>
                             <!-- Buttons -->
-                            <local:MainButton Text="Add Slot" Clicked="OnAddSlotClicked" />
-                            <local:MainButton Text="Save Template" Clicked="OnSaveTemplateClicked" />
+                            <local:MainButton Text="Add Slot" Clicked="OnAddSlotClicked" WidthRequest="80" FontSize="12"/>
+                <local:MainButton Text="Save" Clicked="OnSaveClicked" />
 
 
                             <!-- Display Saved Days with Time Slots -->
@@ -112,71 +151,9 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
 
-                            <!-- Save Room Button -->
-                            <local:MainButton Text="Add Room" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
-
                             <!-- Status Label -->
-                            <Label x:Name="RoomStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
                         </StackLayout>
-                    </Frame>
-                </toolkit:Expander.Content>
-            </toolkit:Expander>
-
-
-            <!-- Display Users -->
-
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
-                <StackLayout>
-                    <Label Text="Users List:" FontSize="15" FontAttributes="Bold" Margin="0,0,0,10"/>
-                    <CollectionView x:Name="UsersCollectionView">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Margin="0,0,0,10" Padding="10" CornerRadius="5" BorderColor="LightGray">
-                                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto">
-                                        <!-- User Details -->
-                                        <toolkit:Expander>
-                                            <toolkit:Expander.Header>
-                                                <StackLayout Orientation="Vertical" Padding="0,0,10,0">
-                                                    <Label
-                                                        Text="{Binding Username}"
-                                                        FontSize="13"
-                                                        FontAttributes="Bold"
-                                                        WidthRequest="200"
-                                                        HorizontalOptions="Center"
-                                                        BackgroundColor="WhiteSmoke"
-                                                        TextColor="Black"
-                                                        Padding="10"
-                                                        Margin="5"
-                                                        HorizontalTextAlignment="Center"
-                                                        VerticalTextAlignment="Center">
-                                                    </Label>
-                                                </StackLayout>
-                                            </toolkit:Expander.Header>
-                                            
-                                            <toolkit:Expander.Content>
-                                                <StackLayout Padding="10">
-                                                    <!-- Additional Details Here -->
-                                                    <Label Text="{Binding Email}" FontSize="14"/>
-                                                    <Label Text="{Binding FieldOfStudy}" FontSize="14"/>
-
-                                                </StackLayout>
-                                            </toolkit:Expander.Content>
-                                        </toolkit:Expander>
-
-                                        <!-- Delete Button -->
-                                        <Button Grid.Column="1" Text="Delete" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.DeleteUserCommand}" 
-                                    CommandParameter="{Binding}" 
-                                    BackgroundColor="Red" 
-                                    TextColor="White" 
-                                    CornerRadius="5"/>
-                                    </Grid>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </Frame>
+            
 
             <!-- Display Rooms -->
 
@@ -187,7 +164,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame Margin="0,0,0,10" Padding="10" CornerRadius="5" BorderColor="LightGray">
-                                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto">
+                                    <Grid ColumnDefinitions="*, Auto, 20, Auto" RowDefinitions="Auto">
                                         <!-- Room Details -->
                                         <StackLayout Grid.Column="0" Orientation="Vertical" Padding="0,0,10,0">
                                             <StackLayout Orientation="Horizontal" Spacing="10">
@@ -198,12 +175,14 @@
                                             <Label Text="{Binding FieldOfStudy}" FontSize="14"/>
                                         </StackLayout>
 
+                                        <!-- Select Room Button -->
+                                        <Button Grid.Column="1" Text="Select" BackgroundColor="Blue" TextColor="White" CornerRadius="5" Clicked="OnSelectRoomClicked" CommandParameter="{Binding}"/>
+
+                                        <BoxView Grid.Column="2" WidthRequest="20" HeightRequest="0" />
+
                                         <!-- Delete Button -->
-                                        <Button Grid.Column="1" Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=DeleteRoomCommand}" 
-                                        CommandParameter="{Binding}" 
-                                        BackgroundColor="Red" 
-                                        TextColor="White" 
-                                        CornerRadius="5"/>
+                                        <Button Grid.Column="3" Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=DeleteRoomCommand}" 
+                                        CommandParameter="{Binding}" BackgroundColor="Red" TextColor="White" CornerRadius="5"/>
                                     </Grid>
                                 </Frame>
                             </DataTemplate>

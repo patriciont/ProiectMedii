@@ -54,7 +54,11 @@ namespace BookingApp.Services
         }
 
         // RoomSlot methods
-        public int SaveRoomSlot(RoomSlot slot) => _database.Insert(slot);
+        public async Task<int> SaveRoomSlot(RoomSlot slot)
+        {
+            return await Task.Run(() => _database.Insert(slot));
+        }
+
         public RoomSlot GetRoomSlot(int id) => _database.Table<RoomSlot>().FirstOrDefault(s => s.Id == id);
         public List<RoomSlot> GetRoomSlots(int availableDayId) => _database.Table<RoomSlot>().Where(s => s.AvailableDayId == availableDayId).ToList();
 

@@ -8,6 +8,7 @@ using BookingApp.Views;
 using Plugin.Maui.Calendar.Models;
 using Plugin.Maui.Calendar.Controls;
 using Plugin.Maui.Calendar.Shared.Controls.SelectionEngines;
+using System.Collections.ObjectModel;
 
 namespace BookingApp
 {
@@ -27,29 +28,28 @@ namespace BookingApp
         private List<RoomSlot> _currentSlotTemplate = new List<RoomSlot>();
         private List<AvailableDay> _AvailableDays = new List<AvailableDay>();
         private List<AvailableDay> _savedDays = new List<AvailableDay>();
+        public ObservableCollection<User> Users { get; set; }
+
+
+        // Selected Room
+
+        private Room _selectedRoom;
+        public Room SelectedRoom { get => _selectedRoom; set { _selectedRoom = value; OnPropertyChanged(nameof(SelectedRoom)); }}
+
+        // Selected User
+        private User _selectedUser;
+        public User SelectedUser
+        { get => _selectedUser; set { _selectedUser = value; OnPropertyChanged(nameof(SelectedUser));}}
 
         // Dropdown menus
         private List<string> _roomFieldsOfStudy = new List<string>
         {
-            "Computer Science",
-            "Library",
-            "Physics",
-            "Engineering",
-            "Biology",
-            "Chemistry",
-            "Arts",
-            "Commons"
+            "Computer Science", "Library", "Physics", "Engineering", "Biology", "Chemistry", "Arts", "Commons"
         };
 
         private List<string> _userFieldsOfStudy = new List<string>
         {
-            "Computer Science",
-            "Business",
-            "Physics",
-            "Engineering",
-            "Biology",
-            "Chemistry",
-            "Arts"
+            "Computer Science", "Business", "Physics", "Engineering", "Biology", "Chemistry", "Arts"
         };
 
         // Commands variables
@@ -62,8 +62,6 @@ namespace BookingApp
         {
             InitializeComponent();
 
-            App.PrintDatabasePath();
-
             _roomService = new RoomService(App.DatabaseService);
 
             // Dropdown Menus
@@ -74,24 +72,26 @@ namespace BookingApp
             DeleteUserCommand = new Command<User>(OnDeleteUser);
             DeleteRoomCommand = new Command<Room>(OnDeleteRoom);
 
+            // User list
+            Users = new ObservableCollection<User>();
+
             // Set the BindingContext to this page
             BindingContext = this;
 
             // Get all Users and Rooms
             LoadUsers();
             LoadRooms();
-
-            
             UpdateSavedDays();
-            
             SavedDaysCollectionView.ItemsSource = _savedDays;
             ClearRoomFields();
         }
 
+        // USER 
+
         // Add user button
         private void OnAddUserClicked(object sender, EventArgs e)
         {
-            // Validate inputs
+            // Validation
             if (string.IsNullOrWhiteSpace(UserNameEntry.Text) ||
                 string.IsNullOrWhiteSpace(PasswordEntry.Text) ||
                 string.IsNullOrWhiteSpace(EmailEntry.Text) ||
@@ -102,38 +102,35 @@ namespace BookingApp
                 return;
             }
 
-            // Create new User object
+            // Create User object
             var user = new User
             {
                 Username = UserNameEntry.Text.Trim(),
                 Password = PasswordEntry.Text.Trim(),
                 Email = EmailEntry.Text.Trim(),
                 FieldOfStudy = UserFieldOfStudyPicker.SelectedItem.ToString(),
-                PermissionsLevel = 4 // Default permissions level
+                PermissionsLevel = 4 
             };
 
             // Save user to database
             App.DatabaseService.SaveUser(user);
-
-            // Clear input fields
-            UserNameEntry.Text = string.Empty;
-            PasswordEntry.Text = string.Empty;
-            EmailEntry.Text = string.Empty;
-            UserFieldOfStudyPicker.SelectedItem = null;
-
-            // Update status label and reload users
             UserStatusLabel.Text = $"User '{user.Username}' added successfully.";
             UserStatusLabel.TextColor = Colors.Green;
-            LoadUsers();
+
+            ClearUserInputs();
         }
 
-        // ADD ROOM
+        
+
+        // ROOM
+
+        // SAVE ROOM
         private void OnAddRoomClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(RoomNameEntry.Text) || string.IsNullOrWhiteSpace(RoomNumberEntry.Text) ||
-                RoomFieldOfStudyPicker.SelectedItem == null || !_savedDays.Any())
+                RoomFieldOfStudyPicker.SelectedItem == null )
             {
-                // Display error message
+                DisplayAlert("Error", "Room Name, Room Number, Field Of Study cannot be empty.", "Okay");
                 return;
             }
 
@@ -144,35 +141,110 @@ namespace BookingApp
                 Description = RoomDescriptionEntry.Text,
                 FieldOfStudy = RoomFieldOfStudyPicker.SelectedItem.ToString(),
                 Capacity = int.TryParse(RoomCapacityEntry.Text, out var capacity) ? capacity : 0,
-                AvailableDays = _savedDays
             };
 
             // Save room to database
             App.DatabaseService.SaveRoom(room);
 
-            // Save available days and slots
-            foreach (var day in _savedDays)
-            {
-                day.RoomId = room.Id; // Set foreign key
-                var dayId = App.DatabaseService.SaveAvailableDay(day); // Save day and get ID
-
-                foreach (var slot in day.Slots)
-                {
-                    slot.AvailableDayId = dayId; 
-                    slot.RoomId = room.Id; 
-                    App.DatabaseService.SaveRoomSlot(slot); 
-
-                }
-            }
-
+            SelectedRoom = room;
+            UpdateSelectedRoomLabels(room);
             LoadRooms();
             ClearRoomFields();
         }
 
+        // CALENDER AND SLOTS
 
-        // ADD SLOT
+        // SAVE DAYS 
+        private void SaveSelectedDates(object sender, EventArgs e)
+        {
+            var selectedDates = PlugCal.SelectedDates;
+
+            if (selectedDates == null)
+            {
+                return;
+            }
+
+            foreach (var date in selectedDates)
+            {
+                if (!_AvailableDays.Any(d => d.Date == date))
+                {
+                    var newDay = new AvailableDay
+                    {
+                        Date = date,
+                        Slots = new List<RoomSlot>(_currentSlotTemplate),
+                        RoomId = _selectedRoom.Id,
+                    };
+
+                    _AvailableDays.Add(newDay);
+                    App.DatabaseService.SaveAvailableDay(newDay);
+                }
+            }
+        }
+
+        // SAVE SLOTS
+        private async void SaveSlots(object sender, EventArgs e)
+        {
+            // Create slot list from roomslot pickers
+            var newSlots = new List<RoomSlot>();
+
+            foreach (var child in SlotTemplateContainer.Children)
+            {
+                if (child is StackLayout slotLayout)
+                {
+                    var startTimePicker = (TimePicker)slotLayout.Children[1];
+                    var endTimePicker = (TimePicker)slotLayout.Children[3];
+
+                    var roomSlot = new RoomSlot
+                    {
+                        StartTime = startTimePicker.Time,
+                        EndTime = endTimePicker.Time,
+                    };
+
+                    newSlots.Add(roomSlot);
+                }
+            }
+
+            // Assign slots to each available day
+            foreach (var day in _AvailableDays)
+            {
+                day.Slots = newSlots.Select(slot => new RoomSlot
+                {
+                    StartTime = slot.StartTime,
+                    EndTime = slot.EndTime,
+                    AvailableDayId = day.Id,
+                    RoomId = _selectedRoom.Id
+                }).ToList();
+
+                foreach (var slot in day.Slots)
+                {
+                    await App.DatabaseService.SaveRoomSlot(slot);
+                }
+            }
+
+            ClearSlotTemplate();
+            _AvailableDays.Clear();
+        }
+
+        // Save slots and days button
+        private async void OnSaveClicked(object sender, EventArgs e)
+        {
+            SaveSelectedDates(sender, e);
+
+            SaveSlots(sender, e);
+        }
+
+
+        // SLOTS
+
+        // Add slot button
         private void OnAddSlotClicked(object sender, EventArgs e)
         {
+            if (SelectedRoom == null)
+            {
+                DisplayAlert("Error", "Please select a room first.", "Okay");
+                return;
+            }
+
             var slotLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Spacing = 10 };
 
             var startTimePicker = new TimePicker();
@@ -217,7 +289,7 @@ namespace BookingApp
             SlotTemplateContainer.Children.Add(slotLayout);
         }
 
-        // REMOVE SLOT
+        // Remove slot button
         private void OnRemoveSlotClicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -225,79 +297,13 @@ namespace BookingApp
             SlotTemplateContainer.Children.Remove(slotLayout);
         }
 
-        // ADD DAY
-        private void OnAddDayClicked(object sender, EventArgs e)
-        {
-            var selectedDates = PlugCal.SelectedDates;
 
-            if (selectedDates == null)
-            {
-                return;
-            }
 
-            foreach (var date in selectedDates)
-            {
-                if (!_AvailableDays.Any(d => d.Date == date))
-                {
-                    var newDay = new AvailableDay
-                    {
-                        Date = date,
-                        Slots = new List<RoomSlot>(_currentSlotTemplate)
-                    };
 
-                    _AvailableDays.Add(newDay);
-                }
-            }
-        }
 
-        // SAVE TEMPLATE
-        private void OnSaveTemplateClicked(object sender, EventArgs e)
-        {
 
-            // Add days first
-            OnAddDayClicked(sender, e);
-
-            // Create a new list of slots to use for each day
-            var newSlots = new List<RoomSlot>();
-
-            foreach (var child in SlotTemplateContainer.Children)
-            {
-                if (child is StackLayout slotLayout)
-                {
-                    var startTimePicker = (TimePicker)slotLayout.Children[1];
-                    var endTimePicker = (TimePicker)slotLayout.Children[3];
-
-                    var roomSlot = new RoomSlot
-                    {
-                        StartTime = startTimePicker.Time,
-                        EndTime = endTimePicker.Time
-
-                        //room id here
-                    };
-
-                    newSlots.Add(roomSlot);
-                }
-            }
-
-            // Assign slots to each available day
-            foreach (var day in _AvailableDays)
-            {
-                // Make a deep copy of slots to ensure each day gets its own instances
-                day.Slots = newSlots.Select(slot => new RoomSlot
-                {
-                    StartTime = slot.StartTime,
-                    EndTime = slot.EndTime,
-                    AvailableDayId = day.Id
-                    //roomid here
-                }).ToList();
-            }
-
-            _savedDays.AddRange(_AvailableDays);
-            UpdateSavedDays();
-            ClearSlotTemplate();
-            _AvailableDays.Clear();
-        }
-
+            // DELETE, UPDATE, LOAD, CLEAR FIELDS //
+        // ------------------------------------------- //
 
         // DELETE IN DATABASE
 
@@ -305,6 +311,9 @@ namespace BookingApp
 
         private async void OnDeleteUser(User user)
         {
+            if (user == null)
+                return;
+
             bool confirm = await DisplayAlert("Confirm", $"Are you sure you want to delete user {user.Username}?", "Yes", "No");
             if (confirm)
             {
@@ -390,15 +399,32 @@ namespace BookingApp
             SlotTemplateContainer.Children.Clear();
         }
 
+        // C USER FIELD
+        private void ClearUserInputs()
+        {
+            UserNameEntry.Text = string.Empty;
+            PasswordEntry.Text = string.Empty;
+            EmailEntry.Text = string.Empty;
+            UserFieldOfStudyPicker.SelectedItem = null;
+
+            LoadUsers();
+        }
+
 
         // LOAD AND UPDATE
 
         // L USERS
 
-        private void LoadUsers()
+        private async void LoadUsers()
         {
-            var users = App.DatabaseService.GetAllUsers();
-            UsersCollectionView.ItemsSource = users;
+            // Fetch users from the database
+            var usersFromDb = App.DatabaseService.GetAllUsers();
+
+            Users.Clear();
+            foreach (var user in usersFromDb)
+            {
+                Users.Add(user);
+            }
         }
 
         // L ROOMS
@@ -408,11 +434,26 @@ namespace BookingApp
             RoomsCollectionView.ItemsSource = rooms;
         }
 
+        private void OnSelectRoomClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var selectedRoom = (Room)button.CommandParameter;
+
+            _selectedRoom = selectedRoom;
+            UpdateSelectedRoomLabels(selectedRoom);
+            DisplayAlert("Room Selected", $"You selected: {selectedRoom.RoomName}", "OK");
+        }
+
         // U SAVED DAYS
         private void UpdateSavedDays()
         {
             SavedDaysCollectionView.ItemsSource = null; 
             SavedDaysCollectionView.ItemsSource = _savedDays;
+        }
+
+        private void UpdateSelectedRoomLabels(Room room)
+        {
+            SelectedRoomLabel.Text = $"Adding Days To: {room.RoomName}";
         }
 
     }

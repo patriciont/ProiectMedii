@@ -12,11 +12,12 @@ namespace BookingApp.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public int RoomId { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        public int AvailableDayId { get; set; } // Foreign key to AvailableDay
+        public int RoomId { get; set; } // Foreign key
+
+        public int AvailableDayId { get; set; } // Foreign key 
 
         [Ignore]  // Application logic
         public List<int> BookedUserIds { get; set; } = new List<int>();
