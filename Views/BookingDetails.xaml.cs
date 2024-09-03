@@ -2,11 +2,13 @@ namespace BookingApp.Views;
 using BookingApp.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using static BookingApp.Models.User;
 
 public partial class BookingDetails : ContentPage
 {
     private Room _selectedRoom;
     private AvailableDay _selectedDay;
+    private BookingManager _bookingManager;
 
     public ObservableCollection<AvailableDay> AvailableDays { get; set; }
 
@@ -16,6 +18,8 @@ public partial class BookingDetails : ContentPage
 
         _selectedRoom = selectedRoom;
         RoomNameLabel.Text = $"Room: {_selectedRoom.RoomName}";
+
+        _bookingManager = new BookingManager();
 
         LoadAvailableDays();
     }
@@ -67,12 +71,24 @@ public partial class BookingDetails : ContentPage
     }
 
     // Book button
-    private void OnBookButtonClicked(object sender, EventArgs e)
+    private async void OnBookButtonClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var selectedTimeSlot = (RoomSlot)button.BindingContext;
 
-        // Logic to create the booking
-        
+        // Attempt to book the selected slot
+        bool isBooked = _bookingManager.BookRoomSlot(CurrentUser.LoggedInUser.Id, selectedTimeSlot.Id);
+
+        if (isBooked)
+        {
+            await DisplayAlert("Booking Confirmed", $"You have successfully booked the slot from {selectedTimeSlot.StartTime} to {selectedTimeSlot.EndTime}.", "OK");
+
+            // Optionally, update the UI to reflect the new booking count
+            LoadSlotsForSelectedDay(selectedTimeSlot.AvailableDayId);
+        }
+        else
+        {
+            await DisplayAlert("Booking Failed", "This timeslot is fully booked. Please select another timeslot.", "OK");
+        }
     }
 }

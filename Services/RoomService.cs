@@ -17,6 +17,29 @@ namespace BookingApp.Services
             _databaseService = databaseService;
         }
 
+        public bool BookRoomSlot(int userId, int roomSlotId)
+        {
+            var roomSlot = App.DatabaseService.GetRoomSlot(roomSlotId);
+
+            if (roomSlot.BookedCount < roomSlot.Capacity)
+            {
+                roomSlot.BookedCount += 1;
+                App.DatabaseService.UpdateRoomSlot(roomSlot);
+
+                var booking = new Booking
+                {
+                    UserId = userId,
+                    RoomSlotId = roomSlotId,
+                    // Add any other relevant properties
+                };
+                App.DatabaseService.SaveBooking(booking);
+
+                return true;
+            }
+
+            return false;  // Slot is fully booked
+        }
+
         // Save a room to the database
         public void SaveRoom(Room room)
         {
@@ -78,35 +101,6 @@ namespace BookingApp.Services
                 // Optionally, update the in-memory list of available days
                 room.AvailableDays ??= new List<AvailableDay>();
                 room.AvailableDays.Add(availableDay);
-            }
-        }
-
-        // Create a room with no slots (slots will be added later)
-        public void CreateRoom(string name, string number, string description, string fieldOfStudy, int capacity, List<AvailableDay> availableDays)
-        {
-            var room = new Room
-            {
-                RoomName = name,
-                RoomNumber = number,
-                Description = description,
-                FieldOfStudy = fieldOfStudy,
-                Capacity = capacity
-            };
-
-            // Save room
-            SaveRoom(room);
-
-            // Save available days and slots
-            foreach (var day in availableDays)
-            {
-                day.RoomId = room.Id; // Link the day to the room
-                _databaseService.SaveAvailableDay(day);
-
-                foreach (var slot in day.Slots)
-                {
-                    slot.AvailableDayId = day.Id; // Link the slot to the available day
-                    _databaseService.SaveRoomSlot(slot);
-                }
             }
         }
 

@@ -25,7 +25,7 @@ public partial class ManageBookings : ContentPage
 
     private void OnViewBookingsButtonClicked(object sender, EventArgs e)
     {
-        //Application.Current.MainPage.Navigation.PushAsync(new ViewBookingsPage());
+        Application.Current.MainPage.Navigation.PushAsync(new ViewBookings());
     }
 
     private void OnEditProfileButtonClicked(object sender, EventArgs e)

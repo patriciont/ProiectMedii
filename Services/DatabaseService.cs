@@ -20,6 +20,7 @@ namespace BookingApp.Services
             _database.CreateTable<Room>();
             _database.CreateTable<AvailableDay>();
             _database.CreateTable<RoomSlot>();
+            _database.CreateTable<Booking>();
         }
 
         // Room methods
@@ -58,9 +59,51 @@ namespace BookingApp.Services
         {
             return await Task.Run(() => _database.Insert(slot));
         }
+        public int UpdateRoomSlot(RoomSlot roomSlot)
+        {
+            return _database.Update(roomSlot);
+        }
 
         public RoomSlot GetRoomSlot(int id) => _database.Table<RoomSlot>().FirstOrDefault(s => s.Id == id);
         public List<RoomSlot> GetRoomSlots(int availableDayId) => _database.Table<RoomSlot>().Where(s => s.AvailableDayId == availableDayId).ToList();
+
+        // Booking methods
+
+        public int SaveBooking(Booking booking)
+        {
+            if (booking.Id != 0)
+            {
+                return _database.Update(booking);
+            }
+            else
+            {
+                return _database.Insert(booking);
+            }
+        }
+
+        // Get a booking by ID
+        public Booking GetBooking(int id)
+        {
+            return _database.Table<Booking>().FirstOrDefault(b => b.Id == id);
+        }
+
+        // Get all bookings for a specific user
+        public List<Booking> GetBookingsForUser(int userId)
+        {
+            return _database.Table<Booking>().Where(b => b.UserId == userId).ToList();
+        }
+
+        // Get all bookings for a specific room slot
+        public List<Booking> GetBookingsForRoomSlot(int roomSlotId)
+        {
+            return _database.Table<Booking>().Where(b => b.RoomSlotId == roomSlotId).ToList();
+        }
+
+        // Delete a booking
+        public int DeleteBooking(int id)
+        {
+            return _database.Delete<Booking>(id);
+        }
 
         // Admin methods
         public int SaveAdmin(Admin admin) => _database.Insert(admin);

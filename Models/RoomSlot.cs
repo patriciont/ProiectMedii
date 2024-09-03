@@ -23,6 +23,8 @@ namespace BookingApp.Models
         public List<int> BookedUserIds { get; set; } = new List<int>();
 
         public int BookedCount { get; set; }
+        public int Capacity { get; set; }
+
         public string SlotDetails => $"{StartTime:hh\\:mm} - {EndTime:hh\\:mm}";
 
 

@@ -212,7 +212,9 @@ namespace BookingApp
                     StartTime = slot.StartTime,
                     EndTime = slot.EndTime,
                     AvailableDayId = day.Id,
-                    RoomId = _selectedRoom.Id
+                    RoomId = _selectedRoom.Id,
+                    Capacity = _selectedRoom.Capacity,  
+                    BookedCount = 0  
                 }).ToList();
 
                 foreach (var slot in day.Slots)
