@@ -12,14 +12,15 @@ namespace BookingApp.Models
         public bool BookRoomSlot(int userId, int roomSlotId)
         {
             var roomSlot = App.DatabaseService.GetRoomSlot(roomSlotId);
+            if (roomSlot == null) { return false; }
+
             var avalday = App.DatabaseService.GetAvailableDay(roomSlot.AvailableDayId);
+            if (avalday == null) { return false; }
+
             var userBookings = App.DatabaseService.GetBookingsForUser(userId);
 
             var existingBooking = userBookings.FirstOrDefault(b => b.BookingDate.Date == avalday.Date);
-            if (existingBooking != null)
-            {
-                return false;
-            }
+            if (existingBooking != null) { return false; }
 
             if (roomSlot.BookedCount < roomSlot.Capacity)
             {
@@ -37,6 +38,7 @@ namespace BookingApp.Models
                     BookingStart = roomSlot.StartTime,
                     BookingEnd = roomSlot.EndTime,
                 };
+
                 App.DatabaseService.SaveBooking(booking);
 
                 return true;

@@ -75,15 +75,16 @@ public partial class BookingDetails : ContentPage
     {
         var button = (Button)sender;
         var selectedTimeSlot = (RoomSlot)button.BindingContext;
+        var selectedRoom = App.DatabaseService.GetRoom(selectedTimeSlot.RoomId);
+        var selectedDay = App.DatabaseService.GetAvailableDay(selectedTimeSlot.AvailableDayId);
 
         // Attempt to book the selected slot
         bool isBooked = _bookingManager.BookRoomSlot(CurrentUser.LoggedInUser.Id, selectedTimeSlot.Id);
 
         if (isBooked)
         {
-            await DisplayAlert("Booking Confirmed", $"You have successfully booked the slot from {selectedTimeSlot.StartTime} to {selectedTimeSlot.EndTime}.", "OK");
+            await DisplayAlert("Booking Confirmed", $"You have successfully booked: {selectedRoom.RoomName}, on the {selectedDay.Date} from {selectedTimeSlot.StartTime} to {selectedTimeSlot.EndTime}.", "OK");
 
-            // Optionally, update the UI to reflect the new booking count
             LoadSlotsForSelectedDay(selectedTimeSlot.AvailableDayId);
         }
         else
