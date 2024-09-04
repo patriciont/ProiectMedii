@@ -34,8 +34,8 @@ namespace BookingApp
             if (DatabaseService != null)
             {
                 var rooms = DatabaseService.GetAllRooms();
-                var availableDays = DatabaseService.GetAvailableDays(1); // Adjust room ID as needed
-                var roomSlots = DatabaseService.GetRoomSlots(1); // Adjust availableDay ID as needed
+                var availableDays = DatabaseService.GetAvailableDays(1); 
+                var roomSlots = DatabaseService.GetRoomSlots(1); 
 
                 Debug.WriteLine($"Rooms count: {rooms.Count}");
                 Debug.WriteLine($"AvailableDays count: {availableDays.Count}");
