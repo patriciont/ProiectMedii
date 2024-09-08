@@ -31,6 +31,7 @@ public partial class LoginPage : ContentPage
 
     private async void OnSignUpButtonClicked(object sender, EventArgs e)
     {
-        //do something
+        Application.Current.MainPage = new NavigationPage(new SignUpPage());
     }
+
 }

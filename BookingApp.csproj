@@ -88,6 +88,9 @@
 	  <MauiXaml Update="Views\OpeningPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SignUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ViewBookings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
