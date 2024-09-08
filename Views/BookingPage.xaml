@@ -3,7 +3,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:BookingApp.Styles"
             x:Class="BookingApp.Views.BookingPage"
-            Title="BookingPage">
+            Title="BookingPage"
+            BackgroundColor="{StaticResource BackgroundColor}">
 
     <Grid Padding="10" RowSpacing="20">
         <Grid.RowDefinitions>

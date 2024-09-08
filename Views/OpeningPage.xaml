@@ -3,7 +3,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:BookingApp.Styles"
             x:Class="BookingApp.Views.OpeningPage"
-            Title="OpeningPage">
+            Title="OpeningPage"
+            BackgroundColor="{StaticResource BackgroundColor}">
 
 
     <ScrollView>

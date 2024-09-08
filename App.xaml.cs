@@ -13,6 +13,8 @@ namespace BookingApp
         {
             InitializeComponent();
 
+            Application.Current.UserAppTheme = AppTheme.Light;
+
             // Set up the path for the SQLite database
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "bookingappdb.db3");
 

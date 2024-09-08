@@ -6,11 +6,17 @@ using static BookingApp.Models.User;
 
 public partial class BookingDetails : ContentPage
 {
+    // Objects
     private Room _selectedRoom;
     private AvailableDay _selectedDay;
     private BookingManager _bookingManager;
 
+    // Lists
     public ObservableCollection<AvailableDay> AvailableDays { get; set; }
+
+    // View available days variables
+    private DateTime _currentStartDate;
+    private const int DaysPerPage = 7;
 
     public BookingDetails(Room selectedRoom)
 	{
@@ -21,25 +27,48 @@ public partial class BookingDetails : ContentPage
 
         _bookingManager = new BookingManager();
 
-        LoadAvailableDays();
+        _currentStartDate = DateTime.Today;
+
+        // Load the first 7 days
+        LoadAvailableDays(_currentStartDate);
     }
 
     // LOAD
 
     // Load Days
-    private void LoadAvailableDays()
+    private void LoadAvailableDays(DateTime startDate)
     {
         var availableDays = App.DatabaseService.GetAvailableDays(_selectedRoom.Id);
 
-        // Debug output for available days
-        foreach (var day in availableDays)
-        {
-            Debug.WriteLine($"Available Day - Date: {day.Date}");
-        }
+        // Filter available days
+        var upcomingDays = availableDays.Where(day => day.Date >= startDate && day.Date <= DateTime.Today.AddDays(DaysPerPage)).OrderBy(day => day.Date).ToList();
 
         // Set AvailableDays and update CollectionView
-        _selectedRoom.AvailableDays = availableDays;
+        _selectedRoom.AvailableDays = upcomingDays;
         DaysCollectionView.ItemsSource = _selectedRoom.AvailableDays;
+
+        DateRangeLabel.Text = $"{startDate:MMM d} - {startDate.AddDays(DaysPerPage - 1):MMM d}";
+
+        _currentStartDate = startDate;
+    }
+
+    private void OnNextPageClicked(object sender, EventArgs e)
+    {
+        var nextStartDate = _currentStartDate.AddDays(DaysPerPage);
+        LoadAvailableDays(nextStartDate);
+    }
+
+    private void OnPreviousPageClicked(object sender, EventArgs e)
+    {
+        var previousStartDate = _currentStartDate.AddDays(-DaysPerPage);
+        if (previousStartDate >= DateTime.Today)
+        {
+            LoadAvailableDays(previousStartDate);
+        }
+        else
+        {
+            LoadAvailableDays(DateTime.Today);
+        }
     }
 
     // Load Slots
@@ -91,5 +120,10 @@ public partial class BookingDetails : ContentPage
         {
             await DisplayAlert("Booking Failed", "This timeslot is fully booked. Please select another timeslot.", "OK");
         }
+    }
+
+    private void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new BookingPage(CurrentUser.LoggedInUser.FieldOfStudy);
     }
 }

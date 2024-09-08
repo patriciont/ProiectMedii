@@ -30,7 +30,7 @@ public partial class BookingPage : ContentPage
         var selectedRoom = (Room)button.BindingContext;
 
         var bookingDetailsPage = new BookingDetails(selectedRoom);
-        Application.Current.MainPage.Navigation.PushAsync(bookingDetailsPage);
+        Application.Current.MainPage = new NavigationPage(bookingDetailsPage);
     }
 
     private void OnBackButtonClicked(object sender, EventArgs e)

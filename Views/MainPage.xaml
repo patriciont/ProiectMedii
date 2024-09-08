@@ -5,169 +5,27 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:BookingApp.Styles"
              x:Class="BookingApp.MainPage"
-             Title="">
+             Title=""
+             BackgroundColor="{StaticResource BackgroundColor}">
 
     <ScrollView Padding="15">
         <StackLayout Spacing="20">
             <!-- Header -->
-            <Label Text="Admin Dashboard" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-
-            <!-- ADD USER -->
-            <toolkit:Expander>
-                <toolkit:Expander.Header>
-                    <local:ExpanderLabel Text="Add User" HorizontalOptions="Center"/>
-                </toolkit:Expander.Header>
-
-                <toolkit:Expander.Content>
-                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,10,0,10">
-                        <StackLayout Padding="10">
-                            <Entry x:Name="UserNameEntry" Placeholder="Username" />
-                            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
-                            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
-                            <Picker x:Name="UserFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}"/>
-
-                            <local:MainButton Text="Save User" Clicked="OnAddUserClicked"/>
-
-                            <Label x:Name="UserStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </Frame>
-                </toolkit:Expander.Content>
-            </toolkit:Expander>
-
-            <!-- SELECT AND DISPLAY USER -->
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
-                <Grid ColumnDefinitions="*, Auto">
-                    <!-- User Details Column -->
-                    <StackLayout Grid.Column="0" Padding="0,0,10,0">
-                        <!-- User Picker -->
-                        <Picker x:Name="UserPicker" 
-                    Title="Select a User"
-                    ItemsSource="{Binding Users}"
-                    SelectedItem="{Binding SelectedUser}"
-                    ItemDisplayBinding="{Binding Username}"/>
-
-                        <!-- Display Selected User Details -->
-                        <Label Text="User Details:" FontSize="15" FontAttributes="Bold" Margin="0,10,0,10"/>
-                        <Label Text="{Binding SelectedUser.Username}" FontSize="16"/>
-                        <Label Text="{Binding SelectedUser.Email}" FontSize="16"/>
-                        <Label Text="{Binding SelectedUser.FieldOfStudy}" FontSize="16"/>
-                    </StackLayout>
-
-                    <!-- Delete Button Column -->
-                    <StackLayout Grid.Column="1" VerticalOptions="Center">
-                        <Button Text="Delete" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding SelectedUser}" BackgroundColor="Red" TextColor="White" CornerRadius="5"/>
-                    </StackLayout>
-                </Grid>
-            </Frame>
-
-
-
-            <!-- ADDING ROOM -->
-            <toolkit:Expander>
-                <toolkit:Expander.Header>
-                    <local:ExpanderLabel Text="Add Room" HorizontalOptions="Center"/>
-                </toolkit:Expander.Header>
-                
-                <toolkit:Expander.Content>
-                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,10,0,10">
-                        <StackLayout Spacing="15">
-
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Entry x:Name="RoomNameEntry" Placeholder="Room Name" WidthRequest="150"/>
-                                <Entry x:Name="RoomNumberEntry" Placeholder="Room Number" WidthRequest="100" Keyboard="Numeric"/>
-                            </StackLayout>
-
-                            <Editor x:Name="RoomDescriptionEntry" Placeholder="Room Description" HeightRequest="100"/>
-                            <Picker x:Name="RoomFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding RoomFieldsOfStudy}"/>
-                            <Entry x:Name="RoomCapacityEntry" Placeholder="Capacity" Keyboard="Numeric"/>
-
-                            <!-- Save Room Button -->
-                            <local:MainButton Text="Save Room" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
-                            <Label x:Name="RoomStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </Frame>
-                </toolkit:Expander.Content>
-            </toolkit:Expander>
-
-
-            <!-- ADDING DAYS -->
-            <StackLayout Spacing="15">
-                <Label x:Name="SelectedRoomLabel" FontSize="20" Margin="0,10,0,0" HorizontalOptions="Center"/>
-
-                            <cal:MultiSelectionCalendar
-                        x:Name="PlugCal"
-                        SelectedDates="{Binding SelectedDates}" ShowYearPicker="False"  BackgroundColor="White" WidthRequest="300" HeightRequest="300"
-                        />
-
-                            <!-- Define Time Slots -->
-                            <Label Text="Define Time Slot/s" FontSize="20" Margin="0,10,0,0" />
-                            <StackLayout x:Name="SlotTemplateContainer">
-                                <!-- Time Slot Template -->
-                                <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label Text="Start:" VerticalOptions="Center" />
-
-                                    <TimePicker x:Name="StartTimePicker" Time="09:00:00"/>
-                                    <Label Text="End:" VerticalOptions="Center" />
-
-                                    <TimePicker x:Name="EndTimePicker" Time="10:00:00"/>
-                                    <Button Text="Remove" Clicked="OnRemoveSlotClicked" BackgroundColor="Red" WidthRequest="80" HeightRequest="30" Padding="5" />
-                                </StackLayout>
-                            </StackLayout>
-                            <!-- Buttons -->
-                            <local:MainButton Text="Add Slot" Clicked="OnAddSlotClicked" WidthRequest="80" FontSize="12"/>
-                <local:MainButton Text="Save" Clicked="OnSaveClicked" />
-
-
-                            <!-- Display Saved Days with Time Slots -->
-                            <Label Text="Saved Days and Time Slots" FontSize="20" Margin="0,10,0,0" />
-                            <CollectionView x:Name="SavedDaysCollectionView">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout Padding="5" Spacing="5">
-                                            <!-- Display the Date -->
-                                            <Label Text="{Binding Date, StringFormat='{0:dddd, dd.MM.yyyy}'}" FontSize="16" />
-
-                                            <!-- Expander to show/hide time slots -->
-                                            <toolkit:Expander>
-                                                <toolkit:Expander.Header>
-                                                    <Label Text="Show Time Slots" FontSize="14" TextColor="Blue"/>
-                                                </toolkit:Expander.Header>
-                                                <toolkit:Expander.Content>
-                                                    <CollectionView ItemsSource="{Binding Slots}">
-                                                        <CollectionView.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <StackLayout Orientation="Horizontal">
-                                                                    <Label Text="{Binding StartTime}" />
-                                                                    <Label Text="-" />
-                                                                    <Label Text="{Binding EndTime}" />
-                                                                </StackLayout>
-                                                            </DataTemplate>
-                                                        </CollectionView.ItemTemplate>
-                                                    </CollectionView>
-                                                </toolkit:Expander.Content>
-                                            </toolkit:Expander>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-
-                            <!-- Status Label -->
-                        </StackLayout>
-            
+            <Label Text="Admin Dashboard" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <!-- Display Rooms -->
 
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+            <Frame BorderColor="LightGray"  CornerRadius="3" Padding="10" >
                 <StackLayout>
-                    <Label Text="Rooms List" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
+                    <Label Text="Rooms List" HorizontalOptions="Center" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
                     <CollectionView x:Name="RoomsCollectionView">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Margin="0,0,0,10" Padding="10" CornerRadius="5" BorderColor="LightGray">
-                                    <Grid ColumnDefinitions="*, Auto, 20, Auto" RowDefinitions="Auto">
+                                <Frame Margin="0,0,0,10" Padding="10" CornerRadius="5" BorderColor="LightGray" BackgroundColor="#faf3e3">
+                                    <Grid ColumnDefinitions="*, Auto, 10, Auto" RowDefinitions="Auto">
                                         <!-- Room Details -->
-                                        <StackLayout Grid.Column="0" Orientation="Vertical" Padding="0,0,10,0">
-                                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                        <StackLayout Grid.Column="0" Orientation="Vertical" Padding="0,0,10,0" Spacing="5">
+                                            <StackLayout Orientation="Horizontal" Spacing="20">
                                                 <Label Text="{Binding RoomName}" FontSize="16" FontAttributes="Bold"/>
                                                 <Label Text="{Binding RoomNumber}" FontSize="16" FontAttributes="Bold"/>
                                             </StackLayout>
@@ -176,13 +34,31 @@
                                         </StackLayout>
 
                                         <!-- Select Room Button -->
-                                        <Button Grid.Column="1" Text="Select" BackgroundColor="Blue" TextColor="White" CornerRadius="5" Clicked="OnSelectRoomClicked" CommandParameter="{Binding}"/>
+                                        <Button Grid.Column="1" 
+                                                Text="Select" 
+                                                BackgroundColor="#e5d7c6" 
+                                                FontSize="Body"
+                                                TextColor="Black"
+                                                CornerRadius="5" 
+                                                WidthRequest="70"
+                                                HeightRequest="30"
+                                                Clicked="OnSelectRoomClicked" 
+                                                CommandParameter="{Binding}"/>
 
                                         <BoxView Grid.Column="2" WidthRequest="20" HeightRequest="0" />
 
                                         <!-- Delete Button -->
-                                        <Button Grid.Column="3" Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=DeleteRoomCommand}" 
-                                        CommandParameter="{Binding}" BackgroundColor="Red" TextColor="White" CornerRadius="5"/>
+                                        <Button Grid.Column="3" 
+                                                Text="Delete" 
+                                                TextColor="Black"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, 
+                                                Path=DeleteRoomCommand}" 
+                                                CommandParameter="{Binding}" 
+                                                BackgroundColor="#ffcccc" 
+                                                CornerRadius="5"
+                                                FontSize="Body"
+                                                WidthRequest="70"
+                                                HeightRequest="30"/>
                                     </Grid>
                                 </Frame>
                             </DataTemplate>
@@ -191,19 +67,166 @@
                 </StackLayout>
             </Frame>
 
+            <!-- ADDING ROOM -->
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <local:ExpanderLabel Text="Add Room" BackgroundColor="CadetBlue" WidthRequest="100" HeightRequest="40" HorizontalOptions="Center"/>
+                </toolkit:Expander.Header>
+
+                <toolkit:Expander.Content>
+                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="10,0,0,0">
+                        <StackLayout Spacing="5">
+
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Entry x:Name="RoomNameEntry" 
+                                       Placeholder="Room Name" 
+                                       WidthRequest="150"/>
+                                <Entry x:Name="RoomNumberEntry" Placeholder="Room Number" FontSize="12" WidthRequest="100" Keyboard="Numeric"/>
+                            </StackLayout>
+
+                            <Editor x:Name="RoomDescriptionEntry" Placeholder="Room Description" HeightRequest="100"/>
+                            <Picker x:Name="RoomFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding RoomFieldsOfStudy}"/>
+                            <Entry x:Name="RoomCapacityEntry" Placeholder="Capacity" Keyboard="Numeric"/>
+
+                            <!-- Save Room Button -->
+                            <local:MainButton Text="Save Room" BackgroundColor="CadetBlue" Clicked="OnAddRoomClicked" Margin="0,20,0,0" />
+                            <Label x:Name="RoomStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+            <!-- ADDING DAYS -->
+            <Label Text="Define Days Available" FontFamily="Comis Sans MS" FontAttributes="Bold" FontSize="20" Margin="0,30,0,-30" HorizontalOptions="Center" />
+            <StackLayout Spacing="5">
+                <Label x:Name="SelectedRoomLabel" FontSize="17" Margin="0,20,0,0" HorizontalOptions="Center"/>
+
+                <cal:MultiSelectionCalendar
+             x:Name="PlugCal"
+             SelectedDates="{Binding SelectedDates}" ShowYearPicker="False"  BackgroundColor="LightGray" WidthRequest="300" HeightRequest="300"
+             />
+
+                <!-- Define Time Slots -->
+                <Label Text="Define Time Slot/s" FontFamily="Comis Sans MS" FontAttributes="Bold" HorizontalOptions="Center" FontSize="20" Margin="0,30,0,0" />
+                <StackLayout x:Name="SlotTemplateContainer">
+                    <!-- Time Slot Template -->
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <Label Text="Start:" VerticalOptions='Center' />
+
+                        <TimePicker x:Name="StartTimePicker" Time="09:00:00"/>
+                        <Label Text="End:" VerticalOptions="Center" />
+
+                        <TimePicker x:Name="EndTimePicker" Time="10:00:00"/>
+                        <Button Text="Remove" 
+                                WidthRequest="70" HeightRequest="30" Padding="5"
+                                Clicked="OnRemoveSlotClicked"  />
+                    </StackLayout>
+                </StackLayout>
+                <!-- Buttons -->
+                <local:MainButton Margin="0,20,0,20" Text="Add Slot" Background="CadetBlue" Clicked="OnAddSlotClicked" WidthRequest="100" HeightRequest="40" FontSize="12"/>
+                <local:MainButton Text="SAVE" HeightRequest="45" WidthRequest="110" Clicked="OnSaveClicked" />
+
+
+                <!-- Display Saved Days with Time Slots -->
+                <Label Text="Saved Days and Time Slots" FontFamily="Comis Sans MS" FontAttributes="Bold" HorizontalOptions="Center" FontSize="20" Margin="0,30,0,0" />
+                <CollectionView x:Name="SavedDaysCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="5" Spacing="5">
+                                <!-- Display the Date -->
+                                <Label Text="{Binding Date, StringFormat='{0:dddd, dd.MM.yyyy}'}" FontSize="16" />
+
+                                <!-- Expander to show/hide time slots -->
+                                <toolkit:Expander>
+                                    <toolkit:Expander.Header>
+                                        <Label Text="Show Time Slots" FontSize="14" TextColor="Blue"/>
+                                    </toolkit:Expander.Header>
+                                    <toolkit:Expander.Content>
+                                        <CollectionView ItemsSource="{Binding Slots}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding StartTime}" />
+                                                        <Label Text="-" />
+                                                        <Label Text="{Binding EndTime}" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </toolkit:Expander.Content>
+                                </toolkit:Expander>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- ADD USER -->
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <local:ExpanderLabel Text="Add User" Background="CadetBlue" WidthRequest="100"  HorizontalOptions="Center"/>
+                    </toolkit:Expander.Header>
+
+                    <toolkit:Expander.Content>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10"  Margin="0,10,0,10">
+                            <StackLayout Padding="10" Spacing="10">
+                                <Entry x:Name="UserNameEntry" Placeholder="Username" />
+                                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
+                                <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
+                                <Picker x:Name="UserFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}"/>
+
+                                <local:MainButton Text="Save User" Background="CadetBlue" Clicked="OnAddUserClicked"/>
+
+                                <Label x:Name="UserStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+
+                <!-- SELECT AND DISPLAY USER -->
+                <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <!-- User Details Column -->
+                        <StackLayout Grid.Column="0" Padding="0,0,10,0">
+                            <!-- User Picker -->
+                            <Picker x:Name="UserPicker" 
+                    Title="Select a User"
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser}"
+                    ItemDisplayBinding="{Binding Username}"/>
+
+                            <!-- Display Selected User Details -->
+                            <Label Text="User Details:" FontSize="15" FontAttributes="Bold" Margin="0,10,0,10"/>
+                            <Label Text="{Binding SelectedUser.Username}" FontSize="16"/>
+                            <Label Text="{Binding SelectedUser.Email}" FontSize="16"/>
+                            <Label Text="{Binding SelectedUser.FieldOfStudy}" FontSize="16"/>
+                        </StackLayout>
+
+                        <!-- Delete Button Column -->
+                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Button Text="Delete" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding SelectedUser}" BackgroundColor="#ffcccc" TextColor="Black" CornerRadius="5" WidthRequest="70" HeightRequest="30"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Status Label -->
+            </StackLayout>
+
+
+
+
             <!-- Management Section -->
             <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
                 <StackLayout>
-                    <Label Text="Management Actions" FontSize="20" FontAttributes="Bold" />
-                    <Button Text="Delete All Users" Clicked="OnDeleteAllUsersClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" />
-                    <Button Text="Delete All Rooms" Clicked="OnDeleteAllRoomsClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" />
-                    <Button Text="Go To Site" Clicked="OnGoToSiteClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Green" TextColor="White" />
+                    <Label Text="Management Actions" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Button Text="Delete All Users" Clicked="OnDeleteAllUsersClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" WidthRequest="200" HeightRequest="30"/>
+                    <Button Text="Delete All Rooms" Clicked="OnDeleteAllRoomsClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" WidthRequest="200" HeightRequest="30"/>
+                    <Button Text="Go To Site" Clicked="OnGoToSiteClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Green" TextColor="White" WidthRequest="200" HeightRequest="30" />
 
                 </StackLayout>
             </Frame>
 
             <!-- Status Label -->
-            <Label x:Name="StatusLabel" Text="Status: Waiting for actions" FontSize="16" HorizontalOptions="Center"/>
+            <Label x:Name="StatusLabel" Text="Status: Waiting for actions"  FontSize="16" HorizontalOptions="Center"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

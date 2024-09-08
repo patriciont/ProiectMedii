@@ -4,7 +4,8 @@
             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
             xmlns:local="clr-namespace:BookingApp.Styles"
             x:Class="BookingApp.Views.ViewBookings"
-            Title="ViewBookings">
+            Title="ViewBookings"
+            BackgroundColor="{StaticResource BackgroundColor}">
 
     <ScrollView>
         <StackLayout Padding="10" Spacing="15">
@@ -39,19 +40,19 @@
 
             <!-- Booking Details -->
             <Frame x:Name="BookingDetails" 
-       IsVisible="False" 
-       Padding="10" 
-       BackgroundColor="LightGray"
-       BorderColor="DarkGray"
-       CornerRadius="10"
-       Margin="10,5"
-       HasShadow="True">
+            IsVisible="False" 
+            Padding="10" 
+            BackgroundColor="White"
+            BorderColor="DarkGray"
+            CornerRadius="10"
+            Margin="10,5"
+            HasShadow="True">
 
                 <StackLayout Spacing="10">
                     <Label Text="Booking Details" 
-               FontSize="Medium" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" />
+                    FontSize="Medium" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" />
 
                     <!-- Display the room name -->
                     <StackLayout Orientation="Horizontal" Spacing="5">

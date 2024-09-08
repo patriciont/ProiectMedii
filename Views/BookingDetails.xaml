@@ -3,11 +3,12 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="BookingApp.Views.BookingDetails"
             Title="BookingDetails"
-            BackgroundColor="{DynamicResource PageBackgroundColor}">
+            BackgroundColor="{StaticResource BackgroundColor}">
 
-    <Grid Padding="10" RowDefinitions="Auto,*,Auto">
+    <Grid Padding="10" RowDefinitions="Auto,*,Auto,*,Auto">
         <!-- Room Details -->
         <Label x:Name="RoomNameLabel"
+               Grid.Row="0"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"
@@ -15,6 +16,41 @@
                TextColor="{DynamicResource PrimaryTextColor}" />
 
         <!-- Available Days -->
+        <Grid Padding="10" RowDefinitions="Auto,*,Auto,*,Auto" ColumnDefinitions="Auto,*,Auto">
+            <!-- Previous Button in Row 0, Column 0 -->
+            <Button Text="Previous"
+            Clicked="OnPreviousPageClicked"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            WidthRequest="100"
+            HeightRequest="50"
+            Padding="10"/>
+
+            <!-- Date Range Label in Row 2, Column 1 -->
+            <Label x:Name="DateRangeLabel"
+           Text="Date Range"
+           Grid.Row="2"
+           Grid.Column="1"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           FontSize="18"
+           FontAttributes="Bold" />
+
+            <!-- Next Button in Row 0, Column 2 -->
+            <Button Text="Next"
+            Clicked="OnNextPageClicked"
+            Grid.Row="0"
+            Grid.Column="2"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            WidthRequest="100"
+            HeightRequest="50"
+            Padding="10"/>
+        </Grid>
+
+
         <CollectionView x:Name="DaysCollectionView"
                         Grid.Row="1"
                         ItemsLayout="VerticalList"
@@ -43,7 +79,7 @@
 
         <!-- Room Slots -->
         <CollectionView x:Name="SlotsCollectionView"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         ItemsLayout="VerticalList"
                         IsVisible="True"
                         Margin="0,10,0,0"
@@ -75,5 +111,15 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Button Text="Back"
+                Clicked="OnBackButtonClicked"
+                Grid.Row="4"
+                Grid.ColumnSpan="3"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                WidthRequest="100"
+                HeightRequest="50"
+                Padding="10"/>
     </Grid>
 </ContentPage>

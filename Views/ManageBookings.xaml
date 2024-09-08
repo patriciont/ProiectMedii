@@ -3,12 +3,13 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:BookingApp.Styles"
             x:Class="BookingApp.Views.ManageBookings"
-            Title="ManageBookings">
+            Title="ManageBookings"
+            BackgroundColor="{StaticResource BackgroundColor}">
 
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="20">
             <!-- User Information -->
-            <StackLayout Padding="10" BackgroundColor="LightGray">
+            <StackLayout Padding="10" BackgroundColor="White">
                 <local:RoomLabel Text="Name:" FontSize="18" FontAttributes="Bold"/>
                 <local:RoomLabel x:Name="UserNameLabel" FontSize="16"/>
 
