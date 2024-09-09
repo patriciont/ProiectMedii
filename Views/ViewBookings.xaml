@@ -12,7 +12,7 @@
             <Label Text="Your Bookings" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <!-- Styled Calendar -->
-            <cal:Calendar x:Name="ProfCal"
+            <cal:Calendar x:Name="ProfCal" SelectedDate="{Binding SelectedDate}"
                       Events="{Binding Events}"
                       ShowYearPicker="False"
                           BackgroundColor="White"
@@ -34,58 +34,68 @@
             </cal:Calendar>
 
 
-            <!-- Booking Picker -->
-            <Picker x:Name="BookingPicker" Title="Select a Booking" ItemsSource="{Binding UserBookings}" ItemDisplayBinding="{Binding BookingDate}" SelectedIndexChanged="BookingPicker_SelectedIndexChanged">
-            </Picker>
+            
 
             <!-- Booking Details -->
             <Frame x:Name="BookingDetails" 
-            IsVisible="False" 
-            Padding="10" 
-            BackgroundColor="White"
-            BorderColor="DarkGray"
-            CornerRadius="10"
-            Margin="10,5"
-            HasShadow="True">
+       IsVisible="False" 
+       Padding="10" 
+       BackgroundColor="White"
+       BorderColor="DarkGray"
+       CornerRadius="10"
+       Margin="10,5"
+       HasShadow="True">
 
                 <StackLayout Spacing="10">
                     <Label Text="Booking Details" 
-                    FontSize="Medium" 
-                    FontAttributes="Bold" 
-                    HorizontalOptions="Center" />
+               FontSize="Medium" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
 
-                    <!-- Display the room name -->
-                    <StackLayout Orientation="Horizontal" Spacing="5">
-                        <Label Text="Room:" FontAttributes="Bold" />
-                        <Label x:Name="RoomNameLabel" />
+                    <!-- Dynamic Layout for Multiple Bookings -->
+                    <StackLayout x:Name="BookingDetailsContainer"
+                     BindableLayout.ItemsSource="{Binding SelectedDateBookings}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="10">
+                                    <StackLayout Spacing="5">
+                                        <!-- Display the room name -->
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Label Text="Room:" FontAttributes="Bold" />
+                                            <Label Text="{Binding RoomName}" />
+                                        </StackLayout>
+
+                                        <!-- Display the booking date -->
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Label Text="Date:" FontAttributes="Bold" />
+                                            <Label Text="{Binding BookingDate, StringFormat='{0:MM/dd/yyyy}'}" />
+                                        </StackLayout>
+
+                                        <!-- Display the start time -->
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Label Text="Start Time:" FontAttributes="Bold" />
+                                            <Label Text="{Binding BookingStart, StringFormat='{0:hh\\:mm}'}" />
+                                        </StackLayout>
+
+                                        <!-- Display the end time -->
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Label Text="End Time:" FontAttributes="Bold" />
+                                            <Label Text="{Binding BookingEnd, StringFormat='{0:hh\\:mm}'}" />
+                                        </StackLayout>
+
+                                        <!-- Button to cancel the booking -->
+                                        <Button Text="Cancel Booking" 
+                                    Clicked="CancelBookingClicked" 
+                                    BackgroundColor="DarkRed"
+                                    TextColor="White"
+                                    CornerRadius="5" 
+                                    HorizontalOptions="Center" 
+                                    CommandParameter="{Binding Id}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                     </StackLayout>
-
-                    <!-- Display the booking date -->
-                    <StackLayout Orientation="Horizontal" Spacing="5">
-                        <Label Text="Date:" FontAttributes="Bold" />
-                        <Label x:Name="BookingDateLabel" />
-                    </StackLayout>
-
-                    <!-- Display the start time -->
-                    <StackLayout Orientation="Horizontal" Spacing="5">
-                        <Label Text="Start Time:" FontAttributes="Bold" />
-                        <Label x:Name="StartTimeLabel" />
-                    </StackLayout>
-
-                    <!-- Display the end time -->
-                    <StackLayout Orientation="Horizontal" Spacing="5">
-                        <Label Text="End Time:" FontAttributes="Bold" />
-                        <Label x:Name="EndTimeLabel" />
-                    </StackLayout>
-
-                    <!-- Button to cancel the booking -->
-                    <Button Text="Cancel Booking" 
-                Clicked="CancelBookingClicked" 
-                BackgroundColor="DarkRed"
-                TextColor="White"
-                CornerRadius="5" 
-                HorizontalOptions="Center" 
-                CommandParameter="{Binding Id}"/>
                 </StackLayout>
             </Frame>
 

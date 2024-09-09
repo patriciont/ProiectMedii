@@ -30,9 +30,15 @@ public partial class OpeningPage : ContentPage
         var bookingPage = new BookingPage(userFieldOfStudy);
         Application.Current.MainPage = new NavigationPage(bookingPage);
     }
-    private void OnManageButtonClicked(object sender, EventArgs e)
+    private void OnProfileButtonClicked(object sender, EventArgs e)
 	{
         var profilePage = new ManageBookings();
         Application.Current.MainPage = new NavigationPage(profilePage);
 	}
+
+    private async void OnViewBookingsButtonClicked(object sender, EventArgs e)
+    {
+        var viewBookings = new ViewBookings();
+        Application.Current.MainPage = new NavigationPage(viewBookings);
+    }
 }

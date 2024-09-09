@@ -23,11 +23,6 @@ public partial class ManageBookings : ContentPage
         }
     }
 
-    private void OnViewBookingsButtonClicked(object sender, EventArgs e)
-    {
-        Application.Current.MainPage = new NavigationPage(new ViewBookings());
-    }
-
     private void OnEditProfileButtonClicked(object sender, EventArgs e)
     {
         //Application.Current.MainPage.Navigation.PushAsync(new EditProfilePage());

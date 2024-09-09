@@ -29,9 +29,14 @@
                               HorizontalOptions="Center"
                               Margin="0,10,0,10"/>
 
+            <local:MainButton Text="View Bookings" 
+                  Clicked="OnViewBookingsButtonClicked" 
+                  HorizontalOptions="Center"
+                  Margin="0,10,0,10"/>
+
             <!-- Manage Your Bookings Button -->
             <local:MainButton Text="Profile" 
-                              Clicked="OnManageButtonClicked" 
+                              Clicked="OnProfileButtonClicked" 
                               HorizontalOptions="Center"
                               Margin="0,10,0,10"/>
 

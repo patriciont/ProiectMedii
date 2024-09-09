@@ -20,11 +20,6 @@
                 <local:RoomLabel x:Name="UserFieldOfStudyLabel" FontSize="16"/>
             </StackLayout>
 
-            <!-- Manage Bookings Section -->
-            <local:MainButton Text="View Bookings"
-                              Clicked="OnViewBookingsButtonClicked"
-                              HorizontalOptions="Center"/>
-
             <!-- Edit Profile Section -->
             <local:MainButton Text="Edit Profile"
                               Clicked="OnEditProfileButtonClicked"

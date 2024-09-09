@@ -18,6 +18,7 @@ namespace BookingApp.Models
 
         public int UserId { get; set; }
         public int RoomId { get; set; }
+        public string RoomName { get; set; }
         public int AvailableDayId { get; set; }
         public int RoomSlotId { get; set; }
         public DateTime BookingDate { get; set; }
