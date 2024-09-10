@@ -75,15 +75,6 @@ public partial class BookingDetails : ContentPage
     private void LoadSlotsForSelectedDay(int availableDayId)
     {
         var slots = App.DatabaseService.GetRoomSlots(availableDayId);
-
-        // Log the retrieved slots
-        Debug.WriteLine($"Loading slots for Day ID: {availableDayId}");
-        foreach (var slot in slots)
-        {
-            Debug.WriteLine($"Slot - Start: {slot.StartTime}, End: {slot.EndTime}");
-        }
-
-        // Update UI with slots
         SlotsCollectionView.ItemsSource = slots;
     }
 
@@ -92,8 +83,6 @@ public partial class BookingDetails : ContentPage
     // Day seleceted
     private async void OnDaySelected(object sender, SelectionChangedEventArgs e)
     {
-        Debug.WriteLine("OnDaySelected triggered");
-
         var selectedDay = e.CurrentSelection.FirstOrDefault() as AvailableDay;
 
         LoadSlotsForSelectedDay(selectedDay.Id);
@@ -112,18 +101,35 @@ public partial class BookingDetails : ContentPage
 
         if (isBooked)
         {
-            await DisplayAlert("Booking Confirmed", $"You have successfully booked: {selectedRoom.RoomName}, on the {selectedDay.Date} from {selectedTimeSlot.StartTime} to {selectedTimeSlot.EndTime}.", "OK");
+            ShowNotification($"You have successfully booked: {selectedRoom.RoomName}, on the {selectedDay.Date} from {selectedTimeSlot.StartTime} to {selectedTimeSlot.EndTime}.");
 
             LoadSlotsForSelectedDay(selectedTimeSlot.AvailableDayId);
         }
         else
         {
-            await DisplayAlert("Booking Failed", "This timeslot is fully booked. Please select another timeslot.", "OK");
+            ShowNotification($"Booking Failed for {selectedRoom.RoomName} on {selectedDay.Date}. Check your bookings for overlaps or contact staff.");
         }
     }
 
     private void OnBackButtonClicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new BookingPage(CurrentUser.LoggedInUser.FieldOfStudy);
+    }
+
+    // NOTIFICATION BAR
+
+    private async void ShowNotification(string message)
+    {
+        NotificationLabel.Text = message;
+        NotificationFrame.IsVisible = true;
+
+        await Task.Delay(5000);
+
+        NotificationFrame.IsVisible = false;
+    }
+
+    private void CloseNotificationClicked(object sender, EventArgs e)
+    {
+        NotificationFrame.IsVisible = false;
     }
 }

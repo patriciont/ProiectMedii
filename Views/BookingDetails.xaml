@@ -5,54 +5,80 @@
             Title="BookingDetails"
             BackgroundColor="{StaticResource BackgroundColor}">
 
-    <Grid Padding="10" RowDefinitions="Auto,*,Auto,*,Auto">
-        <!-- Room Details -->
-        <Label x:Name="RoomNameLabel"
+    <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*,*,Auto">
+        <!-- Row 0: Notification Banner -->
+        <Frame x:Name="NotificationFrame"
                Grid.Row="0"
+               BackgroundColor="LightCoral"
+               IsVisible="False"
+               CornerRadius="10"
+               Padding="10"
+               Margin="10">
+            <Grid>
+                <Label x:Name="NotificationLabel"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
+                <Button Text="✕"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Clicked="CloseNotificationClicked" />
+            </Grid>
+        </Frame>
+
+        <!-- Row 1: Room Name -->
+        <Label x:Name="RoomNameLabel"
+               Grid.Row="1"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                VerticalOptions="Start"
                TextColor="{DynamicResource PrimaryTextColor}" />
 
-        <!-- Available Days -->
-        <Grid Padding="10" RowDefinitions="Auto,*,Auto,*,Auto" ColumnDefinitions="Auto,*,Auto">
-            <!-- Previous Button in Row 0, Column 0 -->
+        <!-- Row 2: Previous, Date Range, and Next Buttons -->
+        <Grid Grid.Row="2"
+              Padding="10"
+              RowDefinitions="Auto"
+              ColumnDefinitions="Auto,*,Auto">
+            <!-- Previous Button -->
             <Button Text="Previous"
-            Clicked="OnPreviousPageClicked"
-            Grid.Row="0"
-            Grid.Column="0"
-            HorizontalOptions="Start"
-            VerticalOptions="Center"
-            WidthRequest="100"
-            HeightRequest="50"
-            Padding="10"/>
+                    Clicked="OnPreviousPageClicked"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    Padding="10" />
 
-            <!-- Date Range Label in Row 2, Column 1 -->
+            <!-- Date Range Label -->
             <Label x:Name="DateRangeLabel"
-           Text="Date Range"
-           Grid.Row="2"
-           Grid.Column="1"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"
-           FontSize="18"
-           FontAttributes="Bold" />
+                   Text="Date Range"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="18"
+                   FontAttributes="Bold" />
 
-            <!-- Next Button in Row 0, Column 2 -->
+            <!-- Next Button -->
             <Button Text="Next"
-            Clicked="OnNextPageClicked"
-            Grid.Row="0"
-            Grid.Column="2"
-            HorizontalOptions="End"
-            VerticalOptions="Center"
-            WidthRequest="100"
-            HeightRequest="50"
-            Padding="10"/>
+                    Clicked="OnNextPageClicked"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    Padding="10" />
         </Grid>
 
-
+        <!-- Row 3: Days CollectionView -->
         <CollectionView x:Name="DaysCollectionView"
-                        Grid.Row="1"
+                        Grid.Row="3"
                         ItemsLayout="VerticalList"
                         SelectionMode="Single"
                         SelectionChanged="OnDaySelected"
@@ -77,9 +103,9 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Room Slots -->
+        <!-- Row 4: Slots CollectionView -->
         <CollectionView x:Name="SlotsCollectionView"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         ItemsLayout="VerticalList"
                         IsVisible="True"
                         Margin="0,10,0,0"
@@ -112,14 +138,14 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- Row 5: Back Button -->
         <Button Text="Back"
                 Clicked="OnBackButtonClicked"
-                Grid.Row="4"
-                Grid.ColumnSpan="3"
+                Grid.Row="5"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 WidthRequest="100"
                 HeightRequest="50"
-                Padding="10"/>
+                Padding="10" />
     </Grid>
 </ContentPage>

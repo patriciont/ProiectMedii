@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using BookingApp.Models;
 using Plugin.Maui.Calendar.Models;
+using CommunityToolkit.Maui.Alerts;
 using static BookingApp.Models.User;
 
 namespace BookingApp.Views;
@@ -38,11 +39,22 @@ public partial class ViewBookings : ContentPage
         BindingContext = this;
     }
 
-    private void LoadUserBookings()
+    private async void LoadUserBookings()
     {
         var bookings = App.DatabaseService.GetBookingsForUser(CurrentUser.LoggedInUser.Id);
+
         foreach (var booking in bookings)
         {
+            var room = App.DatabaseService.GetRoom(booking.RoomId);
+
+            if (room == null)
+            {
+                ShowNotification($"No room found for booking with Room Id: {booking.RoomId}. This booking has been canceled. Find more info at the Home Page.");
+                App.DatabaseService.DeleteBooking(booking.Id);
+                continue;
+            }
+
+            booking.RoomName = room.RoomName;
             UserBookings.Add(booking);
         }
     }
@@ -109,6 +121,10 @@ public partial class ViewBookings : ContentPage
     }
     private void CancelBooking(int bookingId)
     {
+        var booking = App.DatabaseService.GetBooking(bookingId);
+        var room = App.DatabaseService.GetRoom(booking.RoomId);
+        ShowNotification($"Your booking at {room.RoomName}, on {booking.BookingDate.ToString("MM/dd/yyyy")} has been canceled");
+
         App.DatabaseService.DeleteBooking(bookingId);
 
         // Remove the booking from the collection
@@ -136,8 +152,6 @@ public partial class ViewBookings : ContentPage
 
         BookingDetails.IsVisible = false;
         LoadEvents();  
-
-        DisplayAlert("Booking Canceled", "The booking has been successfully canceled.", "OK");
     }
 
     private void UnloadedHandler(object sender, EventArgs e)
@@ -148,5 +162,21 @@ public partial class ViewBookings : ContentPage
     private void OnBackButtonClicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new OpeningPage();
+    }
+
+    // NOTIFICATION BAR
+    private async void ShowNotification(string message)
+    {
+        NotificationLabel.Text = message;
+        NotificationFrame.IsVisible = true;
+
+        await Task.Delay(5000);
+
+        NotificationFrame.IsVisible = false;
+    }
+
+    private void CloseNotificationClicked(object sender, EventArgs e)
+    {
+        NotificationFrame.IsVisible = false;
     }
 }

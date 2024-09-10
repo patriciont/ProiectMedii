@@ -130,7 +130,7 @@ namespace BookingApp
             if (string.IsNullOrWhiteSpace(RoomNameEntry.Text) || string.IsNullOrWhiteSpace(RoomNumberEntry.Text) ||
                 RoomFieldOfStudyPicker.SelectedItem == null )
             {
-                DisplayAlert("Error", "Room Name, Room Number, Field Of Study cannot be empty.", "Okay");
+                ShowNotification("Error. Room Name, Room Number, and Field Of Study cannot be empty");
                 return;
             }
 
@@ -243,7 +243,7 @@ namespace BookingApp
         {
             if (SelectedRoom == null)
             {
-                DisplayAlert("Error", "Please select a room first.", "Okay");
+                ShowNotification("Error. Please select a room first.");
                 return;
             }
 
@@ -443,7 +443,7 @@ namespace BookingApp
 
             _selectedRoom = selectedRoom;
             UpdateSelectedRoomLabels(selectedRoom);
-            DisplayAlert("Room Selected", $"You selected: {selectedRoom.RoomName}", "OK");
+            ShowNotification($"You selected: {selectedRoom.RoomName}, {selectedRoom.RoomNumber}.");
         }
 
         // U SAVED DAYS
@@ -456,6 +456,23 @@ namespace BookingApp
         private void UpdateSelectedRoomLabels(Room room)
         {
             SelectedRoomLabel.Text = $"Adding Days To: {room.RoomName}";
+        }
+
+        // NOTIFICATION BAR
+
+        private async void ShowNotification(string message)
+        {
+            NotificationLabel.Text = message;
+            NotificationFrame.IsVisible = true;
+
+            await Task.Delay(5000);
+
+            NotificationFrame.IsVisible = false;
+        }
+
+        private void CloseNotificationClicked(object sender, EventArgs e)
+        {
+            NotificationFrame.IsVisible = false;
         }
 
     }

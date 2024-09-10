@@ -9,6 +9,30 @@
 
     <ScrollView>
         <StackLayout Padding="10" Spacing="15">
+
+            <!-- Notification banner -->
+            <Frame x:Name="NotificationFrame" 
+           BackgroundColor="LightCoral" 
+           IsVisible="False" 
+           CornerRadius="10" 
+           Padding="10" 
+           Margin="10">
+                <Grid>
+                    <Label x:Name="NotificationLabel" 
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="StartAndExpand"/>
+
+                    <Button Text="✕" 
+                    BackgroundColor="Transparent" 
+                    TextColor="White" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="End"
+                    Clicked="CloseNotificationClicked"/>
+                </Grid>
+            </Frame>
+
             <Label Text="Your Bookings" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <!-- Styled Calendar -->

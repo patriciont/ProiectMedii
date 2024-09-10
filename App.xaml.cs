@@ -20,8 +20,6 @@ namespace BookingApp
 
             DatabaseService = new DatabaseService(dbPath);
 
-            CheckDatabaseContent();
-
             MainPage = new NavigationPage(new MainPage());
         }
 

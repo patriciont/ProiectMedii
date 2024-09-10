@@ -30,7 +30,6 @@ namespace BookingApp.Services
                 {
                     UserId = userId,
                     RoomSlotId = roomSlotId,
-                    // Add any other relevant properties
                 };
                 App.DatabaseService.SaveBooking(booking);
 
@@ -45,10 +44,8 @@ namespace BookingApp.Services
         {
             try
             {
-                // Save the room and get the generated ID
                 var roomId = _databaseService.SaveRoom(room);
 
-                // Ensure room ID is properly assigned
                 if (roomId > 0)
                 {
                     room.Id = roomId; // Update room with the generated ID
@@ -83,7 +80,6 @@ namespace BookingApp.Services
             {
                 RoomId = room.Id,
                 Date = date
-                // Initialize the Slots list
             };
 
             // Save the available day and get the ID
