@@ -20,10 +20,21 @@
                 <local:RoomLabel x:Name="UserFieldOfStudyLabel" FontSize="16"/>
             </StackLayout>
 
-            <!-- Edit Profile Section -->
-            <local:MainButton Text="Edit Profile"
-                              Clicked="OnEditProfileButtonClicked"
-                              HorizontalOptions="Center"/>
+            <!-- Extra Button for Permission Level 1 -->
+            <local:MainButton x:Name="RoomButton"
+                Text="Manage Rooms"
+                IsVisible="False"
+                Clicked="OnRoomButtonClicked"/>
+
+            <local:MainButton x:Name="UserButton"
+                Text="Manage Users"
+                IsVisible="False"
+                Clicked="OnUserButtonClicked"/>
+
+            <local:MainButton x:Name="UserBookingsButton"
+                Text="User Bookings"
+                IsVisible="False"
+                Clicked="OnUserBookingsButtonClicked"/>
 
             <!-- Log Out Button -->
             <local:MainButton Text="Log Out"

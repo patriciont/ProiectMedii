@@ -20,7 +20,19 @@ public partial class BookingPage : ContentPage
 
     private void LoadRooms()
     {
-        var rooms = App.DatabaseService.GetRoomsByFieldOfStudy(_userFieldOfStudy);
+        IEnumerable<Room> rooms;
+
+        if (User.CurrentUser.LoggedInUser.PermissionsLevel == 1) // Check if the user is an admin
+        {
+            // Admins see all rooms
+            rooms = App.DatabaseService.GetAllRooms();
+        }
+        else
+        {
+            // Regular users see rooms based on their field of study
+            rooms = App.DatabaseService.GetRoomsByFieldOfStudy(_userFieldOfStudy);
+        }
+
         RoomsCollectionView.ItemsSource = rooms;
     }
 

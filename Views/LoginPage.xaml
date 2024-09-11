@@ -6,6 +6,7 @@
             BackgroundColor="{StaticResource BackgroundColor}">
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
         <!-- SpaceFinder Logo -->
         <Image Source="spacefinder_logo.png" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20" />
         <Label Text="Welcome Back!" 
@@ -51,12 +52,28 @@
                 WidthRequest="150"   
                 Margin="0,0,0,10"  />
 
+        <!-- Notification banner -->
+        <Frame x:Name="NotificationFrame" 
+                BackgroundColor="LightCoral" 
+                IsVisible="False" 
+                CornerRadius="10" 
+                Padding="10" 
+                Margin="10">
+            <Grid>
+                <Label x:Name="NotificationLabel" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="StartAndExpand"/>
 
-        <Label x:Name="LoginStatusLabel"
-            Text=""
-            TextColor="Red"
-            IsVisible="False"
-            HorizontalOptions="Center" />
-        
+                <Button Text="✕" 
+                 BackgroundColor="Transparent" 
+                 TextColor="White" 
+                 VerticalOptions="Center" 
+                 HorizontalOptions="End"
+                 Clicked="CloseNotificationClicked"/>
+            </Grid>
+        </Frame>
+
     </StackLayout>
 </ContentPage>

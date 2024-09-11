@@ -35,7 +35,7 @@
             </Frame>
             
             <!-- Header -->
-            <Label Text="Admin Dashboard" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Manage Rooms" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <!-- Display Rooms -->
 
@@ -183,74 +183,16 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-                <!-- ADD USER -->
-                <toolkit:Expander>
-                    <toolkit:Expander.Header>
-                        <local:ExpanderLabel Text="Add User" Background="CadetBlue" WidthRequest="100"  HorizontalOptions="Center"/>
-                    </toolkit:Expander.Header>
-
-                    <toolkit:Expander.Content>
-                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10"  Margin="0,10,0,10">
-                            <StackLayout Padding="10" Spacing="10">
-                                <Entry x:Name="UserNameEntry" Placeholder="Username" />
-                                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
-                                <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
-                                <Picker x:Name="UserFieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}"/>
-
-                                <local:MainButton Text="Save User" Background="CadetBlue" Clicked="OnAddUserClicked"/>
-
-                                <Label x:Name="UserStatusLabel" TextColor="DarkGreen" FontAttributes="Italic" HorizontalOptions="Center"/>
-                            </StackLayout>
-                        </Frame>
-                    </toolkit:Expander.Content>
-                </toolkit:Expander>
-
-                <!-- SELECT AND DISPLAY USER -->
-                <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
-                    <Grid ColumnDefinitions="*, Auto">
-                        <!-- User Details Column -->
-                        <StackLayout Grid.Column="0" Padding="0,0,10,0">
-                            <!-- User Picker -->
-                            <Picker x:Name="UserPicker" 
-                    Title="Select a User"
-                    ItemsSource="{Binding Users}"
-                    SelectedItem="{Binding SelectedUser}"
-                    ItemDisplayBinding="{Binding Username}"/>
-
-                            <!-- Display Selected User Details -->
-                            <Label Text="User Details:" FontSize="15" FontAttributes="Bold" Margin="0,10,0,10"/>
-                            <Label Text="{Binding SelectedUser.Username}" FontSize="16"/>
-                            <Label Text="{Binding SelectedUser.Email}" FontSize="16"/>
-                            <Label Text="{Binding SelectedUser.FieldOfStudy}" FontSize="16"/>
-                        </StackLayout>
-
-                        <!-- Delete Button Column -->
-                        <StackLayout Grid.Column="1" VerticalOptions="Center">
-                            <Button Text="Delete" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding SelectedUser}" BackgroundColor="#ffcccc" TextColor="Black" CornerRadius="5" WidthRequest="70" HeightRequest="30"/>
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-
-                <!-- Status Label -->
             </StackLayout>
-
-
-
 
             <!-- Management Section -->
             <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
                 <StackLayout>
                     <Label Text="Management Actions" FontFamily="Comis Sans MS" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                    <Button Text="Delete All Users" Clicked="OnDeleteAllUsersClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" WidthRequest="200" HeightRequest="30"/>
                     <Button Text="Delete All Rooms" Clicked="OnDeleteAllRoomsClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Red" TextColor="White" WidthRequest="200" HeightRequest="30"/>
-                    <Button Text="Go To Site" Clicked="OnGoToSiteClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Green" TextColor="White" WidthRequest="200" HeightRequest="30" />
-
+                    <Button Text="Back" Clicked="OnGoToSiteClicked" Padding="10" Margin="0,5,0,0" BackgroundColor="Green" TextColor="White" WidthRequest="200" HeightRequest="30" />
                 </StackLayout>
             </Frame>
-
-            <!-- Status Label -->
-            <Label x:Name="StatusLabel" Text="Status: Waiting for actions"  FontSize="16" HorizontalOptions="Center"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

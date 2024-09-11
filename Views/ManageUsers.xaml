@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:BookingApp.Styles"
+             x:Class="BookingApp.Views.ManageUsers"
+             Title="Manage Users"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+
+    <ScrollView>
+        <StackLayout Padding="10">
+
+            <!-- Notification banner -->
+            <Frame x:Name="NotificationFrame" 
+                    BackgroundColor="LightCoral" 
+                    IsVisible="False" 
+                    CornerRadius="10" 
+                    Padding="10" 
+                    Margin="10">
+                <Grid>
+                    <Label x:Name="NotificationLabel" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Button Text="✕" 
+                             BackgroundColor="Transparent" 
+                             TextColor="White" 
+                             VerticalOptions="Center" 
+                             HorizontalOptions="End"
+                             Clicked="CloseNotificationClicked"/>
+                </Grid>
+            </Frame>
+
+            <!-- Add User Section -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <local:ExpanderLabel Text="Add User" 
+                               BackgroundColor="CadetBlue" 
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               Padding="10"/>
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <StackLayout Padding="10" Spacing="10">
+                            <Entry x:Name="UserNameEntry" 
+                                   Placeholder="Username" />
+                            <Entry x:Name="EmailEntry" 
+                                   Placeholder="Email" 
+                                   Keyboard="Email" />
+                            <Entry x:Name="PasswordEntry" 
+                                   Placeholder="Password" 
+                                   IsPassword="True" />
+                            <Picker x:Name="UserFieldOfStudyPicker" 
+                                    Title="Select Field of Study" 
+                                    ItemsSource="{Binding UserFieldsOfStudy}" />
+                            <Picker x:Name="UserPermissionsPicker" 
+                                    Title="Select Permissions Level" 
+                                    ItemsSource="{Binding PermissionsLevels}" />
+                            <local:MainButton Text="Save User" 
+                                    BackgroundColor="CadetBlue" 
+                                    TextColor="White" 
+                                    Clicked="OnAddUserClicked" />
+                        </StackLayout>
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Frame>
+
+            <!-- Select and Display User Section -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto">
+                    
+                    <!-- User Details Column -->
+                    <StackLayout Grid.Column="0" Padding="10,0,20,0">
+
+                        <!-- Search and Select User -->
+                        <StackLayout Padding="10" Spacing="10">
+                            <SearchBar x:Name="UserSearchBar" 
+                                   Placeholder="Search Users" 
+                                   TextChanged="OnUserSearchBarTextChanged" />
+                            <Picker x:Name="UserPicker" 
+                                Title="Select a User"
+                                ItemsSource="{Binding Users}"
+                                SelectedItem="{Binding SelectedUser}"
+                                ItemDisplayBinding="{Binding Username}" 
+                                BackgroundColor="LightGray"/>
+                        </StackLayout>
+
+                        <Label Text="User Details:" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   Margin="0,0,0,10" 
+                   TextColor="DarkSlateGray" />
+
+                        <Label Text="Username:" 
+                   FontSize="16" 
+                   FontAttributes="Bold" 
+                   TextColor="DarkSlateGray" />
+                        <Label Text="{Binding SelectedUser.Username}" 
+                   FontSize="16" 
+                   TextColor="Black" 
+                   Margin="0,0,0,5" />
+
+                        <Label Text="Email:" 
+                   FontSize="16" 
+                   FontAttributes="Bold" 
+                   TextColor="DarkSlateGray" />
+                        <Label Text="{Binding SelectedUser.Email}" 
+                   FontSize="16" 
+                   TextColor="Black" 
+                   Margin="0,0,0,5" />
+
+                        <Label Text="Field of Study:" 
+                   FontSize="16" 
+                   FontAttributes="Bold" 
+                   TextColor="DarkSlateGray" />
+                        <Label Text="{Binding SelectedUser.FieldOfStudy}" 
+                   FontSize="16" 
+                   TextColor="Black" 
+                   Margin="0,0,0,5" />
+
+                        <Label Text="Permissions Level:" 
+                   FontSize="16" 
+                   FontAttributes="Bold" 
+                   TextColor="DarkSlateGray" />
+                        <Label Text="{Binding SelectedUser.PermissionsLevel}" 
+                   FontSize="16" 
+                   TextColor="Black" 
+                   Margin="0,0,0,10" />
+                    </StackLayout>
+
+                    <!-- Delete Button Column -->
+                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Button Text="Delete" 
+                                Command="{Binding DeleteUserCommand}" 
+                                CommandParameter="{Binding SelectedUser}" 
+                                BackgroundColor="#ffcccc" 
+                                TextColor="Black" 
+                                CornerRadius="5" 
+                                WidthRequest="70" 
+                                HeightRequest="30" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Management Actions Section -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                <StackLayout>
+                    <Label Text="Management Actions" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" 
+                           Margin="0,0,0,10" />
+                    <Button Text="Delete All Users" 
+                            Clicked="OnDeleteAllUsersClicked" 
+                            Padding="10" 
+                            Margin="0,5,0,0" 
+                            BackgroundColor="Red" 
+                            TextColor="White" 
+                            WidthRequest="200" 
+                            HeightRequest="30" />
+                    <Button Text="Back" 
+                            Clicked="OnGoToSiteClicked" 
+                            Padding="10" 
+                            Margin="0,5,0,0" 
+                            BackgroundColor="Green" 
+                            TextColor="White" 
+                            WidthRequest="200" 
+                            HeightRequest="30" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

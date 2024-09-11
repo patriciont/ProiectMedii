@@ -7,7 +7,7 @@ public partial class ManageBookings : ContentPage
 	{
 		InitializeComponent();
         LoadUserProfile();
-
+        CheckUserPermissions();
     }
 
     private void LoadUserProfile()
@@ -23,9 +23,34 @@ public partial class ManageBookings : ContentPage
         }
     }
 
-    private void OnEditProfileButtonClicked(object sender, EventArgs e)
+    private void CheckUserPermissions()
     {
-        //Application.Current.MainPage.Navigation.PushAsync(new EditProfilePage());
+        var currentUser = CurrentUser.LoggedInUser;
+
+        if (currentUser != null && currentUser.PermissionsLevel == 1)
+        {
+            RoomButton.IsVisible = true;
+            UserButton.IsVisible = true;
+            UserBookingsButton.IsVisible = true;
+        }
+    }
+
+    private async void OnRoomButtonClicked(object sender, EventArgs e)
+    {
+        // Navigate to the manage rooms Page
+        await Navigation.PushAsync(new MainPage()); 
+    }
+
+    private async void OnUserButtonClicked(object sender, EventArgs e)
+    {
+        // Navigate to the manage users Page
+        await Navigation.PushAsync(new ManageUsers());
+    }
+
+    private async void OnUserBookingsButtonClicked(object sender, EventArgs e)
+    {
+        // Navigate to the User bookings Page
+        //await Navigation.PushAsync(new MainPage());
     }
 
     private void OnLogOutButtonClicked(object sender, EventArgs e)

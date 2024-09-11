@@ -1,4 +1,6 @@
 ﻿using BookingApp.Services;
+using BookingApp.Models;
+using BookingApp.Views;
 using System.Diagnostics;
 using System.IO;
 
@@ -20,7 +22,28 @@ namespace BookingApp
 
             DatabaseService = new DatabaseService(dbPath);
 
-            MainPage = new NavigationPage(new MainPage());
+            CheckAdmin();
+
+            MainPage = new NavigationPage(new LoginPage());
+        }
+
+        public void CheckAdmin()
+        {
+            var adminUser = DatabaseService.GetUserByUsername("admin");
+
+            if (adminUser == null)
+            {
+                var newAdminUser = new User
+                {
+                    Username = "admin",
+                    Password = "admin", 
+                    Email = "admin@outlook.com",
+                    FieldOfStudy = "ADMIN",
+                    PermissionsLevel = 1
+                };
+
+                DatabaseService.SaveUser(newAdminUser);
+            }
         }
 
         public static void PrintDatabasePath()
