@@ -23,6 +23,12 @@ public partial class SignUpPage : ContentPage
 
     private void OnSignupClicked(object sender, EventArgs e)
     {
+        if (!PrivacyCheckBox.IsChecked)
+        {
+            ShowNotification("You must agree to the privacy statement to sign up.");
+            return;
+        }
+
         // Validation
         if (string.IsNullOrWhiteSpace(UsernameEntry.Text) ||
             string.IsNullOrWhiteSpace(PasswordEntry.Text) ||
@@ -79,6 +85,12 @@ public partial class SignUpPage : ContentPage
         ClearSignupInputs();
     }
 
+    private async void OnPrivacyStatementTapped(object sender, EventArgs e)
+    {
+        // Display privacy statement popup
+        await Navigation.PushModalAsync(new PrivacyStatementPage());
+    }
+
     private void ClearSignupInputs()
     {
         UsernameEntry.Text = string.Empty;
@@ -87,8 +99,26 @@ public partial class SignUpPage : ContentPage
         FieldOfStudyPicker.SelectedItem = null;
     }
 
-    private void OnBackClicked(object sender, EventArgs e)
+    private async void OnBackClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new LoginPage();
+        await Navigation.PushModalAsync(new LoginPage());
+
+    }
+
+    // NOTIFICATION BAR
+
+    private async void ShowNotification(string message)
+    {
+        NotificationLabel.Text = message;
+        NotificationFrame.IsVisible = true;
+
+        await Task.Delay(5000);
+
+        NotificationFrame.IsVisible = false;
+    }
+
+    private void CloseNotificationClicked(object sender, EventArgs e)
+    {
+        NotificationFrame.IsVisible = false;
     }
 }

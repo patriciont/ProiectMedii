@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingApp.Views.PrivacyStatementPage"
+             Title="PrivacyStatementPage"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20">
+
+        <!-- Title Section -->
+        <Image Source="spacefinder_logo.png" 
+               HeightRequest="100" 
+               WidthRequest="100" 
+               Margin="0,0,0,10" 
+               Grid.Row="0"/>
+
+        <Label Text="Privacy Policy"
+               Grid.Row="1"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="Black"
+               Margin="0,10" />
+
+        <!-- Scrollable Content Section -->
+        <ScrollView Grid.Row="2">
+            <StackLayout Spacing="10">
+                <Label Text="This Privacy Policy goes over how SpaceFinder collects, uses, and protects your personal information when you use our service."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="1. Information We Collect"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="• Account Information: When you create an account, we collect your name, email address, and a password."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Booking Information: When you book a timeslot, we collect details related to the booking, including the room, date, and time."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Automatically Collected Information: The App may collect certain information automatically, such as the type of device you use, your operating system, and IP address for app analytics and improvement."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="2. How We Use Your Information"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="• Account Management: We use your account information to manage your access to the App and provide you with the ability to book timeslots."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Booking Management: We use your booking information to manage your room reservations. Your booking data will be stored in the cloud until the booking has concluded. Afterward, the data will be deleted from our records."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• App Improvement: We may use automatically collected information to understand how the App is used and improve its functionality."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="3. Data Storage and Security"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="• Database Storage: Booking data is stored in the database until the booking is completed, after which it is deleted."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Security Measures: We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="4. Data Retention"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="• Account Information: Your account information will be retained as long as your account is active."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Booking Information: Booking data will be stored in the cloud until the booking is completed. Once the booking has concluded, the data will be deleted."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="5. Your Rights"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="• Access and Correction: You have the right to access, delete or correct your personal information stored in the App. You can do this by logging into your account, navigating to your profile, and updating your information."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="• Account Deletion: You may delete your account at any time. Upon deletion, your account information will be removed from our records."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="6. Changes to This Privacy Policy"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. Your continued use of the App after any changes indicates your acceptance of the new terms."
+                       FontSize="14"
+                       TextColor="Gray" />
+
+                <Label Text="7. Contact Us"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                <Label Text="If you have any questions about this Privacy Policy, please contact us at 123 456."
+                       FontSize="14"
+                       TextColor="Gray" />
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Back Button at Bottom -->
+        <Button Text="Back"
+                Grid.Row="3"
+                BackgroundColor="CadetBlue"
+                TextColor="White"
+                CornerRadius="20"
+                HorizontalOptions="Center"
+                WidthRequest="150"
+                Clicked="OnBackClicked" />
+    </Grid>
+</ContentPage>

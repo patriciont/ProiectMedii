@@ -6,12 +6,47 @@
             BackgroundColor="{StaticResource BackgroundColor}">
 
     <StackLayout Padding="20" Spacing="10">
+
+        <!-- Notification banner -->
+        <Frame x:Name="NotificationFrame" 
+        BackgroundColor="LightCoral" 
+        IsVisible="False" 
+        CornerRadius="10" 
+        Padding="10" 
+        Margin="10">
+            <Grid>
+                <Label x:Name="NotificationLabel" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand"/>
+
+                <Button Text="✕" 
+                 BackgroundColor="Transparent" 
+                 TextColor="White" 
+                 VerticalOptions="Center" 
+                 HorizontalOptions="End"
+                 Clicked="CloseNotificationClicked"/>
+            </Grid>
+        </Frame>
+        
         <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="0,10,0,10">
             <StackLayout Padding="10" Spacing="10">
                 <Entry x:Name="UsernameEntry" Placeholder="Username" />
                 <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
                 <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
-                <Picker x:Name="FieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}"/>
+                <Picker x:Name="FieldOfStudyPicker" Title="Select Field of Study" ItemsSource="{Binding UserFieldsOfStudy}" BackgroundColor="LightGray"/>
+
+                <!-- Privacy Checkbox and Statement -->
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <CheckBox x:Name="PrivacyCheckBox" VerticalOptions="Center"/>
+                    <Label Text="I agree to the" VerticalOptions="Center"/>
+                    <Label Text="Privacy Statement" 
+                           FontAttributes="Bold" 
+                           TextColor="DodgerBlue"
+                           VerticalOptions="Center" 
+                           GestureRecognizers="{TapGestureRecognizer Tapped='OnPrivacyStatementTapped'}"/>
+                </StackLayout>
 
                 <Button Text="Sign Up" BackgroundColor="CadetBlue" TextColor="White" Clicked="OnSignupClicked"/>
 

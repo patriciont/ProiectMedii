@@ -9,6 +9,9 @@
 
     <ScrollView>
         <StackLayout Padding="20" Spacing="20">
+
+            <Image Source="spacefinder_logo.png" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20" />
+
             <!-- Welcome Message -->
             <Label x:Name="WelcomeLabel" 
                              FontSize="24" 

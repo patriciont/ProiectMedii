@@ -22,7 +22,7 @@ public partial class BookingPage : ContentPage
     {
         IEnumerable<Room> rooms;
 
-        if (User.CurrentUser.LoggedInUser.PermissionsLevel == 1) // Check if the user is an admin
+        if (User.CurrentUser.LoggedInUser.PermissionsLevel == 1 || User.CurrentUser.LoggedInUser.PermissionsLevel == 2) // Check if the user is an admin
         {
             // Admins see all rooms
             rooms = App.DatabaseService.GetAllRooms();
