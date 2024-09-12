@@ -55,17 +55,29 @@ namespace BookingApp.Services
         }
 
         // RoomSlot methods
+
+        // Save
         public async Task<int> SaveRoomSlot(RoomSlot slot)
         {
             return await Task.Run(() => _database.Insert(slot));
         }
+
+        // Update
         public int UpdateRoomSlot(RoomSlot roomSlot)
         {
             return _database.Update(roomSlot);
         }
 
+        // Get room slot by id
         public RoomSlot GetRoomSlot(int id) => _database.Table<RoomSlot>().FirstOrDefault(s => s.Id == id);
+        // get all slots for available day
         public List<RoomSlot> GetRoomSlots(int availableDayId) => _database.Table<RoomSlot>().Where(s => s.AvailableDayId == availableDayId).ToList();
+
+        // Get roomslot by room id
+        public IEnumerable<RoomSlot> GetRoomSlotsByRoomId(int roomId)
+        {
+            return _database.Table<RoomSlot>().Where(slot => slot.RoomId == roomId).ToList();
+        }
 
         // Booking methods
 
@@ -87,11 +99,20 @@ namespace BookingApp.Services
             return _database.Table<Booking>().FirstOrDefault(b => b.Id == id);
         }
 
+        public List<Booking> GetUserBookingsByRoomId(int roomId)
+        {
+            // Query the database for all user bookings with the matching RoomId
+            return _database.Table<Booking>().Where(b => b.RoomId == roomId).ToList();
+        }
+
         // Get all bookings for a specific user
         public List<Booking> GetBookingsForUser(int userId)
         {
             return _database.Table<Booking>().Where(b => b.UserId == userId).ToList();
         }
+
+        public List<Booking> GetAllBookings() => _database.Table<Booking>().ToList();
+
 
         // Get all bookings for a specific room slot
         public List<Booking> GetBookingsForRoomSlot(int roomSlotId)
@@ -120,10 +141,59 @@ namespace BookingApp.Services
             return _database.Table<User>().FirstOrDefault(u => u.Username == username);
         }
 
-        // Methods for deleting users and rooms
+        // Methods for deleting users, rooms, slots and days
         public int DeleteUser(int id) => _database.Delete<User>(id);
         public int DeleteRoom(int id) => _database.Delete<Room>(id);
         public void DeleteAllUsers() => _database.DeleteAll<User>();
         public void DeleteAllRooms() => _database.DeleteAll<Room>();
+
+        public void DeleteRoomSlot(int roomSlotId)
+        {
+            var roomSlot = _database.Table<RoomSlot>().FirstOrDefault(rs => rs.Id == roomSlotId);
+            if (roomSlot != null)
+            {
+                _database.Delete(roomSlot);
+            }
+        }
+
+        public void DeleteAvailableDay(int availableDayId)
+        {
+            var availableDay = _database.Table<AvailableDay>().FirstOrDefault(ad => ad.Id == availableDayId);
+            if (availableDay != null)
+            {
+                _database.Delete(availableDay);
+            }
+        }
+
+        // CLEAN UP METHODS 
+
+        // Fetch past bookings
+        public List<Booking> GetPastBookings(DateTime cutoffDate)
+        {
+            return _database.Table<Booking>().Where(b => b.BookingDate < cutoffDate).ToList();
+        }
+
+        // Save BookingHistory
+        public int SaveBookingHistory(BookingHistory bookingHistory)
+        {
+            return _database.Insert(bookingHistory);
+        }
+
+        // Delete all available days before a certain date
+        public void DeleteAvailableDaysBefore(DateTime date)
+        {
+            var daysToDelete = _database.Table<AvailableDay>().Where(d => d.Date < date).ToList();
+            foreach (var day in daysToDelete)
+            {
+                DeleteAvailableDay(day.Id);
+
+                // Also delete associated RoomSlots
+                var slotsToDelete = _database.Table<RoomSlot>().Where(s => s.AvailableDayId == day.Id).ToList();
+                foreach (var slot in slotsToDelete)
+                {
+                    DeleteRoomSlot(slot.Id);
+                }
+            }
+        }
     }
 }

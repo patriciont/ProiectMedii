@@ -24,6 +24,9 @@ namespace BookingApp
 
             CheckAdmin();
 
+            var cleanupService = new CleanupService();
+            Task.Run(() => cleanupService.CleanupExpiredData());
+
             MainPage = new NavigationPage(new LoginPage());
         }
 

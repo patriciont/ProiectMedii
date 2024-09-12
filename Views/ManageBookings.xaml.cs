@@ -50,7 +50,7 @@ public partial class ManageBookings : ContentPage
     private async void OnUserBookingsButtonClicked(object sender, EventArgs e)
     {
         // Navigate to the User bookings Page
-        //await Navigation.PushAsync(new MainPage());
+        await Navigation.PushAsync(new AdminOverviewPage());
     }
 
     private void OnLogOutButtonClicked(object sender, EventArgs e)

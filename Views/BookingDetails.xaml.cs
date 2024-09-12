@@ -38,10 +38,15 @@ public partial class BookingDetails : ContentPage
     // Load Days
     private void LoadAvailableDays(DateTime startDate)
     {
+        var endDate = startDate.AddDays(DaysPerPage - 1); // Calculate the end date
+
         var availableDays = App.DatabaseService.GetAvailableDays(_selectedRoom.Id);
 
-        // Filter available days
-        var upcomingDays = availableDays.Where(day => day.Date >= startDate && day.Date <= DateTime.Today.AddDays(DaysPerPage)).OrderBy(day => day.Date).ToList();
+        // Filter available days within the current date range
+        var upcomingDays = availableDays
+            .Where(day => day.Date >= startDate && day.Date <= endDate)
+            .OrderBy(day => day.Date)
+            .ToList();
 
         // Set AvailableDays and update CollectionView
         _selectedRoom.AvailableDays = upcomingDays;

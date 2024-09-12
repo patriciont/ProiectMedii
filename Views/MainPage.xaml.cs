@@ -256,12 +256,38 @@ namespace BookingApp
         // D ROOM
         private async void OnDeleteRoom(Room room)
         {
-            bool confirm = await DisplayAlert("Confirm", $"Are you sure you want to delete room {room.RoomName}?", "Yes", "No");
+            bool confirm = await DisplayAlert(
+                "Confirm Deletion",
+                $"Are you sure you want to delete room '{room.RoomName}'? This will also delete all associated slots, days, and user bookings.",
+                "Yes",
+                "No"
+            );
+
             if (confirm)
             {
+                // Delete all RoomSlots associated with the room
+                var roomSlots = App.DatabaseService.GetRoomSlotsByRoomId(room.Id);
+                foreach (var slot in roomSlots)
+                {
+                    App.DatabaseService.DeleteRoomSlot(slot.Id);
+                }
+
+                // Delete all AvailableDays associated with the room
+                var availableDays = App.DatabaseService.GetAvailableDays(room.Id);
+                foreach (var day in availableDays)
+                {
+                    App.DatabaseService.DeleteAvailableDay(day.Id);
+                }
+
+                var userBookings = App.DatabaseService.GetUserBookingsByRoomId(room.Id);
+                foreach (var booking in userBookings)
+                {
+                    App.DatabaseService.DeleteBooking(booking.Id);
+                }
+
                 App.DatabaseService.DeleteRoom(room.Id);
                 LoadRooms();
-                ShowNotification($"Room '{room.RoomName}' deleted.");
+                ShowNotification($"Room '{room.RoomName}' and all associated data deleted.");
             }
         }
 
@@ -278,6 +304,64 @@ namespace BookingApp
             }
         }
 
+        // RESET ROOM DATA
+
+        private async void OnResetRoomClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var room = button?.CommandParameter as Room;
+
+            if (room != null)
+            {
+                await OnResetRoom(room);
+            }
+        }
+        private async Task OnResetRoom(Room room)
+        {
+            if (room == null)
+            {
+                ShowNotification("Error. Please select a room first.");
+                return;
+            }
+
+            bool confirm = await DisplayAlert(
+                "Confirm Reset",
+                $"Are you sure you want to reset data for room '{room.RoomName}'? This will delete all associated slots, available days, and user bookings.",
+                "Yes",
+                "No"
+            );
+
+            if (confirm)
+            {
+                // Delete all user bookings associated with the room
+                var userBookings = App.DatabaseService.GetUserBookingsByRoomId(room.Id);
+                foreach (var booking in userBookings)
+                {
+                    App.DatabaseService.DeleteBooking(booking.Id);
+                }
+
+                // Delete all RoomSlots associated with the room
+                var roomSlots = App.DatabaseService.GetRoomSlotsByRoomId(room.Id);
+                foreach (var slot in roomSlots)
+                {
+                    App.DatabaseService.DeleteRoomSlot(slot.Id);
+                }
+
+                // Delete all AvailableDays associated with the room
+                var availableDays = App.DatabaseService.GetAvailableDays(room.Id);
+                foreach (var day in availableDays)
+                {
+                    App.DatabaseService.DeleteAvailableDay(day.Id);
+                }
+
+                // Optionally, clear the lists if needed
+                _AvailableDays.Clear();
+                _currentSlotTemplate.Clear();
+                UpdateSavedDays();
+
+                ShowNotification($"Data for room '{room.RoomName}' has been reset.");
+            }
+        }
 
         // NAVIGATION
 

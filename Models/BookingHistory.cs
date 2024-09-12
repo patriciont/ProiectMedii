@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Models
 {
-    public class Booking
+    public class BookingHistory
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
-        public TimeSpan BookingStart { get; set; }
-        public TimeSpan BookingEnd { get; set; }
-
 
         public int UserId { get; set; }
         public string UserName { get; set; }
@@ -22,8 +18,8 @@ namespace BookingApp.Models
         public string RoomName { get; set; }
         public string RoomNumber { get; set; }
         public string Description { get; set; }
-        public int AvailableDayId { get; set; }
-        public int RoomSlotId { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime CreatedAt { get; set; }
     }
