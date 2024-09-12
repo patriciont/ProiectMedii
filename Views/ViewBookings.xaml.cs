@@ -122,18 +122,32 @@ public partial class ViewBookings : ContentPage
     private void CancelBooking(int bookingId)
     {
         var booking = App.DatabaseService.GetBooking(bookingId);
-        var room = App.DatabaseService.GetRoom(booking.RoomId);
-        ShowNotification($"Your booking at {room.RoomName}, on {booking.BookingDate.ToString("MM/dd/yyyy")} has been canceled");
+        if (booking == null) return; 
+        
+        var roomSlot = App.DatabaseService.GetRoomSlot(booking.RoomSlotId);
+        if (roomSlot == null) return; 
 
+        // Decrement the booked count for the room slot
+        if (roomSlot.BookedCount > 0)
+        {
+            roomSlot.BookedCount -= 1;
+            App.DatabaseService.UpdateRoomSlot(roomSlot); 
+        }
+
+        // Display a notification 
+        var room = App.DatabaseService.GetRoom(booking.RoomId);
+        ShowNotification($"Your booking at {room.RoomName}, on {booking.BookingDate:MM/dd/yyyy} has been canceled");
+
+        // Delete the booking from the database
         App.DatabaseService.DeleteBooking(bookingId);
 
-        // Remove the booking from the collection
+        // Remove the booking from the user's bookings collection
         var bookingToRemove = UserBookings.FirstOrDefault(b => b.Id == bookingId);
         if (bookingToRemove != null)
         {
             UserBookings.Remove(bookingToRemove);
 
-            // Remove event for the canceled booking
+            // Remove event for the canceled booking from the calendar
             var eventDate = bookingToRemove.BookingDate.Date;
             if (Events.ContainsKey(eventDate))
             {
@@ -144,14 +158,14 @@ public partial class ViewBookings : ContentPage
                     eventsOnDate.Remove(eventToRemove);
                     if (eventsOnDate.Count == 0)
                     {
-                        Events.Remove(eventDate);
+                        Events.Remove(eventDate); 
                     }
                 }
             }
         }
 
         BookingDetails.IsVisible = false;
-        LoadEvents();  
+        LoadEvents();
     }
 
     private void UnloadedHandler(object sender, EventArgs e)

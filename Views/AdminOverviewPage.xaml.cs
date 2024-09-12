@@ -14,13 +14,24 @@ public partial class AdminOverviewPage : ContentPage
 		InitializeComponent();
 
         LoadBookings();
+        LoadPickers();
     }
 
     private void LoadBookings()
     {
-        allBookings = App.DatabaseService.GetAllBookings(); // Fetch all bookings from DB
+        allBookings = App.DatabaseService.GetAllBookings(); 
         filteredBookings = new List<Booking>(allBookings);
-        BookingsList.ItemsSource = filteredBookings; // Show all bookings by default
+        BookingsList.ItemsSource = filteredBookings;
+    }
+
+    private void LoadPickers()
+    {
+        var rooms = App.DatabaseService.GetAllRooms(); 
+        var users = App.DatabaseService.GetAllUsers();
+
+        // Set the ItemsSource for the pickers
+        RoomPicker.ItemsSource = rooms;
+        UserPicker.ItemsSource = users;
     }
 
     private void OnRoomFilterChanged(object sender, EventArgs e)
@@ -32,7 +43,7 @@ public partial class AdminOverviewPage : ContentPage
         }
         else
         {
-            filteredBookings = new List<Booking>(allBookings); // Show all if no room selected
+            filteredBookings = new List<Booking>(allBookings); 
         }
         BookingsList.ItemsSource = filteredBookings;
     }
@@ -58,6 +69,16 @@ public partial class AdminOverviewPage : ContentPage
             filteredBookings = new List<Booking>(allBookings); // Show all if no user selected
         }
         BookingsList.ItemsSource = filteredBookings;
+    }
+
+    // Show all bookings (reset filters)
+    private void OnShowAllClicked(object sender, EventArgs e)
+    {
+        RoomPicker.SelectedItem = null; // Clear room picker
+        DateFilter.Date = DateTime.Today; // Reset date picker
+        UserPicker.SelectedItem = null; // Clear user picker
+
+        ResetFilters();
     }
 
     // Clear filters and show all bookings

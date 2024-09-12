@@ -25,7 +25,7 @@ namespace BookingApp.Models
         public int BookedCount { get; set; }
         public int Capacity { get; set; }
 
-        public string SlotDetails => $"{StartTime:hh\\:mm} - {EndTime:hh\\:mm}";
+        public string SlotDetails => $"{StartTime:hh\\:mm} - {EndTime:hh\\:mm}.     {BookedCount}/{Capacity} slots booked.";
 
 
     }

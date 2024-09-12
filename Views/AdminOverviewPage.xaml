@@ -7,77 +7,103 @@
              BackgroundColor="{StaticResource BackgroundColor}">
 
 
-    <StackLayout Padding="20">
-        <!-- Expander for Filter Options -->
-        <toolkit:Expander>
-            <toolkit:Expander.Header>
-                <Frame BackgroundColor="LightGray" CornerRadius="5" Padding="5">
-                <Label Text="Filter Options" FontSize="18" FontAttributes="Bold" />
-                </Frame>
-
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <StackLayout Padding="10" Spacing="10">
-                    <!-- Room Filter -->
-                    <Label Text="Filter by Room" FontSize="16" />
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Room Filter Expander -->
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
                     <Frame BackgroundColor="LightGray" CornerRadius="5" Padding="5">
+                        <Label Text="Filter by Room" FontSize="18" FontAttributes="Bold" />
+                    </Frame>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <StackLayout Padding="10" Spacing="10">
                         <Picker x:Name="RoomPicker"
-                        Title="Select a Room"
-                        ItemsSource="{Binding Room}" 
-                        SelectedIndexChanged="OnRoomFilterChanged" />
-                    </Frame>
+                                Title="Select a Room"
+                                ItemsSource="{Binding Rooms}" 
+                                ItemDisplayBinding="{Binding RoomName}" 
+                                SelectedIndexChanged="OnRoomFilterChanged" 
+                                BackgroundColor="White"/>
+                    </StackLayout>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
 
-                    <!-- Date Filter -->
-                    <Label Text="Filter by Date" FontSize="16" Margin="0,10,0,0" />
+            <!-- Date Filter Expander -->
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
                     <Frame BackgroundColor="LightGray" CornerRadius="5" Padding="5">
+                        <Label Text="Filter by Date" FontSize="18" FontAttributes="Bold" />
+                    </Frame>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <StackLayout Padding="10" Spacing="10">
                         <DatePicker x:Name="DateFilter"
-                            Date="{Binding AvailableDay}"
-                            DateSelected="OnDateFilterChanged" />
-                    </Frame>
+                                    Date="{Binding AvailableDay}"
+                                    DateSelected="OnDateFilterChanged"
+                                    BackgroundColor="White"/>
+                    </StackLayout>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
 
-                    <!-- User Filter -->
-                    <Label Text="Filter by User" FontSize="16" Margin="0,10,0,0" />
+            <!-- User Filter Expander -->
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
                     <Frame BackgroundColor="LightGray" CornerRadius="5" Padding="5">
+                        <Label Text="Filter by User" FontSize="18" FontAttributes="Bold" />
+                    </Frame>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <StackLayout Padding="10" Spacing="10">
                         <Picker x:Name="UserPicker"
-                        Title="Select a User"
-                        ItemsSource="{Binding User}" 
-                        SelectedIndexChanged="OnUserFilterChanged" />
-                    </Frame>
-                </StackLayout>
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
+                                Title="Select a User"
+                                ItemsSource="{Binding Users}" 
+                                ItemDisplayBinding="{Binding Username}" 
+                                SelectedIndexChanged="OnUserFilterChanged" 
+                                BackgroundColor="White"/>
+                    </StackLayout>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
 
-        <!-- Booking List -->
-        <CollectionView x:Name="BookingsList" ItemsSource="{Binding FilteredBookings}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="LightGray" CornerRadius="10" Margin="0,0,0,10">
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding RoomName}" FontSize="18" FontAttributes="Bold" />
-                            <Label Text="{Binding BookingDate.Date}" FontSize="16" />
-                            <Label Text="{Binding UserName}" FontSize="16" />
-                            <!-- Additional booking details can be added here -->
-                            <Label Text="{Binding BookingTime}" FontSize="14" TextColor="Gray"/>
-                            <Label Text="{Binding BookingNotes}" FontSize="14" TextColor="Gray"/>
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <!-- Back Button at Bottom -->
-        <Frame>
-            <Button Text="Back"
-                    Grid.Row="3"
+            <!-- Show All Button -->
+            <Button Text="Show All" 
                     BackgroundColor="CadetBlue"
                     TextColor="White"
-                    CornerRadius="20"
+                    CornerRadius="15"
+                    FontSize="12"
                     HorizontalOptions="Center"
-                    WidthRequest="150"
-                    Clicked="OnBackClicked" />
-            
-        </Frame>
-        
+                    WidthRequest="100"
+                    HeightRequest="30"
+                    Padding="10"
+                    Clicked="OnShowAllClicked" />
 
-    </StackLayout>
+            <!-- Booking List -->
+            <CollectionView x:Name="BookingsList" ItemsSource="{Binding FilteredBookings}" Margin="0,20,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Margin="0,0,0,10">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding RoomName}" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding BookingDate.Date}" FontSize="16" />
+                                <Label Text="{Binding UserName}" FontSize="16" />
+                                <!-- Additional booking details -->
+                                <Label Text="{Binding BookingTime}" FontSize="14" TextColor="Gray"/>
+                                <Label Text="{Binding BookingNotes}" FontSize="14" TextColor="Gray"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Back Button at Bottom -->
+            <Frame Margin="0,20,0,0">
+                <Button Text="Back"
+                        BackgroundColor="CadetBlue"
+                        TextColor="White"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        WidthRequest="150"
+                        Clicked="OnBackClicked" />
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
