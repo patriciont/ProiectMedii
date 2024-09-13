@@ -8,31 +8,64 @@
 
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="20">
-            <!-- User Information -->
-            <StackLayout Padding="10" BackgroundColor="White">
-                <local:RoomLabel Text="Name:" FontSize="18" FontAttributes="Bold"/>
-                <local:RoomLabel x:Name="UserNameLabel" FontSize="16"/>
+            <!-- User Information Frame -->
+            <Frame Padding="15"
+                   BackgroundColor="White"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Margin="10"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Center">
+                <Grid ColumnDefinitions="*,*"
+                      RowDefinitions="Auto, Auto, Auto, Auto">
+                    <!-- Name -->
+                    <Label Text="Name:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
+                    <Label x:Name="UserNameLabel"
+                           FontSize="14"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           VerticalOptions="Center"/>
 
-                <local:RoomLabel Text="Email:" FontSize="18" FontAttributes="Bold"/>
-                <local:RoomLabel x:Name="UserEmailLabel" FontSize="16"/>
+                    <!-- Field of Study -->
+                    <Label Text="Field of Study:"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           Grid.Row="2"
+                           VerticalOptions="Center"/>
+                    <Label x:Name="UserFieldOfStudyLabel"
+                           FontSize="14"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           VerticalOptions="Center"/>
 
-                <local:RoomLabel Text="Field of Study:" FontSize="18" FontAttributes="Bold"/>
-                <local:RoomLabel x:Name="UserFieldOfStudyLabel" FontSize="16"/>
-            </StackLayout>
+                    <!-- Edit Button -->
+                    <local:MainButton Text="Edit"
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            HorizontalOptions="Center"
+                            WidthRequest="60"
+                            HeightRequest="35"
+                            Clicked="OnEditButtonClicked"/>
+                </Grid>
+            </Frame>
 
             <!-- Extra Button for Permission Level 1 -->
             <local:MainButton x:Name="RoomButton"
-                Text="Manage Rooms"
+                Text="Rooms Dash"
                 IsVisible="False"
                 Clicked="OnRoomButtonClicked"/>
 
             <local:MainButton x:Name="UserButton"
-                Text="Manage Users"
+                Text="Users Dash"
                 IsVisible="False"
                 Clicked="OnUserButtonClicked"/>
 
             <local:MainButton x:Name="UserBookingsButton"
-                Text="User Bookings"
+                Text="Bookings Dash"
                 IsVisible="False"
                 Clicked="OnUserBookingsButtonClicked"/>
 
@@ -44,9 +77,7 @@
             <!-- Back Button -->
             <local:MainButton Text="Back"
                     Clicked="OnBackButtonClicked"
-                    HorizontalOptions="Center"
-                    Grid.Row="2"/>
+                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

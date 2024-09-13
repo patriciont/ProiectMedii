@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingApp.Views.EditProfilePage"
+             Title="EditProfilePage"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+            <!-- User Information Form -->
+            <Frame Padding="20" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                <Grid>
+                    <!-- Define the grid structure -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Username (Non-editable) -->
+                    <Label Text="Username:" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="UsernameLabel" FontSize="16" Grid.Row="0" Grid.Column="1"/>
+
+                    <!-- Unique ID (Non-editable) -->
+                    <Label Text="Unique ID:" FontSize="16" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                    <Label x:Name="UniqueIdLabel" FontSize="16" Grid.Row="1" Grid.Column="1"/>
+
+                    <!-- Old Password (Editable) -->
+                    <Label Text="Old Password:" FontSize="16" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                    <Entry x:Name="OldPasswordEntry" Placeholder="Enter old password" IsPassword="True" Grid.Row="2" Grid.Column="1"/>
+
+                    <!-- New Password (Editable) -->
+                    <Label Text="New Password:" FontSize="16" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                    <Entry x:Name="NewPasswordEntry" Placeholder="Enter new password" IsPassword="True" Grid.Row="3" Grid.Column="1"/>
+
+                    <!-- Email (Editable) -->
+                    <Label Text="Email:" FontSize="16" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                    <Entry x:Name="EmailEntry" Placeholder="Enter email address" Grid.Row="4" Grid.Column="1"/>
+
+                    <!-- Field of Study (Non-editable) -->
+                    <Label Text="Field of Study:" FontSize="16" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
+                    <Label x:Name="FieldOfStudyLabel" FontSize="16" Grid.Row="5" Grid.Column="1"/>
+                </Grid>
+            </Frame>
+
+            <!-- Save Changes Button -->
+            <Button Text="Save Changes" 
+                    Clicked="OnSaveChangesClicked" 
+                    BackgroundColor="Green" 
+                    TextColor="White" 
+                    CornerRadius="10"
+                    HorizontalOptions="Center"/>
+            <Button Text="Cancel" 
+                    Clicked="OnCancelClicked" 
+                    BackgroundColor="Red" 
+                    TextColor="White" 
+                    CornerRadius="10"
+                    HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

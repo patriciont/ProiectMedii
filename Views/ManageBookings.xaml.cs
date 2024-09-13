@@ -18,7 +18,7 @@ public partial class ManageBookings : ContentPage
         if (user != null)
         {
             UserNameLabel.Text = user.Username;
-            UserEmailLabel.Text = user.Email;
+            //UserEmailLabel.Text = user.Email;
             UserFieldOfStudyLabel.Text = user.FieldOfStudy;
         }
     }
@@ -33,6 +33,11 @@ public partial class ManageBookings : ContentPage
             UserButton.IsVisible = true;
             UserBookingsButton.IsVisible = true;
         }
+    }
+
+    private async void OnEditButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new EditProfilePage());
     }
 
     private async void OnRoomButtonClicked(object sender, EventArgs e)

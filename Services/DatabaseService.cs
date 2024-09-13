@@ -184,6 +184,8 @@ namespace BookingApp.Services
             return _database.Table<User>().FirstOrDefault(u => u.Username == username);
         }
 
+        public int UpdateUser(User user) => _database.Update(user);
+
         public int DeleteUser(int id) => _database.Delete<User>(id);
         public void DeleteAllUsers() => _database.DeleteAll<User>();
 
