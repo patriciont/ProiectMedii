@@ -6,7 +6,7 @@
     
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="BackgroundColor">#FAF3E3</Color>
+            <Color x:Key="BackgroundColor">Blue</Color>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />

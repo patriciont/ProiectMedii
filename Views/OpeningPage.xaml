@@ -10,7 +10,7 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="20">
 
-            <Image Source="spacefinder_logo.png" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20" />
+            <Image Source="main_logo.png" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20" />
 
             <!-- Welcome Message -->
             <Label x:Name="WelcomeLabel" 
@@ -20,7 +20,7 @@
                              Margin="0,0,0,10"/>
 
             <!-- Feature Description -->
-            <local:RoomLabel Text="Easily find and book study rooms on campus. Manage your bookings, and stay organized with our user-friendly interface." 
+            <local:RoomLabel Text="Welcome to our booking app for all students that need a nice and quite place to study :)" 
                              FontSize="16" 
                              HorizontalOptions="Center"
                              TextColor="Gray"
@@ -44,7 +44,7 @@
                               Margin="0,10,0,10"/>
 
             <!-- Additional Information or Links -->
-            <local:RoomLabel Text="Need Help? Visit our FAQ or contact support." 
+            <local:RoomLabel Text="Application realised in .NET MAUI by Patricia Ciont" 
                              FontSize="14" 
                              HorizontalOptions="Center"
                              TextColor="Gray"

@@ -1,0 +1,739 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\bookingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\bookingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\viewbookings.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\viewbookings.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\viewbookings.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\viewbookings.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\openingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\openingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\danac\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.83\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\adminoverviewpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\adminoverviewpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\styles\\styles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:styles\\styles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\images\\profile_icon_png.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\images\\profile_icon_png.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\bookingapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:bookingapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\appicon\\appicon.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\appicon\\appicon.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\appicon\\appiconfg.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\appicon\\appiconfg.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\images\\star_icon.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\images\\star_icon.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\images\\home_icon.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\images\\home_icon.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\images\\dotnet_bot.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\images\\dotnet_bot.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\bookingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\bookingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\managebookings.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\managebookings.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\managebookings.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\managebookings.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\adminoverviewpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\adminoverviewpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\bookingmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\bookingmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\services\\cleanupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:services\\cleanupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\roomslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\roomslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\calendarevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\calendarevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\bookinghistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\bookinghistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\models\\availableday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:models\\availableday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\manageusers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\manageusers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\editprofilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\editprofilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\danac\\AppData\\Local\\Temp\\.vsdbgsrc\\b6f11410710224b56c0b81fd19c07f51acff0538\\Resources_Styles_Styles.xaml.sg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|c:\\users\\danac\\source\\repos\\patriciaciontproiect\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4162B6D1-90C1-43BF-A1EA-0A86DC942755}|BookingApp.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ViewBookings.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ViewBookings.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\ViewBookings.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ViewBookings.xaml.cs",
+              "RelativeToolTip": "Views\\ViewBookings.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T14:28:58.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OpeningPage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\OpeningPage.xaml",
+              "RelativeDocumentMoniker": "Views\\OpeningPage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\OpeningPage.xaml",
+              "RelativeToolTip": "Views\\OpeningPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-04T14:14:25.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BookingPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\BookingPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\BookingPage.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\BookingPage.xaml.cs",
+              "RelativeToolTip": "Views\\BookingPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:43:27.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Microsoft.Maui.Resizetizer.After.targets",
+              "DocumentMoniker": "C:\\Users\\danac\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.83\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.83\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "ToolTip": "C:\\Users\\danac\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.83\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.maui.resizetizer\\8.0.83\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "ViewState": "AgIAADEBAAAAAAAAAADgvzwBAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-01-04T14:09:59.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ViewBookings.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ViewBookings.xaml",
+              "RelativeDocumentMoniker": "Views\\ViewBookings.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ViewBookings.xaml",
+              "RelativeToolTip": "Views\\ViewBookings.xaml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-03T08:58:11.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:39:35.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminOverviewPage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\AdminOverviewPage.xaml",
+              "RelativeDocumentMoniker": "Views\\AdminOverviewPage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\AdminOverviewPage.xaml",
+              "RelativeToolTip": "Views\\AdminOverviewPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:38:56.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Styles.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Styles\\Styles.cs",
+              "RelativeDocumentMoniker": "Styles\\Styles.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Styles\\Styles.cs",
+              "RelativeToolTip": "Styles\\Styles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T08:58:34.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\MainPage.xaml",
+              "RelativeToolTip": "Views\\MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-04T14:17:46.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Admin.cs",
+              "RelativeDocumentMoniker": "Models\\Admin.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Admin.cs",
+              "RelativeToolTip": "Models\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:14:39.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "Views\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\LoginPage.xaml",
+              "RelativeToolTip": "Views\\LoginPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:38:59.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "profile_icon_png.png -  [English (United States)] - PNG [980x982, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\profile_icon_png.png",
+              "RelativeDocumentMoniker": "Resources\\Images\\profile_icon_png.png",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\profile_icon_png.png -  [English (United States)] - PNG [980x982, 32 bit, PNG]",
+              "RelativeToolTip": "Resources\\Images\\profile_icon_png.png -  [English (United States)] - PNG [980x982, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-01-03T12:26:41.271Z",
+              "EditorCaption": " -  [English (United States)] - PNG [980x982, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "App.g.i.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "RelativeToolTip": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwEoAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T14:13:21.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "BookingApp.csproj",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\BookingApp.csproj",
+              "RelativeDocumentMoniker": "BookingApp.csproj",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\BookingApp.csproj",
+              "RelativeToolTip": "BookingApp.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-03T12:37:55.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "home_icon.jpg -  [English (United States)] - Bitmap [5000x5000, 24 bit, JPG]",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\home_icon.jpg",
+              "RelativeDocumentMoniker": "Resources\\Images\\home_icon.jpg",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\home_icon.jpg -  [English (United States)] - Bitmap [5000x5000, 24 bit, JPG]",
+              "RelativeToolTip": "Resources\\Images\\home_icon.jpg -  [English (United States)] - Bitmap [5000x5000, 24 bit, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-01-03T12:26:39.221Z",
+              "EditorCaption": " -  [English (United States)] - Bitmap [5000x5000, 24 bit, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "dotnet_bot.png -  [English (United States)] - PNG [1200x738, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\dotnet_bot.png",
+              "RelativeDocumentMoniker": "Resources\\Images\\dotnet_bot.png",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\dotnet_bot.png -  [English (United States)] - PNG [1200x738, 32 bit, PNG]",
+              "RelativeToolTip": "Resources\\Images\\dotnet_bot.png -  [English (United States)] - PNG [1200x738, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-01-03T12:26:37.18Z",
+              "EditorCaption": " -  [English (United States)] - PNG [1200x738, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "appiconfg.svg",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\AppIcon\\appiconfg.svg",
+              "RelativeDocumentMoniker": "Resources\\AppIcon\\appiconfg.svg",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\AppIcon\\appiconfg.svg",
+              "RelativeToolTip": "Resources\\AppIcon\\appiconfg.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKTSURBVDhPjVNLSFRRGP7unTsz9w75uOaMZlMNpo1aFFJRodRGN7UwatMiKgga3JgVRBSNSA8RooUFLRycCCpc9ITIFi0EW\u002BhCW/gONYUcxplsQL13nKv3dM6ZGV\u002BE9N37c\u002B455/\u002B\u002B/7s/5whYA7/fP5L63BSCIDxvbGxsAiEktZQEE6Brm6K1tXWS5TU0NNQyjsiZKQgCBgBChQ2Q\u002BfswpytgDLmg9zihD9XBNJfhcrlstPoeqlVPRS6uCBDy1broLnN29PkxPeaFFmpC79gOdEu9sB8KQRt\u002Bz/NUVbUGAoGpJIfc5j2gZIuv3fam/sCNGrdjGLGwE23hR\u002BiMeBCKAbXlOTgfr0VW9QfqD4iEZ5BIJNAWDI5yB75X0tXqwrc1JZk90MKVUEq/4UplFc4W5UKwiHjaO4tx90NWiYfT5cQuj4dRITLrZfn9104XtOD3\u002BE4z7/BrqIoKZ4YM37E8XNifA4vdiuCIApPzWY9Wmy9h6UfOpd13t89FstEceyF2PJlAfNHkm6y6xSbxcTASpyuMyFT4NoeI6PV6mzEvvIy0oO\u002BXPVGULaMs186jVLVil0zzF\u002BI4ki\u002BnqjP\u002BGgemrp0Z\u002BHn8T0d0nyrOTky\u002B8x0tNoxE0iZrcSqXz5lAcroCcXkeBcGpyzcnowRTDk9xoDuEmbkE5vRlfB6cRcWzIXibv\u002BNTf5ST0y7SEBa6MGIaOFje2VUnZSgPTFECMZM9YCeLde6cdwvuVLlXrVMFWXGAHqRRaUlDezyEic6tlbFBbW/oS8nHbf0RDZIooDDLipPeTJwozIJJH4EIoG/y1/6Fe/5bj6lFousa0WjoWjoWiLYhGNidWHcXDNhOsVGWFSg0ZCUdDigbIo11Zv73Oq8C\u002BAsr5V2IWWNA0gAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-03T12:26:33.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "appicon.svg",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\AppIcon\\appicon.svg",
+              "RelativeDocumentMoniker": "Resources\\AppIcon\\appicon.svg",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\AppIcon\\appicon.svg",
+              "RelativeToolTip": "Resources\\AppIcon\\appicon.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKTSURBVDhPjVNLSFRRGP7unTsz9w75uOaMZlMNpo1aFFJRodRGN7UwatMiKgga3JgVRBSNSA8RooUFLRycCCpc9ITIFi0EW\u002BhCW/gONYUcxplsQL13nKv3dM6ZGV\u002BE9N37c\u002B455/\u002B\u002B/7s/5whYA7/fP5L63BSCIDxvbGxsAiEktZQEE6Brm6K1tXWS5TU0NNQyjsiZKQgCBgBChQ2Q\u002BfswpytgDLmg9zihD9XBNJfhcrlstPoeqlVPRS6uCBDy1broLnN29PkxPeaFFmpC79gOdEu9sB8KQRt\u002Bz/NUVbUGAoGpJIfc5j2gZIuv3fam/sCNGrdjGLGwE23hR\u002BiMeBCKAbXlOTgfr0VW9QfqD4iEZ5BIJNAWDI5yB75X0tXqwrc1JZk90MKVUEq/4UplFc4W5UKwiHjaO4tx90NWiYfT5cQuj4dRITLrZfn9104XtOD3\u002BE4z7/BrqIoKZ4YM37E8XNifA4vdiuCIApPzWY9Wmy9h6UfOpd13t89FstEceyF2PJlAfNHkm6y6xSbxcTASpyuMyFT4NoeI6PV6mzEvvIy0oO\u002BXPVGULaMs186jVLVil0zzF\u002BI4ki\u002BnqjP\u002BGgemrp0Z\u002BHn8T0d0nyrOTky\u002B8x0tNoxE0iZrcSqXz5lAcroCcXkeBcGpyzcnowRTDk9xoDuEmbkE5vRlfB6cRcWzIXibv\u002BNTf5ST0y7SEBa6MGIaOFje2VUnZSgPTFECMZM9YCeLde6cdwvuVLlXrVMFWXGAHqRRaUlDezyEic6tlbFBbW/oS8nHbf0RDZIooDDLipPeTJwozIJJH4EIoG/y1/6Fe/5bj6lFousa0WjoWjoWiLYhGNidWHcXDNhOsVGWFSg0ZCUdDigbIo11Zv73Oq8C\u002BAsr5V2IWWNA0gAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-03T12:26:30.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "star_icon.png -  [English (United States)] - PNG [200x200, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\star_icon.png",
+              "RelativeDocumentMoniker": "Resources\\Images\\star_icon.png",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Images\\star_icon.png -  [English (United States)] - PNG [200x200, 32 bit, PNG]",
+              "RelativeToolTip": "Resources\\Images\\star_icon.png -  [English (United States)] - PNG [200x200, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-01-03T12:26:43.166Z",
+              "EditorCaption": " -  [English (United States)] - PNG [200x200, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Room.cs",
+              "RelativeDocumentMoniker": "Models\\Room.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Room.cs",
+              "RelativeToolTip": "Models\\Room.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:13:57.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ManageBookings.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageBookings.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\ManageBookings.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageBookings.xaml.cs",
+              "RelativeToolTip": "Views\\ManageBookings.xaml.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T12:14:34.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\AppShell.xaml",
+              "RelativeDocumentMoniker": "AppShell.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\AppShell.xaml",
+              "RelativeToolTip": "AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:46:15.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BookingPage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\BookingPage.xaml",
+              "RelativeDocumentMoniker": "Views\\BookingPage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\BookingPage.xaml",
+              "RelativeToolTip": "Views\\BookingPage.xaml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAwwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:43:23.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "Services\\DatabaseService.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAwEcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:25:21.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\LoginPage.xaml.cs",
+              "RelativeToolTip": "Views\\LoginPage.xaml.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAjwB4AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:39:04.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ManageBookings.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageBookings.xaml",
+              "RelativeDocumentMoniker": "Views\\ManageBookings.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageBookings.xaml",
+              "RelativeToolTip": "Views\\ManageBookings.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-03T08:58:20.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "BookingManager.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\BookingManager.cs",
+              "RelativeDocumentMoniker": "Models\\BookingManager.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\BookingManager.cs",
+              "RelativeToolTip": "Models\\BookingManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:12:40.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\RoomService.cs",
+              "RelativeDocumentMoniker": "Services\\RoomService.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\RoomService.cs",
+              "RelativeToolTip": "Services\\RoomService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:28:47.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AdminOverviewPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\AdminOverviewPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\AdminOverviewPage.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\AdminOverviewPage.xaml.cs",
+              "RelativeToolTip": "Views\\AdminOverviewPage.xaml.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:46:28.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "CleanupService.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\CleanupService.cs",
+              "RelativeDocumentMoniker": "Services\\CleanupService.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Services\\CleanupService.cs",
+              "RelativeToolTip": "Services\\CleanupService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:26:59.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CalendarEvent.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\CalendarEvent.cs",
+              "RelativeDocumentMoniker": "Models\\CalendarEvent.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\CalendarEvent.cs",
+              "RelativeToolTip": "Models\\CalendarEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:13:32.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "BookingHistory.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\BookingHistory.cs",
+              "RelativeDocumentMoniker": "Models\\BookingHistory.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\BookingHistory.cs",
+              "RelativeToolTip": "Models\\BookingHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:12:12.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "Models\\Booking.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\Booking.cs",
+              "RelativeToolTip": "Models\\Booking.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:11:28.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AvailableDay.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\AvailableDay.cs",
+              "RelativeDocumentMoniker": "Models\\AvailableDay.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\AvailableDay.cs",
+              "RelativeToolTip": "Models\\AvailableDay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T11:11:05.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "RoomSlot.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\RoomSlot.cs",
+              "RelativeDocumentMoniker": "Models\\RoomSlot.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\RoomSlot.cs",
+              "RelativeToolTip": "Models\\RoomSlot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:47:24.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:47:18.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ManageUsers.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageUsers.xaml",
+              "RelativeDocumentMoniker": "Views\\ManageUsers.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\ManageUsers.xaml",
+              "RelativeToolTip": "Views\\ManageUsers.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-03T08:58:22.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "MauiProgram.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\MauiProgram.cs",
+              "RelativeToolTip": "MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:46:13.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "EditProfilePage.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\EditProfilePage.xaml",
+              "RelativeDocumentMoniker": "Views\\EditProfilePage.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\EditProfilePage.xaml",
+              "RelativeToolTip": "Views\\EditProfilePage.xaml",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwBgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:47:43.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Colors.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Styles\\Colors.xaml",
+              "RelativeDocumentMoniker": "Resources\\Styles\\Colors.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Styles\\Colors.xaml",
+              "RelativeToolTip": "Resources\\Styles\\Colors.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:39:43.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Styles.xaml",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Styles\\Styles.xaml",
+              "RelativeDocumentMoniker": "Resources\\Styles\\Styles.xaml",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Resources\\Styles\\Styles.xaml",
+              "RelativeToolTip": "Resources\\Styles\\Styles.xaml",
+              "ViewState": "AgIAAHsBAAAAAAAAAAAwwJsBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-28T21:40:25.016Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Views\\MainPage.xaml.cs",
+              "RelativeToolTip": "Views\\MainPage.xaml.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:39:25.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Resources_Styles_Styles.xaml.sg.cs",
+              "DocumentMoniker": "C:\\Users\\danac\\AppData\\Local\\Temp\\.vsdbgsrc\\b6f11410710224b56c0b81fd19c07f51acff0538\\Resources_Styles_Styles.xaml.sg.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\b6f11410710224b56c0b81fd19c07f51acff0538\\Resources_Styles_Styles.xaml.sg.cs",
+              "ToolTip": "C:\\Users\\danac\\AppData\\Local\\Temp\\.vsdbgsrc\\b6f11410710224b56c0b81fd19c07f51acff0538\\Resources_Styles_Styles.xaml.sg.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\b6f11410710224b56c0b81fd19c07f51acff0538\\Resources_Styles_Styles.xaml.sg.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAcwB0AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T21:40:58.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\danac\\source\\repos\\PatriciaCiontProiect\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-28T21:12:03.304Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

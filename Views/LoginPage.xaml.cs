@@ -1,3 +1,4 @@
+using BookingApp.Models;
 using Microsoft.Maui.Controls;
 using static BookingApp.Models.User;
 
@@ -21,19 +22,32 @@ public partial class LoginPage : ContentPage
         var username = UsernameEntry.Text.Trim();
         var password = PasswordEntry.Text.Trim();
 
+        // Check if the user is the default admin
+        if (username == "admin" && password == "admin123")
+        {
+            CurrentUser.LoggedInUser = new User
+            {
+                Username = "admin",
+                Password = "admin123",
+            };
+
+            Application.Current.MainPage = new NavigationPage(new AdminOverviewPage());
+            return;
+        }
+
         var user = App.DatabaseService.GetUserByUsername(username);
-        if (user != null && user.Password == PasswordEntry.Text) // Password check
+        if (user != null && user.Password == password) // Password check
         {
             CurrentUser.LoggedInUser = user;
 
             Application.Current.MainPage = new NavigationPage(new OpeningPage());
-
         }
         else
         {
             ShowNotification("Invalid username and password.");
         }
     }
+
 
     private async void OnSignUpButtonClicked(object sender, EventArgs e)
     {

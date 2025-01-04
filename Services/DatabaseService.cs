@@ -3,7 +3,6 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookingApp.Services
@@ -21,6 +20,55 @@ namespace BookingApp.Services
             _database.CreateTable<AvailableDay>();
             _database.CreateTable<RoomSlot>();
             _database.CreateTable<Booking>();
+
+            InitializeDefaultAdmin();
+            InitializeDefaultRooms();
+        }
+
+        private void InitializeDefaultAdmin()
+        {
+            // Check if the admin user exists
+            var adminUser = GetUserByUsername("admin");
+            if (adminUser == null)
+            {
+                // Add default admin user
+                var defaultAdmin = new User
+                {
+                    Username = "admin",
+                    Password = "admin123",
+                };
+                SaveUser(defaultAdmin);
+            }
+        }
+
+        private void InitializeDefaultRooms()
+        {
+            if (!_database.Table<Room>().Any())
+            {
+                var fieldsOfStudy = new List<string>
+                {
+                    "Computer Science",
+                    "Mathematics",
+                    "Physics",
+                    "Biology",
+                    "Chemistry",
+                    "History",
+                    "Engineering"
+                };
+
+                foreach (var field in fieldsOfStudy)
+                {
+                    SaveRoom(new Room { RoomName = $"{field} Room 1", FieldOfStudy = field });
+                    SaveRoom(new Room { RoomName = $"{field} Room 2", FieldOfStudy = field });
+                }
+            }
+        }
+        public void AddBooking(Booking booking)
+        {
+            if (booking == null)
+                throw new ArgumentNullException(nameof(booking));
+
+            _database.Insert(booking);
         }
 
         #region Room Methods
